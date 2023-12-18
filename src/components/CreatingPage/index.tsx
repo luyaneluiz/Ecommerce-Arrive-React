@@ -2,7 +2,7 @@ import developmentIllustration from "../../assets/illustrations/development-illu
 
 export function CreatingPage() {
   return (
-    <div className="flex flex-col items-center justify-center gap-10 h-full">
+    <div className="flex flex-col items-center justify-center gap-10 mt-20">
       <img
         src={developmentIllustration}
         alt="Illustration for page in development"
