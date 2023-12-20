@@ -1,28 +1,54 @@
+import { Burger, Drawer } from '@mantine/core';
+
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 // logo
 import Logo from '../../assets/logo.png'
 
-// icons
-import { BiSearch } from "react-icons/bi";
-
 // components 
-import { NavigationButtons } from './Desktop/NavigationButtons';
+import { NavigationButtons } from './NavigationButtons';
+import { NavbarItems } from '../Navbar/NavbarItems';
+import { InputSearch } from '../Search';
 
 // types
 import { BreakpointProps } from '../BreakpointTypes';
 
 export function Header( { width, breakpoint }: BreakpointProps ) {
-    return (
-      <header className="flex justify-between items-center bg-white py-2 px-4 border-b-slate-100 border-b md:py-4 md:px-6">
-        <img src={Logo} alt="Logo arrive" className="w-20 md:w-24" />
-        
-        <div className="flex items-center relative border border-slate-100 rounded-md px-3 w-2/4 max-w-sm h-10 md:h-11">
-          <input type="text" placeholder="Search product..." className="bg-transparent outline-none w-full pe-6 text-sm"/>
-          <BiSearch className="absolute right-3 cursor-pointer" size={20} />
-        </div>
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-        {width > breakpoint && (
-          <NavigationButtons />
-        )}
-      </header>
-    );
-  }
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+  };
+
+  return (
+    <header className="flex justify-between items-center bg-white py-2 px-4 border-b-slate-100 border-b md:py-4 md:px-6">
+      <Link to="/">
+        <img src={Logo} alt="Logo arrive" className="w-20 md:w-24" />
+      </Link>
+
+      { width > breakpoint 
+        ? (
+          <div className="flex justify-between w-2/3">
+            <InputSearch />
+            <NavigationButtons mobile={false} /> 
+          </div>
+        ) 
+        : <Burger opened={drawerOpen} onClick={() => setDrawerOpen(true)}  size="sm" aria-label="Toggle navigation" />
+      }
+
+      <Drawer
+        position="right"
+        size="xs"
+        opened={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <div className="p-4">
+          <NavbarItems mobile={true} closeDrawer={closeDrawer} />
+          <NavigationButtons mobile={true} closeDrawer={closeDrawer}/>
+        </div>
+      </Drawer>
+
+    </header>
+  );
+}
