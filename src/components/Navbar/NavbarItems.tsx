@@ -15,9 +15,9 @@ export function NavbarItems( { mobile, closeDrawer }: NavbarProps ) {
     };
 
     return (
-        <div className={`flex ${mobile ? "flex-col" : "flex-row w-1/2"}`}>
-            <ul className={`flex ${mobile ? "flex-col gap-4" : "flex-row"}`}>
-                <li className="cursor-pointer flex hover:text-pink ">
+        <div className={`flex ${mobile ? "flex-col" : "flex-row w-full justify-center py-6"}`}>
+            <ul className={`flex ${mobile ? "flex-col gap-4" : "flex-row gap-5"}`}>
+                <li className="cursor-pointer flex hover:text-pink">
                     <Link to="/" onClick={handleLinkClick}>HOME</Link>
                 </li>
 

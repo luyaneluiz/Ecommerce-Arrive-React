@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Header } from "../Header";
+import { NavbarItems } from "../Navbar/NavbarItems";
 import { Outlet } from "react-router-dom";
 
 export function Layout() {
@@ -20,6 +21,7 @@ export function Layout() {
   return(
     <>
       <Header width={width} breakpoint={breakpoint} />
+      { width > breakpoint && <NavbarItems mobile={false} /> }
       <Outlet />
     </>
   )
