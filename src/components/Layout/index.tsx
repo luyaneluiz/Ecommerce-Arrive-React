@@ -19,10 +19,10 @@ export function Layout() {
   }, []);
 
   return(
-    <>
+    <div className="font-['Poppins']">
       <Header width={width} breakpoint={breakpoint} />
       { width > breakpoint && <NavbarItems mobile={false} /> }
       <Outlet />
-    </>
+    </div>
   )
 }
