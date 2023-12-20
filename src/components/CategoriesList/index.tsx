@@ -1,10 +1,13 @@
 import { useState } from "react";
 
+import { Menu } from '@mantine/core';
+
 // icons
 import { BiMinus, BiPlus} from "react-icons/bi";
 
 export function CategoriesList( {mobile}: {mobile: boolean} ) {
     const [ active, setActive ] = useState(false)
+    const [ showCategories, setShowCategories ] = useState(false)
 
     function handleActiveClick() {
         setActive((prevStatus) => !prevStatus)
@@ -31,74 +34,53 @@ export function CategoriesList( {mobile}: {mobile: boolean} ) {
         )
     } else {
         return (
-            <div>
-                <a className="navbar__link" 
-                            // onClick={toggleExpandCategories}
-                        >
-                            CATEGORIES
-                            
-                            {/* <div
-                                className={`categoriesButton ${
-                                expandCategories === "true" ? "mobile" : ""
-                                }`}
-                            >
-                                <BiPlus
-                                    className={`buttonExpand ${
-                                        expandCategories === false ? "active" : ""
-                                    }`}
-                                />
-                                <BiMinus
-                                    className={`buttonMinus ${
-                                        expandCategories === true ? "active" : ""
-                                    }`}
-                                />
-                            </div> */}
+            <Menu trigger="click-hover" openDelay={100} closeDelay={400}>
+                <a 
+                    className="cursor-pointer flex hover:text-pink"
+                    onMouseEnter={() => setShowCategories(true)}
+                    onMouseLeave={() => setShowCategories(false)}
+                >
+                    CATEGORIES
                 </a>
     
-                <div
-                    // className={`categories__list ${
-                    //     expandCategories === true ? "open" : ""
-                    // }`}
-                >
-                    <div className="list__content">
-                        <ul>
-                            <li className="categories__title">Women's</li>
-                            <li>Formal</li>
-                            <li>Casual</li>
-                            <li>Sports</li>
-                            <li>Jacket</li>
-                            <li>Perfum</li>
-                        </ul>
-    
-                        <ul>
-                            <li className="categories__title">Men's</li>
-                            <li>Formal</li>
-                            <li>Casual</li>
-                            <li>Sports</li>
-                            <li>Jacket</li>
-                            <li>Perfum</li>
-                        </ul>
-    
-                        <ul>
-                            <li className="categories__title">Accessories</li>
-                            <li>Bags</li>
-                            <li>Belt</li>
-                            <li>Jewelry</li>
-                            <li>Cosmetics</li>
-                            <li>Cap</li>
-                        </ul>
-    
-                        <ul>
-                            <li className="categories__title">Beach</li>
-                            <li>Bikini</li>
-                            <li>Sarong</li>
-                            <li>Speedo</li>
-                            <li>Hats</li>
-                            <li>Bags</li>
-                        </ul>
-                    </div>
+                <div className={`${showCategories ? "flex" : "hidden"} "justify-around w-3/4 max-w-[650px] absolute m-auto left-0 right-0 bg-white shadow-sm shadow-slate-300 rounded-xl p-6"`}>
+                    <ul className="flex flex-col gap-2 w-1/4 pl-4">
+                        <li className="font-bold pb-1">Women's</li>
+                        <li className="cursor-pointer flex hover:text-pink">Formal</li>
+                        <li className="cursor-pointer flex hover:text-pink">Casual</li>
+                        <li className="cursor-pointer flex hover:text-pink">Sports</li>
+                        <li className="cursor-pointer flex hover:text-pink">Jacket</li>
+                        <li className="cursor-pointer flex hover:text-pink">Perfum</li>
+                    </ul>
+
+                    <ul className="flex flex-col gap-2 w-1/4 pl-4">
+                        <li className="font-bold pb-1">Men's</li>
+                        <li className="cursor-pointer flex hover:text-pink">Formal</li>
+                        <li className="cursor-pointer flex hover:text-pink">Casual</li>
+                        <li className="cursor-pointer flex hover:text-pink">Sports</li>
+                        <li className="cursor-pointer flex hover:text-pink">Jacket</li>
+                        <li className="cursor-pointer flex hover:text-pink">Perfum</li>
+                    </ul>
+
+                    <ul className="flex flex-col gap-2 w-1/4 pl-4">
+                        <li className="font-bold pb-1">Accessories</li>
+                        <li className="cursor-pointer flex hover:text-pink">Bags</li>
+                        <li className="cursor-pointer flex hover:text-pink">Belt</li>
+                        <li className="cursor-pointer flex hover:text-pink">Jewelry</li>
+                        <li className="cursor-pointer flex hover:text-pink">Cosmetics</li>
+                        <li className="cursor-pointer flex hover:text-pink">Cap</li>
+                    </ul>
+
+                    <ul className="flex flex-col gap-2 w-1/4 pl-4">
+                        <li className="font-bold pb-1">Beach</li>
+                        <li className="cursor-pointer flex hover:text-pink">Bikini</li>
+                        <li className="cursor-pointer flex hover:text-pink">Sarong</li>
+                        <li className="cursor-pointer flex hover:text-pink">Speedo</li>
+                        <li className="cursor-pointer flex hover:text-pink">Hats</li>
+                        <li className="cursor-pointer flex hover:text-pink">Bags</li>
+                    </ul>
                 </div>
-            </div>
+            </Menu>
         )
     }
 }
