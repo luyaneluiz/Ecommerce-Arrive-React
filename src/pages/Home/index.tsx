@@ -1,7 +1,7 @@
-import { CreatingPage } from "../../components/CreatingPage"
+import { Banner } from "../../components/Banner"
 
 export function Home() {
     return (
-        <CreatingPage />
+        <Banner />
     )
 }
