@@ -44,7 +44,7 @@ export function CategoriesList( {mobile, showCategories}: CategoriesProps ) {
                     CATEGORIES
                 </a>
     
-                <div className={`${showCategories ? "flex" : "hidden"} "justify-around w-3/4 max-w-[650px] absolute m-auto left-0 right-0 bg-white shadow-sm shadow-slate-300 rounded-xl p-6"`}>
+                <div className={`${showCategories ? "flex" : "hidden"} justify-around w-3/4 max-w-[650px] absolute m-auto left-0 right-0 bg-white shadow-sm shadow-slate-300 rounded-xl p-6`}>
                     <ul className="flex flex-col gap-2 w-1/4 pl-4">
                         <li className="font-bold pb-1">Women's</li>
                         <li className="cursor-pointer flex hover:text-pink">Formal</li>
