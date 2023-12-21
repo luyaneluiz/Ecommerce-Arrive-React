@@ -5,9 +5,14 @@ import { Menu } from '@mantine/core';
 // icons
 import { BiMinus, BiPlus} from "react-icons/bi";
 
-export function CategoriesList( {mobile}: {mobile: boolean} ) {
+// types
+interface CategoriesProps {
+    mobile: boolean, 
+    showCategories: boolean
+}
+
+export function CategoriesList( {mobile, showCategories}: CategoriesProps ) {
     const [ active, setActive ] = useState(false)
-    const [ showCategories, setShowCategories ] = useState(false)
 
     function handleActiveClick() {
         setActive((prevStatus) => !prevStatus)
@@ -35,11 +40,7 @@ export function CategoriesList( {mobile}: {mobile: boolean} ) {
     } else {
         return (
             <Menu trigger="click-hover" openDelay={100} closeDelay={400}>
-                <a 
-                    className="cursor-pointer flex hover:text-pink"
-                    onMouseEnter={() => setShowCategories(true)}
-                    onMouseLeave={() => setShowCategories(false)}
-                >
+                <a className="cursor-pointer flex hover:text-pink">
                     CATEGORIES
                 </a>
     

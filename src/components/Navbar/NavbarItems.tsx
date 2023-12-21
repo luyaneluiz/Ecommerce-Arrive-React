@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // components
@@ -10,6 +11,8 @@ interface NavbarProps {
 }
 
 export function NavbarItems( { mobile, closeDrawer }: NavbarProps ) {
+    const [ showCategories, setShowCategories ] = useState(false)
+
     const handleLinkClick = () => {
         closeDrawer?.();
     };
@@ -21,8 +24,8 @@ export function NavbarItems( { mobile, closeDrawer }: NavbarProps ) {
                     <Link to="/" onClick={handleLinkClick}>HOME</Link>
                 </li>
 
-                <li>
-                    <CategoriesList mobile={mobile} />
+                <li onMouseEnter={() => setShowCategories(true)} onMouseLeave={() => setShowCategories(false)}>
+                    <CategoriesList mobile={mobile} showCategories={showCategories} />
                 </li>
 
                 <li className="cursor-pointer flex hover:text-pink">
