@@ -1,7 +1,11 @@
-import { Banner } from "../../components/Banner"
+import { Banner } from "../../components/Banner";
+import { CategoriesCards } from "../../components/CategoriesCards";
 
 export function Home() {
-    return (
-        <Banner />
-    )
+  return (
+    <div>
+      <Banner />
+      <CategoriesCards />
+    </div>
+  );
 }
