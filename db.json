@@ -18,5 +18,57 @@
       "cover": "https://img.icons8.com/doodle/48/000000/dress-back-view.png",
       "amount": 35
     }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "California 705 T-shirt",
+      "category": "Men's",
+      "price": 50,
+      "old_price": 80,
+      "cover": "src/assets/products/1.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 2,
+      "title": "Hot Coat Myspring Winter",
+      "category": "Winter",
+      "price": 160,
+      "old_price": 0,
+      "cover": "src/assets/products/2.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 3,
+      "title": "Simple T-Shirt Candle High",
+      "category": "Women's",
+      "price": 25,
+      "old_price": 40,
+      "cover": "src/assets/products/3.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 4,
+      "title": "Poncho Femme High",
+      "category": "Winter",
+      "price": 70,
+      "old_price": 90,
+      "cover": "src/assets/products/4.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 5,
+      "title": "Blazer Formal Man's Event",
+      "category": "Men's",
+      "price": 180,
+      "old_price": 0,
+      "cover": "src/assets/products/5.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    }
   ]
 }
