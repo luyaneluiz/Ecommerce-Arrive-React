@@ -1,0 +1,22 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "title": "T-shirts",
+      "cover": "https://img.icons8.com/doodle/48/000000/t-shirt--v1.png",
+      "amount": 65
+    },
+    {
+      "id": 2,
+      "title": "Coats",
+      "cover": "https://img.icons8.com/doodle/48/000000/jumper.png",
+      "amount": 50
+    },
+    {
+      "id": 3,
+      "title": "Dress",
+      "cover": "https://img.icons8.com/doodle/48/000000/dress-back-view.png",
+      "amount": 35
+    }
+  ]
+}
