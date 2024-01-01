@@ -31,8 +31,6 @@ export function CategoriesCards() {
             cover={categories.cover}
           />
         ))}
-        {/* <CategoryCard /> */}
-        {/* <CategoryCard /> */}
       </div>
     </section>
   );
