@@ -11,24 +11,33 @@ import { ProductCard } from "./ProductCard";
 import { ProductProps } from "../ProductTypes";
 
 export function Trends() {
+  const [trend, setTrend] = useState("New");
   const [products, setProducts] = useState<ProductProps[]>([]);
 
   useEffect(() => {
     api.get("/products").then((response) => {
       const allProducts: ProductProps[] = response.data;
       const newProducts: ProductProps[] = allProducts.filter(
-        (product: ProductProps) => product.type === "New"
+        (product: ProductProps) => product.type === trend
       );
       setProducts(newProducts);
     });
-  }, []);
+  }, [trend]);
+
+  function handleTrendClick() {
+    trend === "New" ? setTrend("Hot") : setTrend("New");
+  }
 
   return (
     <div className="mx-7">
       <div className="flex justify-between items-center p-1">
-        <BiChevronLeft />
-        <h2>New</h2>
-        <BiChevronRight />
+        <button onClick={() => handleTrendClick()}>
+          <BiChevronLeft />
+        </button>
+        <h2>{trend}</h2>
+        <button onClick={() => handleTrendClick()}>
+          <BiChevronRight />
+        </button>
       </div>
       <div>
         {products.map((product) => (
