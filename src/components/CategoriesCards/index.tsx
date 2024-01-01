@@ -21,7 +21,7 @@ export function CategoriesCards() {
   }, []);
 
   return (
-    <section className="flex justify-center my-5">
+    <section className="flex justify-center my-5 w-full">
       <div className="flex sm:grid sm:grid-cols-3 gap-3 w-full max-w-[1000px] overflow-y-hidden sm:overflow-visible snap-x snap-mandatory overscroll-contain">
         {categories.map((categories) => (
           <CategoryCard
