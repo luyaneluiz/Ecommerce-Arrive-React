@@ -69,6 +69,56 @@
       "cover": "src/assets/products/5.png",
       "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
       "type": "New"
+    },
+    {
+      "id": 6,
+      "title": "Tenis Nike Air Man",
+      "category": "Shoes",
+      "price": 200,
+      "old_price": 250,
+      "cover": "src/assets/products/6.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
+    },
+    {
+      "id": 7,
+      "title": "Purse Gucci Trend Colorful",
+      "category": "Purse",
+      "price": 90,
+      "old_price": 120,
+      "cover": "src/assets/products/7.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
+    },
+    {
+      "id": 8,
+      "title": "Coat Gourmet Woman",
+      "category": "Winter",
+      "price": 150,
+      "old_price": 180,
+      "cover": "src/assets/products/8.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
+    },
+    {
+      "id": 9,
+      "title": "Coat Gourmet Winter Man",
+      "category": "Winter",
+      "price": 130,
+      "old_price": 180,
+      "cover": "src/assets/products/9.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
+    },
+    {
+      "id": 10,
+      "title": "Jacket Jeans Hot Man",
+      "category": "Winter",
+      "price": 100,
+      "old_price": 150,
+      "cover": "src/assets/products/10.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
     }
   ]
 }
