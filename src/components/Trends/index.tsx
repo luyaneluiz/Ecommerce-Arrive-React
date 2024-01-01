@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 // icons
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
+// context
+import { useBreakpoint } from "../../contexts/BreakpointContext";
+
 // components
 import { ProductCard } from "./ProductCard";
 
@@ -11,6 +14,8 @@ import { ProductCard } from "./ProductCard";
 import { ProductProps } from "../ProductTypes";
 
 export function Trends() {
+  const { isMobile } = useBreakpoint();
+
   const [trend, setTrend] = useState("New");
   const [products, setProducts] = useState<ProductProps[]>([]);
 
@@ -20,7 +25,8 @@ export function Trends() {
       const newProducts: ProductProps[] = allProducts.filter(
         (product: ProductProps) => product.type === trend
       );
-      setProducts(newProducts);
+
+      isMobile ? setProducts(newProducts) : setProducts(allProducts);
     });
   }, [trend]);
 
@@ -28,22 +34,44 @@ export function Trends() {
     trend === "New" ? setTrend("Hot") : setTrend("New");
   }
 
-  return (
-    <div className="mx-7">
-      <div className="flex justify-between items-center p-1">
-        <button onClick={() => handleTrendClick()}>
-          <BiChevronLeft />
-        </button>
-        <h2>{trend}</h2>
-        <button onClick={() => handleTrendClick()}>
-          <BiChevronRight />
-        </button>
+  if (isMobile) {
+    return (
+      <div className="mx-7">
+        <div className="flex justify-between items-center p-1">
+          <button onClick={() => handleTrendClick()} className="sm:hidden">
+            <BiChevronLeft />
+          </button>
+          <h2 className="sm:font-bold sm:text-xl uppercase">{trend}</h2>
+          <button onClick={() => handleTrendClick()} className="sm:hidden">
+            <BiChevronRight />
+          </button>
+        </div>
+        <div>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-      <div>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    );
+  } else {
+    const newProducts = products.filter((product) => product.type === "New");
+    const hotProducts = products.filter((product) => product.type === "Hot");
+
+    return (
+      <div className="flex justify-center flex-col max-w-md border-e">
+        <div className="flex flex-col pe-5">
+          <h2 className="sm:font-bold sm:text-xl uppercase">New</h2>
+          {newProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        <div className="flex flex-col pe-5 mt-3">
+          <h2 className="sm:font-bold sm:text-xl uppercase">Hot</h2>
+          {hotProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
