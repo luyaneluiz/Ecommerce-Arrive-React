@@ -5,7 +5,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
   const { title, category, price, old_price, cover } = product;
 
   return (
-    <div className="flex gap-4 w-full p-4 rounded-2xl my-4 shadow-lg">
+    <div className="flex gap-4 w-full p-4 rounded-2xl mt-4 shadow-lg">
       <div className="flex justify-center h-20 w-20 overflow-hidden">
         <img src={cover} alt={title} className="h-20" />
       </div>
