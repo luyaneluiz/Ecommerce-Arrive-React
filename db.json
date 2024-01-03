@@ -22,97 +22,97 @@
   "products": [
     {
       "id": 1,
-      "title": "California 705 T-shirt",
-      "category": "Men's",
-      "price": 50,
-      "old_price": 80,
+      "title": "Simple T-Shirt Candle High",
+      "category": "Women's",
+      "price": 25,
+      "old_price": 40,
       "cover": "src/assets/products/1.png",
       "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
       "type": "New"
     },
     {
       "id": 2,
-      "title": "Hot Coat Myspring Winter",
-      "category": "Winter",
-      "price": 160,
+      "title": "Original T-Shirt Kawaii Cat",
+      "category": "Women's",
+      "price": 30,
       "old_price": 0,
       "cover": "src/assets/products/2.png",
       "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "New"
+      "type": ""
     },
     {
       "id": 3,
-      "title": "Simple T-Shirt Candle High",
-      "category": "Women's",
-      "price": 25,
-      "old_price": 40,
-      "cover": "src/assets/products/3.png",
-      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "New"
-    },
-    {
-      "id": 4,
-      "title": "Poncho Femme High",
-      "category": "Winter",
-      "price": 70,
-      "old_price": 90,
-      "cover": "src/assets/products/4.png",
-      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "New"
-    },
-    {
-      "id": 5,
-      "title": "Blazer Formal Man's Event",
-      "category": "Men's",
-      "price": 180,
-      "old_price": 0,
-      "cover": "src/assets/products/5.png",
-      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "New"
-    },
-    {
-      "id": 6,
-      "title": "Tenis Nike Air Man",
-      "category": "Shoes",
-      "price": 200,
-      "old_price": 250,
-      "cover": "src/assets/products/6.png",
-      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "Hot"
-    },
-    {
-      "id": 7,
-      "title": "Purse Gucci Trend Colorful",
-      "category": "Purse",
-      "price": 90,
-      "old_price": 120,
-      "cover": "src/assets/products/7.png",
-      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "Hot"
-    },
-    {
-      "id": 8,
-      "title": "Coat Gourmet Woman",
-      "category": "Winter",
-      "price": 150,
-      "old_price": 180,
-      "cover": "src/assets/products/8.png",
-      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
-      "type": "Hot"
-    },
-    {
-      "id": 9,
-      "title": "Coat Gourmet Winter Man",
+      "title": "Men's Gourmet Winter Coat",
       "category": "Winter",
       "price": 130,
       "old_price": 180,
-      "cover": "src/assets/products/9.png",
+      "cover": "src/assets/products/3.png",
       "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
       "type": "Hot"
     },
     {
+      "id": 4,
+      "title": "Long Sleeve T-Shirt 705 Black",
+      "category": "Men's",
+      "price": 34,
+      "old_price": 40,
+      "cover": "src/assets/products/4.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Offer"
+    },
+    {
+      "id": 5,
+      "title": "Women's Gourmet Coat",
+      "category": "Winter",
+      "price": 150,
+      "old_price": 180,
+      "cover": "src/assets/products/5.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
+    },
+    {
+      "id": 6,
+      "title": "Basic White T-Shirt",
+      "category": "Men's",
+      "price": 30,
+      "old_price": 0,
+      "cover": "src/assets/products/6.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": ""
+    },
+    {
+      "id": 7,
+      "title": "Black 705 T-Shirt",
+      "category": "Men's",
+      "price": 50,
+      "old_price": 52.5,
+      "cover": "src/assets/products/7.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Offer"
+    },
+    {
+      "id": 8,
+      "title": "Women's Long poncho",
+      "category": "Winter",
+      "price": 70,
+      "old_price": 90,
+      "cover": "src/assets/products/8.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 9,
+      "title": "California 705 T-shirt",
+      "category": "Men's",
+      "price": 50,
+      "old_price": 80,
+      "cover": "src/assets/products/9.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
       "id": 10,
-      "title": "Jacket Jeans Hot Man",
+      "title": "Men's Warm Denim Jacket",
       "category": "Winter",
       "price": 100,
       "old_price": 150,
@@ -122,7 +122,7 @@
     },
     {
       "id": 11,
-      "title": "Tenis Nike Air Red Man",
+      "title": "Nike Air Men's Red Sneakers",
       "category": "Shoes",
       "price": 100,
       "old_price": 150,
@@ -131,6 +131,46 @@
       "type": "Promo",
       "sold": 30,
       "avaliable": 20
+    },
+    {
+      "id": 12,
+      "title": "Myspring Warm Jacket",
+      "category": "Winter",
+      "price": 160,
+      "old_price": 0,
+      "cover": "src/assets/products/12.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 13,
+      "title": "Formal Men's Blazer",
+      "category": "Men's",
+      "price": 180,
+      "old_price": 0,
+      "cover": "src/assets/products/13.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "New"
+    },
+    {
+      "id": 14,
+      "title": "Nike Air Men's Shoes",
+      "category": "Shoes",
+      "price": 200,
+      "old_price": 250,
+      "cover": "src/assets/products/14.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
+    },
+    {
+      "id": 15,
+      "title": "Gucci Colorful Trend Bag",
+      "category": "Purse",
+      "price": 90,
+      "old_price": 120,
+      "cover": "src/assets/products/15.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Hot"
     }
   ]
 }
