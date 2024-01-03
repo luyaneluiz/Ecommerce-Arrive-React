@@ -7,4 +7,6 @@ export interface ProductProps {
   cover: string;
   description: string;
   type: string;
+  sold?: number;
+  avaliable?: number;
 }
