@@ -16,7 +16,7 @@ interface TimerProps {
 }
 
 const Timer: React.FC<TimerProps> = ({ days, hours, minutes, seconds }) => (
-  <div className="flex gap-2 my-2">
+  <div className="flex gap-2 mt-2">
     <CounterBlock value={days} title="days" />
     <CounterBlock value={hours} title="hours" />
     <CounterBlock value={minutes} title="min" />

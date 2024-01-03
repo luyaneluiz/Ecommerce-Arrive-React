@@ -9,7 +9,7 @@ export function Home() {
     <main className="flex flex-col items-center">
       <Banner />
       <CategoriesCards />
-      <div className="flex flex-col sm:flex-row w-full max-w-[1000px]">
+      <div className="flex flex-col sm:flex-row w-full max-w-[1300px] px-4">
         <section className="flex justify-center">
           <Trends />
         </section>
