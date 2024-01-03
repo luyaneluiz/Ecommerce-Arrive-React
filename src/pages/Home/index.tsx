@@ -13,7 +13,7 @@ export function Home() {
         <section className="flex justify-center">
           <Trends />
         </section>
-        <section>
+        <section className="w-full">
           <PromoCard />
         </section>
       </div>
