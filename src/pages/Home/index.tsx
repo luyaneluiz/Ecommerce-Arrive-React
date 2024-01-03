@@ -10,12 +10,12 @@ export function Home() {
       <Banner />
       <CategoriesCards />
       <div className="flex flex-col sm:flex-row w-full max-w-[1300px] px-4">
-        <section className="flex justify-center">
+        <div className="flex justify-center">
           <Trends />
-        </section>
-        <section className="w-full">
+        </div>
+        <div className="w-full">
           <PromoCard />
-        </section>
+        </div>
       </div>
     </main>
   );

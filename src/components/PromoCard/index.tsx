@@ -83,7 +83,7 @@ export function PromoCard() {
 
   if (product) {
     return (
-      <div className="flex flex-col items-center sm:ps-7">
+      <section className="flex flex-col items-center sm:ps-7">
         <div className="w-full border-b mb-4 py-3">
           <h3 className="font-bold sm:text-lg">Daily Deal</h3>
         </div>
@@ -139,7 +139,7 @@ export function PromoCard() {
             </section>
           </section>
         </div>
-      </div>
+      </section>
     );
   }
 }
