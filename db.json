@@ -119,6 +119,18 @@
       "cover": "src/assets/products/10.png",
       "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
       "type": "Hot"
+    },
+    {
+      "id": 11,
+      "title": "Tenis Nike Air Red Man",
+      "category": "Shoes",
+      "price": 100,
+      "old_price": 150,
+      "cover": "src/assets/products/11.png",
+      "description": "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor.",
+      "type": "Promo",
+      "sold": 30,
+      "avaliable": 20
     }
   ]
 }
