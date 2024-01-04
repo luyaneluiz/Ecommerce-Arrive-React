@@ -36,7 +36,7 @@ export function Trends() {
 
   if (isMobile) {
     return (
-      <div className="mx-7">
+      <div>
         <div className="flex justify-between items-center p-1">
           <button onClick={() => handleTrendClick()} className="sm:hidden">
             <BiChevronLeft />
