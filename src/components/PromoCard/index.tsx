@@ -92,7 +92,7 @@ export function PromoCard() {
           <img
             src={product.cover}
             alt={product.title}
-            className="w-full sm:max-w-[400px] px-3 cursor-pointer transition-all hover:scale-105"
+            className="w-full sm:max-w-[400px] px-3 cursor-pointer transition-all duration-500 hover:scale-105"
           />
 
           <section className="sm:ps-3">
