@@ -1,10 +1,29 @@
+import { useState } from "react";
+
+// icons
+import { BiHeart, BiSolidHeart } from "react-icons/bi";
+
 // types
 import { ProductProps } from "../ProductTypes";
 
 export function ProductCard({ product }: { product: ProductProps }) {
+  const [favorite, setFavorite] = useState(false);
+
+  function handleFavoriteClick() {
+    setFavorite((prevState) => !prevState);
+  }
+
   return (
     <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6">
-      <div></div>
+      <div className="w-full flex flex-row-reverse justify-between">
+        <button
+          onClick={() => {
+            handleFavoriteClick();
+          }}
+        >
+          {favorite ? <BiSolidHeart size={28} /> : <BiHeart size={28} />}
+        </button>
+      </div>
       <img
         src={product.cover}
         alt={product.title}
