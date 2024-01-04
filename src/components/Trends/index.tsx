@@ -36,7 +36,7 @@ export function Trends() {
 
   if (isMobile) {
     return (
-      <div>
+      <div className="mb-6">
         <div className="flex justify-between items-center p-1">
           <button onClick={() => handleTrendClick()} className="sm:hidden">
             <BiChevronLeft />
@@ -58,7 +58,7 @@ export function Trends() {
     const hotProducts = products.filter((product) => product.type === "Hot");
 
     return (
-      <div className="flex justify-center flex-col max-w-md border-e">
+      <div className="flex justify-center flex-col max-w-md border-e gap-4">
         <div className="flex flex-col pe-5">
           <h2 className="sm:font-bold sm:text-xl uppercase">New</h2>
           {newProducts.map((product) => (
