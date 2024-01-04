@@ -6,6 +6,9 @@ import { BiHeart, BiSolidHeart } from "react-icons/bi";
 // types
 import { ProductProps } from "../ProductTypes";
 
+// components
+import { Badge } from "../Bagde";
+
 export function ProductCard({ product }: { product: ProductProps }) {
   const [favorite, setFavorite] = useState(false);
 
@@ -23,6 +26,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
         >
           {favorite ? <BiSolidHeart size={28} /> : <BiHeart size={28} />}
         </button>
+        {product.type && <Badge {...product} />}
       </div>
       <img
         src={product.cover}
