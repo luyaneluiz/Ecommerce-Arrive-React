@@ -22,7 +22,7 @@ export function Products() {
         <h3 className="font-bold sm:text-lg">Products</h3>
       </div>
 
-      <div className="flex flex-col items-center gap-4 w-full">
+      <div className="flex flex-col items-center gap-4 w-full sm:grid sm:grid-cols-3">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

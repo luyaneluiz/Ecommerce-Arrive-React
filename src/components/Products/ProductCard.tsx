@@ -31,7 +31,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
       <img
         src={product.cover}
         alt={product.title}
-        className="transition-all duration-500 hover:scale-105 h-72 w-64"
+        className="transition-all duration-500 hover:scale-105 h-72 w-64 sm:h-60 sm:w-56"
       />
       <div className="flex flex-col items-center text-center w-5/6 gap-2">
         <p className="text-base">{product.title}</p>
