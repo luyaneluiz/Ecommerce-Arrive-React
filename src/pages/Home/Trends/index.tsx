@@ -36,13 +36,13 @@ export function Trends() {
 
   if (isMobile) {
     return (
-      <div className="mb-6">
+      <div className="mb-6 w-full">
         <div className="flex justify-between items-center p-1">
-          <button onClick={() => handleTrendClick()} className="sm:hidden">
+          <button onClick={() => handleTrendClick()}>
             <BiChevronLeft />
           </button>
-          <h2 className="sm:font-bold sm:text-xl uppercase">{trend}</h2>
-          <button onClick={() => handleTrendClick()} className="sm:hidden">
+          <h2 className="font-bold uppercase">{trend}</h2>
+          <button onClick={() => handleTrendClick()}>
             <BiChevronRight />
           </button>
         </div>

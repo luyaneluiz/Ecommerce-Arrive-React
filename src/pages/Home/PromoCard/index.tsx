@@ -84,19 +84,19 @@ export function PromoCard() {
 
   if (product) {
     return (
-      <section className="flex flex-col items-center sm:ps-7">
+      <section className="flex flex-col items-center">
         <div className="w-full border-b mb-4 py-3">
           <h3 className="font-bold sm:text-lg">Daily Deal</h3>
         </div>
 
-        <div className="flex flex-col border rounded-xl p-6 w-full sm:flex-row">
+        <div className="flex flex-col items-center border rounded-xl p-6 w-full lg:flex-row">
           <img
             src={product.cover}
             alt={product.title}
-            className="w-full sm:max-w-[400px] px-3 cursor-pointer transition-all duration-500 hover:scale-105"
+            className="w-full sm:max-w-[300px] lg:max-w-[50%] px-3 cursor-pointer transition-all duration-500 hover:scale-105"
           />
 
-          <section className="sm:ps-3">
+          <section className="sm:ps-3 lg:max-w-[50%]">
             <div className="flex flex-col">
               <h4 className="overflow-hidden whitespace-nowrap text-ellipsis font-bold mb-1 sm:text-2xl">
                 {product.title}
