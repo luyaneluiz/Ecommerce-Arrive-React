@@ -11,10 +11,12 @@ import { NavigationButtons } from "./NavigationButtons";
 import { NavbarItems } from "../Navbar";
 import { InputSearch } from "../../Search";
 
-// types
-import { BreakpointProps } from "../../../types/BreakpointTypes";
+// context
+import { useBreakpoint } from "../../../contexts/BreakpointContext";
 
-export function Header({ width, breakpoint }: BreakpointProps) {
+export function Header() {
+  const { isMobile } = useBreakpoint();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const closeDrawer = () => {
@@ -27,7 +29,7 @@ export function Header({ width, breakpoint }: BreakpointProps) {
         <img src={Logo} alt="Logo arrive" className="w-20 md:w-24" />
       </Link>
 
-      {width > breakpoint ? (
+      {!isMobile ? (
         <div className="flex justify-between w-2/3">
           <InputSearch />
           <NavigationButtons mobile={false} />
