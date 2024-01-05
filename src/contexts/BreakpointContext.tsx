@@ -14,7 +14,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
   children,
 }) => {
   const [width, setWidth] = useState(window.innerWidth);
-  const breakpoint = 600;
+  const breakpoint = 1024;
 
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
