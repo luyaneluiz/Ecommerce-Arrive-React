@@ -6,6 +6,7 @@ import { Progress } from "@material-tailwind/react";
 // components
 import { CounterBlock } from "../CounterBlock";
 import { Button } from "../../../components/Button";
+import { Title } from "../../../components/Titlte";
 
 // types
 import { ProductProps } from "../../../types/ProductTypes";
@@ -85,9 +86,7 @@ export function PromoCard() {
   if (product) {
     return (
       <section className="flex flex-col items-center">
-        <div className="w-full border-b mb-4 py-3">
-          <h3 className="font-bold sm:text-lg">Daily Deal</h3>
-        </div>
+        <Title text="Daily Deal" />
 
         <div className="flex flex-col items-center border rounded-xl p-6 w-full lg:flex-row">
           <img
