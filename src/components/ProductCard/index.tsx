@@ -18,7 +18,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
   }
 
   return (
-    <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6">
+    <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
       <div className="w-full flex flex-row-reverse justify-between">
         <button
           onClick={() => {
