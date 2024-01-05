@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ProductCard } from "./ProductCard";
 
 // types
-import { ProductProps } from "../ProductTypes";
+import { ProductProps } from "../../types/ProductTypes";
 
 export function Products() {
   const [products, setProducts] = useState<ProductProps[]>([]);

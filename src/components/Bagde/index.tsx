@@ -1,5 +1,5 @@
 // types
-import { ProductProps } from "../ProductTypes";
+import { ProductProps } from "../../types/ProductTypes";
 
 export function Badge(product: ProductProps) {
   let bgColor;

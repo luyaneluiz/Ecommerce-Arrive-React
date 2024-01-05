@@ -11,7 +11,7 @@ import { useBreakpoint } from "../../contexts/BreakpointContext";
 import { ProductCard } from "./ProductCard";
 
 // types
-import { ProductProps } from "../ProductTypes";
+import { ProductProps } from "../../types/ProductTypes";
 
 export function Trends() {
   const { isMobile } = useBreakpoint();

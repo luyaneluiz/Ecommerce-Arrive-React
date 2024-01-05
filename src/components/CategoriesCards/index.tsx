@@ -6,7 +6,7 @@ import { api } from "../../services/api";
 import { CategoryCard } from "./CategoryCard";
 
 // types
-import { CategoriesProps } from "../CategoriesTypes";
+import { CategoriesProps } from "../../types/CategoriesTypes";
 
 export function CategoriesCards() {
   const [categories, setCategories] = useState<CategoriesProps[]>([]);

@@ -12,7 +12,7 @@ import { NavbarItems } from "../Navbar";
 import { InputSearch } from "../../Search";
 
 // types
-import { BreakpointProps } from "../../BreakpointTypes";
+import { BreakpointProps } from "../../../types/BreakpointTypes";
 
 export function Header({ width, breakpoint }: BreakpointProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);

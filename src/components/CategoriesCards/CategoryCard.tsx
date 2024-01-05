@@ -1,5 +1,5 @@
 // types
-import { CategoriesProps } from "../CategoriesTypes";
+import { CategoriesProps } from "../../types/CategoriesTypes";
 
 export function CategoryCard({ title, amount, cover }: CategoriesProps) {
   return (

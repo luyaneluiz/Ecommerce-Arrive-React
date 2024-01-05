@@ -4,7 +4,7 @@ import { useState } from "react";
 import { BiHeart, BiSolidHeart } from "react-icons/bi";
 
 // types
-import { ProductProps } from "../ProductTypes";
+import { ProductProps } from "../../types/ProductTypes";
 
 // components
 import { Badge } from "../Bagde";

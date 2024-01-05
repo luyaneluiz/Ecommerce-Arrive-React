@@ -7,7 +7,7 @@ import { Progress } from "@material-tailwind/react";
 import { CounterBlock } from "./CounterBlock";
 
 // types
-import { ProductProps } from "../ProductTypes";
+import { ProductProps } from "../../types/ProductTypes";
 interface TimerProps {
   days: number;
   hours: number;
