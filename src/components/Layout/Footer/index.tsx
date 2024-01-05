@@ -13,7 +13,7 @@ import {
 export function Footer() {
   return (
     <footer>
-      <div className="bg-gray-300 p-7 text-sm flex flex-col gap-5 sm:flex-row sm:justify-center sm:gap-8">
+      <div className="bg-gray-300 p-7 text-sm flex flex-col items-center gap-5 md:flex-row md:justify-center md:gap-8">
         <aside className="flex flex-col gap-5 sm:flex-row sm:justify-around sm:w-[500px] sm:gap-9">
           <section>
             <img src={Logo} alt="Logo arrive" width={100} />
@@ -50,16 +50,16 @@ export function Footer() {
           <div className="flex flex-col gap-5 max-w-[300px]">
             <section className="flex flex-col gap-2">
               <h2 className="font-bold text-xl">Newsletter</h2>
-              <div className="flex gap-2">
+              <form className="flex gap-2">
                 <input
-                  type="text"
+                  type="email"
                   className="py-2 px-3 outline-none rounded-sm w-full border-gray-400"
                   placeholder="Enter your e-mail here"
                 />
                 <button className="w-44 sm:w-36 py-2 px-3 bg-pink rounded-sm text-white cursor-pointer font-bold transition-all duration-500 hover:bg-lightPink">
                   SUBSCRIBE
                 </button>
-              </div>
+              </form>
             </section>
             <ul>
               <li className="border-b border-gray-500 flex justify-between py-3">
