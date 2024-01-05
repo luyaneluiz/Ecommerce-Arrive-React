@@ -8,6 +8,7 @@ import { ProductProps } from "../../types/ProductTypes";
 
 // components
 import { Badge } from "../Bagde";
+import { Button } from "../../components/Button";
 
 export function ProductCard({ product }: { product: ProductProps }) {
   const [favorite, setFavorite] = useState(false);
@@ -41,9 +42,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
           </h3>
           <del className="text-xs">${product.old_price.toFixed(2)}</del>
         </div>
-        <button className="bg-pink font-bold text-white cursor-pointer rounded-lg py-2 transition-all hover:bg-lightPink w-full sm:w-32 sm:text-sm sm:my-2">
-          ADD TO CART
-        </button>
+        <Button text="ADD TO CART" />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { Progress } from "@material-tailwind/react";
 
 // components
 import { CounterBlock } from "../CounterBlock";
+import { Button } from "../../../components/Button";
 
 // types
 import { ProductProps } from "../../../types/ProductTypes";
@@ -110,9 +111,7 @@ export function PromoCard() {
                 <del className="text-sm">${product.old_price.toFixed(2)}</del>
               </div>
 
-              <button className="bg-pink font-bold text-white cursor-pointer rounded-lg py-2 transition-all hover:bg-lightPink sm:w-32 sm:text-sm sm:my-2">
-                SHOP NOW
-              </button>
+              <Button text="SHOP NOW" />
 
               <div>
                 <div className="flex justify-between text-xs my-3">
