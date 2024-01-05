@@ -1,6 +1,6 @@
 // images
-import Logo from "../../assets/logo.png";
-import PaymentMethods from "../../assets/payment-methods.png";
+import Logo from "../../../assets/logo.png";
+import PaymentMethods from "../../../assets/payment-methods.png";
 
 // icons
 import {

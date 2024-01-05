@@ -11,7 +11,7 @@ interface CategoriesProps {
   showCategories: boolean;
 }
 
-export function CategoriesList({ mobile, showCategories }: CategoriesProps) {
+export function CategoriesBlock({ mobile, showCategories }: CategoriesProps) {
   const [active, setActive] = useState(false);
 
   function handleActiveClick() {

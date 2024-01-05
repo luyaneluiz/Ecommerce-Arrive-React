@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { Header } from "../Header";
-import { NavbarItems } from "../Navbar/NavbarItems";
+import { Header } from "./Header";
+import { NavbarItems } from "./Navbar";
 import { Outlet } from "react-router-dom";
-import { Footer } from "../Footer";
+import { Footer } from "./Footer";
 
 export function Layout() {
   const [width, setWidth] = useState(window.innerWidth);
