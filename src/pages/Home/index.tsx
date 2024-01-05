@@ -1,9 +1,9 @@
 // components
 import { Banner } from "../../components/Banner";
-import { CategoriesCards } from "../../components/CategoriesCards";
-import { Trends } from "../../components/Trends";
-import { PromoCard } from "../../components/PromoCard";
-import { Products } from "../../components/Products";
+import { CategoriesCards } from "./CategoriesBlock";
+import { Trends } from "./Trends";
+import { PromoCard } from "./PromoCard";
+import { Products } from "./Products";
 
 export function Home() {
   return (

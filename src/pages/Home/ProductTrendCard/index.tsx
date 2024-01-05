@@ -1,5 +1,5 @@
 // types
-import { ProductProps } from "../../types/ProductTypes";
+import { ProductProps } from "../../../types/ProductTypes";
 
 export function ProductCard({ product }: { product: ProductProps }) {
   return (

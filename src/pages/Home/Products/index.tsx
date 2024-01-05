@@ -1,11 +1,11 @@
-import { api } from "../../services/api";
+import { api } from "../../../services/api";
 import { useEffect, useState } from "react";
 
 // components
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "../../../components/ProductCard";
 
 // types
-import { ProductProps } from "../../types/ProductTypes";
+import { ProductProps } from "../../../types/ProductTypes";
 
 export function Products() {
   const [products, setProducts] = useState<ProductProps[]>([]);

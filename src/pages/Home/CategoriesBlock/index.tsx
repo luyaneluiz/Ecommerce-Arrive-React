@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { api } from "../../services/api";
+import { api } from "../../../services/api";
 
 // components
-import { CategoryCard } from "./CategoryCard";
+import { CategoryCard } from "../CategoryCard";
 
 // types
-import { CategoriesProps } from "../../types/CategoriesTypes";
+import { CategoriesProps } from "../../../types/CategoriesTypes";
 
 export function CategoriesCards() {
   const [categories, setCategories] = useState<CategoriesProps[]>([]);

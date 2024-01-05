@@ -1,17 +1,17 @@
-import { api } from "../../services/api";
+import { api } from "../../../services/api";
 import { useEffect, useState } from "react";
 
 // icons
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 // context
-import { useBreakpoint } from "../../contexts/BreakpointContext";
+import { useBreakpoint } from "../../../contexts/BreakpointContext";
 
 // components
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "../ProductTrendCard";
 
 // types
-import { ProductProps } from "../../types/ProductTypes";
+import { ProductProps } from "../../../types/ProductTypes";
 
 export function Trends() {
   const { isMobile } = useBreakpoint();

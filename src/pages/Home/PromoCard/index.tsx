@@ -1,13 +1,13 @@
-import { api } from "../../services/api";
+import { api } from "../../../services/api";
 import { useEffect, useState } from "react";
 
 import { Progress } from "@material-tailwind/react";
 
 // components
-import { CounterBlock } from "./CounterBlock";
+import { CounterBlock } from "../CounterBlock";
 
 // types
-import { ProductProps } from "../../types/ProductTypes";
+import { ProductProps } from "../../../types/ProductTypes";
 interface TimerProps {
   days: number;
   hours: number;
