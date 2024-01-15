@@ -31,7 +31,7 @@ export function Header() {
 
       {!isMobile ? (
         <div className="flex justify-between w-2/3">
-          <InputSearch />
+          <InputSearch data={} />
           <NavigationButtons mobile={false} />
         </div>
       ) : (
