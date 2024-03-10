@@ -13,7 +13,10 @@ export function CategoryCard({ title, amount, cover }: CategoriesProps) {
             <h3>{title}</h3>
             <p>({amount})</p>
           </div>
-          <a href="" className="text-pink font-medium text-sm">
+          <a
+            href=""
+            className="text-pink font-medium text-sm hover:text-lightPink transition-colors"
+          >
             Show All
           </a>
         </div>
