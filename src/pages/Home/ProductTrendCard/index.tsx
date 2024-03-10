@@ -8,7 +8,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
         <img
           src={product.cover}
           alt={product.title}
-          className="h-20 transition-all duration-500 hover:scale-105"
+          className="h-20 transition-all duration-500 hover:scale-105 cursor-pointer"
         />
       </div>
       <div className="w-4/5">
