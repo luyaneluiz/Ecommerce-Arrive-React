@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-// components
+import { Link, useLocation } from "react-router-dom";
 import { CategoriesBlock } from "./CategoriesBlock";
 
-// types
 interface NavbarProps {
   mobile: boolean;
   closeDrawer?: () => void;
@@ -12,6 +9,9 @@ interface NavbarProps {
 
 export function NavbarItems({ mobile, closeDrawer }: NavbarProps) {
   const [showCategories, setShowCategories] = useState(false);
+  const location = useLocation(); 
+
+  const isActive = (path: string) => location.pathname === path;
 
   const handleLinkClick = () => {
     closeDrawer?.();
@@ -25,7 +25,7 @@ export function NavbarItems({ mobile, closeDrawer }: NavbarProps) {
     >
       <ul className={`flex ${mobile ? "flex-col gap-4" : "flex-row gap-5"}`}>
         <li className="cursor-pointer flex hover:text-pink">
-          <Link to="/" onClick={handleLinkClick}>
+          <Link to="/" onClick={handleLinkClick} className={isActive("/") ? "text-pink" : ""}>
             HOME
           </Link>
         </li>
@@ -38,19 +38,19 @@ export function NavbarItems({ mobile, closeDrawer }: NavbarProps) {
         </li>
 
         <li className="cursor-pointer flex hover:text-pink">
-          <Link to="/new" onClick={handleLinkClick}>
+          <Link to="/new" onClick={handleLinkClick} className={isActive("/new") ? "text-pink" : ""}>
             NEW
           </Link>
         </li>
 
         <li className="cursor-pointer flex hover:text-pink">
-          <Link to="/trends" onClick={handleLinkClick}>
+          <Link to="/trends" onClick={handleLinkClick} className={isActive("/trends") ? "text-pink" : ""}>
             TRENDS
           </Link>
         </li>
 
         <li className="cursor-pointer flex hover:text-pink">
-          <Link to="/offers" onClick={handleLinkClick}>
+          <Link to="/offers" onClick={handleLinkClick} className={isActive("/offers") ? "text-pink" : ""}>
             OFFERS
           </Link>
         </li>
