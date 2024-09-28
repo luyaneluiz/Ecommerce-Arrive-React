@@ -1,8 +1,6 @@
-// images
 import Logo from "../../../assets/logo.png";
 import PaymentMethods from "../../../assets/payment-methods.png";
 
-// icons
 import {
   BiLogoInstagram,
   BiLogoFacebook,
@@ -13,7 +11,7 @@ import {
 export function Footer() {
   return (
     <footer>
-      <div className="bg-gray-300 p-7 text-sm flex flex-col items-center gap-5 md:flex-row md:justify-center md:gap-8">
+      <div className="bg-gray-300 p-7 text-sm flex flex-col gap-5 items-center lg:items-start lg:flex-row lg:justify-center lg:gap-8">
         <aside className="flex flex-col gap-5 sm:flex-row sm:justify-around sm:w-[500px] sm:gap-9">
           <section>
             <img src={Logo} alt="Logo arrive" width={100} />
