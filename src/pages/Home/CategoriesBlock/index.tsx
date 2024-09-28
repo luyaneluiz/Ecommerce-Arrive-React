@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
-
 import { api } from "../../../services/api";
-
-// components
 import { CategoryCard } from "../CategoryCard";
-
-// types
 import { CategoriesProps } from "../../../types/CategoriesTypes";
 
 export function CategoriesCards() {
@@ -23,13 +18,15 @@ export function CategoriesCards() {
   return (
     <section className="flex justify-center my-5 w-full">
       <div className="flex sm:grid sm:grid-cols-3 gap-3 w-full max-w-[1000px] px-4 overflow-y-hidden sm:overflow-visible snap-x snap-mandatory overscroll-contain">
-        {categories.map((categories) => (
-          <CategoryCard
-            id={categories.id}
-            title={categories.title}
-            amount={categories.amount}
-            cover={categories.cover}
-          />
+        {categories.map((category) => (
+          <div key={category.id}>
+            <CategoryCard
+              id={category.id}
+              title={category.title}
+              amount={category.amount}
+              cover={category.cover}
+            />
+          </div>
         ))}
       </div>
     </section>
