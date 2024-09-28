@@ -38,20 +38,14 @@ export function NavbarItems({ mobile, closeDrawer }: NavbarProps) {
         </li>
 
         <li className="cursor-pointer flex hover:text-pink">
-          <Link to="/news" onClick={handleLinkClick}>
-            NEWS
+          <Link to="/new" onClick={handleLinkClick}>
+            NEW
           </Link>
         </li>
 
         <li className="cursor-pointer flex hover:text-pink">
           <Link to="/trends" onClick={handleLinkClick}>
             TRENDS
-          </Link>
-        </li>
-
-        <li className="cursor-pointer flex hover:text-pink">
-          <Link to="/tops" onClick={handleLinkClick}>
-            TOPS
           </Link>
         </li>
 

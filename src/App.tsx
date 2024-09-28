@@ -8,9 +8,8 @@ import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
 import { Favorites } from "./pages/Favorites";
 import { Bag } from "./pages/Bag";
-import { News } from "./pages/News";
+import { New } from "./pages/New";
 import { Trends } from "./pages/Trends";
-import { Tops } from "./pages/Tops";
 import { Offers } from "./pages/Offers";
 
 const router = createBrowserRouter([
@@ -34,16 +33,12 @@ const router = createBrowserRouter([
         element: <Bag />
       },
       {
-        path: "/news",
-        element: <News />
+        path: "/new",
+        element: <New />
       },
       {
         path: "/trends",
         element: <Trends />
-      },
-      {
-        path: "/tops",
-        element: <Tops />
       },
       {
         path: "/offers",
