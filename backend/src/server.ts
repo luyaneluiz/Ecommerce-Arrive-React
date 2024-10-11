@@ -42,6 +42,17 @@ app.post("/create/product", async (req: Request, res: Response) => {
     res.send(product)
 })
 
+// ****** Post multiplo ******** //
+// app.post("/create/product", async (req: Request, res: Response) => {
+//     try {
+//         const products = req.body; // Espera um array de produtos
+//         const result = await Product.insertMany(products);
+//         res.status(201).send(result);
+//     } catch (error) {
+//         res.status(500).send({ error: 'Erro ao criar produtos' });
+//     }
+// });
+
 app.put("/update/product/:id", async (req: Request, res: Response) => {
     const product = await Product.findOneAndUpdate({ id: req.params }, req.body )
 

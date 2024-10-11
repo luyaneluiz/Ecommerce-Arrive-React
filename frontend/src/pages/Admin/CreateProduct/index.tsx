@@ -53,6 +53,7 @@ export default function CreateProduct() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
+
         try {
             const response = await axios.post(
                 "http://localhost:3002/create/product",
@@ -125,7 +126,11 @@ export default function CreateProduct() {
                 <div className="flex justify-between mt-4">
                     <Button variant="default">Cancel</Button>
 
-                    <Button variant="filled" color="#d369a0">
+                    <Button
+                        variant="filled"
+                        color="#d369a0"
+                        onClick={handleSubmit}
+                    >
                         Save product
                     </Button>
                 </div>

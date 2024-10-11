@@ -1,9 +1,9 @@
 export interface ProductProps {
-    id: number
+    _id: number
     title: string
     category: string
     price: number
-    old_price: number
+    old_price?: number
     cover: string
     description: string
     type: string

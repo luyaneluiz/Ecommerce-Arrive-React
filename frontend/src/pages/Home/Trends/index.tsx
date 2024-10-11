@@ -1,77 +1,111 @@
 import { api } from "../../../services/api"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
-// icons
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
-
-// context
-import { useBreakpoint } from "../../../contexts/BreakpointContext"
-
-// components
 import { ProductCard } from "../ProductTrendCard"
-
-// types
+import { useBreakpoint } from "../../../contexts/BreakpointContext"
 import { ProductProps } from "../../../types/ProductTypes"
 
 export function Trends() {
     const { isMobile } = useBreakpoint()
-
-    const [trend, setTrend] = useState("New")
+    const [trend, setTrend] = useState<"New" | "Hot">("New")
     const [products, setProducts] = useState<ProductProps[]>([])
 
     useEffect(() => {
-        api.get("/products").then((response) => {
-            const allProducts: ProductProps[] = response.data
-            const newProducts: ProductProps[] = allProducts.filter(
-                (product: ProductProps) => product.type === trend,
-            )
+        const fecthProducts = async () => {
+            try {
+                const response = await api.get("http://localhost:3002/products")
+                const data = await response.data
+                setProducts(data)
+            } catch (error) {
+                console.error("Erro ao buscar produtos:", error)
+            }
+        }
 
-            isMobile ? setProducts(newProducts) : setProducts(allProducts)
-        })
-    }, [trend])
+        fecthProducts()
+    }, [])
+
+    const filteredProducts = products.filter(
+        (product) => product.type === trend || !isMobile,
+    )
 
     function handleTrendClick() {
-        trend === "New" ? setTrend("Hot") : setTrend("New")
+        setTrend(trend === "New" ? "Hot" : "New")
     }
 
-    if (isMobile) {
-        return (
-            <div className="mb-6 w-full">
-                <div className="flex justify-between items-center p-1">
-                    <button onClick={() => handleTrendClick()}>
-                        <BiChevronLeft />
-                    </button>
-                    <h2 className="font-bold uppercase">{trend}</h2>
-                    <button onClick={() => handleTrendClick()}>
-                        <BiChevronRight />
-                    </button>
-                </div>
-                <div>
-                    {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-            </div>
-        )
-    } else {
-        const newProducts = products.filter((product) => product.type === "New")
-        const hotProducts = products.filter((product) => product.type === "Hot")
-
-        return (
-            <div className="flex justify-center flex-col max-w-md border-e gap-4">
-                <div className="flex flex-col pe-5">
-                    <h2 className="sm:font-bold sm:text-xl uppercase">New</h2>
-                    {newProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-                <div className="flex flex-col pe-5 mt-3">
-                    <h2 className="sm:font-bold sm:text-xl uppercase">Hot</h2>
-                    {hotProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-            </div>
-        )
-    }
+    return (
+        <div className="mb-6 w-full">
+            {isMobile ? (
+                <MobileView
+                    products={filteredProducts}
+                    trend={trend}
+                    handleTrendClick={handleTrendClick}
+                />
+            ) : (
+                <DesktopView products={products} />
+            )}
+        </div>
+    )
 }
+
+interface MobileViewProps {
+    products: ProductProps[]
+    trend: "New" | "Hot"
+    handleTrendClick: () => void
+}
+
+const MobileView: React.FC<MobileViewProps> = ({
+    products,
+    trend,
+    handleTrendClick,
+}) => (
+    <div>
+        <div className="flex justify-between items-center p-1">
+            <button onClick={handleTrendClick}>
+                <BiChevronLeft />
+            </button>
+            <h2 className="font-bold uppercase">{trend}</h2>
+            <button onClick={handleTrendClick}>
+                <BiChevronRight />
+            </button>
+        </div>
+        <div>
+            {products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+            ))}
+        </div>
+    </div>
+)
+
+interface DesktopViewProps {
+    products: ProductProps[]
+}
+
+const DesktopView: React.FC<DesktopViewProps> = ({ products }) => {
+    const newProducts = products.filter((product) => product.type === "New")
+    const hotProducts = products.filter((product) => product.type === "Hot")
+
+    return (
+        <div className="flex flex-col md:flex-row gap-6">
+            <CategorySection title="New" products={newProducts} />
+            <CategorySection title="Hot" products={hotProducts} />
+        </div>
+    )
+}
+
+interface CategorySectionProps {
+    title: string
+    products: ProductProps[]
+}
+
+const CategorySection: React.FC<CategorySectionProps> = ({
+    title,
+    products,
+}) => (
+    <div className="flex flex-col pe-5">
+        <h2 className="font-bold text-xl uppercase">{title}</h2>
+        {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+        ))}
+    </div>
+)

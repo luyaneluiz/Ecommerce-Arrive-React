@@ -1,4 +1,4 @@
-// types
+import React from "react"
 import { ProductProps } from "../../../types/ProductTypes"
 
 export function ProductCard({ product }: { product: ProductProps }) {
@@ -20,9 +20,11 @@ export function ProductCard({ product }: { product: ProductProps }) {
                     <h3 className="text-pink pe-2">
                         ${product.price.toFixed(2)}
                     </h3>
-                    <del className="text-xs">
-                        ${product.old_price.toFixed(2)}
-                    </del>
+                    {product.old_price && (
+                        <del className="text-xs">
+                            ${product.old_price.toFixed(2)}
+                        </del>
+                    )}
                 </div>
             </div>
         </div>
