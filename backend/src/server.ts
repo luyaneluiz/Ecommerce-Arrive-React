@@ -6,11 +6,9 @@ const app = express()
 const port = 3002
 
 const productSchema = new mongoose.Schema({
-    id: Number,
     title: String,
     category: String,
     price: Number,
-    old_price: Number,
     cover: String,
     description: String,
     type: String
@@ -32,11 +30,9 @@ app.get("/products", async (req: Request, res: Response) => {
 
 app.post("/create/product", async (req: Request, res: Response) => {
     const product = new Product({
-        id: req.body.id,
         title: req.body.title,
         category: req.body.category,
         price: req.body.price,
-        old_price: req.body.old_price,
         cover: req.body.cover,
         description: req.body.description,
         type: req.body.type

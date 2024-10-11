@@ -19,13 +19,13 @@ interface Product {
     type: Types
 }
 
-type Categories = "Women's" | "Winter" | "Men's" | "Shoes" | "Purse"
+type Categories = "" | "Women's" | "Winter" | "Men's" | "Shoes" | "Purse"
 type Types = "" | "New" | "Hot" | "Offer" | "Promo"
 
 export default function CreateProduct() {
     const [product, setProduct] = useState<Product>({
         title: "",
-        category: "Women's",
+        category: "",
         price: 0,
         cover: new File([], ""),
         description: "",
