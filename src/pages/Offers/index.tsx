@@ -1,18 +1,18 @@
-import { api } from "../../services/api";
-import { useEffect, useState } from "react";
-import { ProductCard } from "../../components/ProductCard";
-import { Title } from "../../components/Titlte";
-import { ProductProps } from "../../types/ProductTypes";
+import { api } from "../../services/api"
+import { useEffect, useState } from "react"
+import { ProductCard } from "../../components/ProductCard"
+import { Title } from "../../components/Titlte"
+import { ProductProps } from "../../types/ProductTypes"
 
 export function Offers() {
     const [products, setProducts] = useState<ProductProps[]>([])
-    const offers = products.filter((product) => product.type === "Offer");
+    const offers = products.filter((product) => product.type === "Offer")
 
     useEffect(() => {
-      api.get("/products").then((response) => {
-        setProducts(response.data);
-      });
-    }, []);
+        api.get("/products").then((response) => {
+            setProducts(response.data)
+        })
+    }, [])
 
     return (
         <main className="flex justify-center">
