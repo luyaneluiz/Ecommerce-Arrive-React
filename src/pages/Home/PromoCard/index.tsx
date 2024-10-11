@@ -1,9 +1,8 @@
 import { api } from "../../../services/api";
 import { useEffect, useState } from "react";
 
-import { Progress } from "@material-tailwind/react";
+import { Progress } from "@mantine/core";
 
-// components
 import { CounterBlock } from "../CounterBlock";
 import { Button } from "../../../components/Button";
 import { Title } from "../../../components/Titlte";
@@ -123,10 +122,9 @@ export function PromoCard() {
                 </div>
                 <Progress
                   value={60}
-                  placeholder=""
                   size="lg"
-                  className="border bg-gray-900/5 p-1"
-                  color="purple"
+                  radius="lg"
+                  color="grape"
                 />
               </div>
             </div>

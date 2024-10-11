@@ -12,7 +12,6 @@
   "dependencies": {
     "@mantine/core": "^7.3.2",
     "@mantine/hooks": "^7.3.2",
-    "@material-tailwind/react": "^2.1.8",
     "axios": "^1.6.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
