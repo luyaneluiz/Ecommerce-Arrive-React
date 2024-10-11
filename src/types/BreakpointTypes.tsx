@@ -1,4 +1,4 @@
 export interface BreakpointProps {
-    width: number;
-    breakpoint: number;
+    width: number
+    breakpoint: number
 }
