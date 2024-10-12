@@ -1,6 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useState, useEffect } from "react"
 
-// types
 interface BreakpointProviderProps {
     children: React.ReactNode
 }
@@ -14,7 +13,7 @@ export const BreakpointProvider: React.FC<BreakpointProviderProps> = ({
     children,
 }) => {
     const [width, setWidth] = useState(window.innerWidth)
-    const breakpoint = 1024
+    const breakpoint = 900
 
     useEffect(() => {
         const handleResizeWindow = () => setWidth(window.innerWidth)
