@@ -1,7 +1,7 @@
 import React from "react"
 import { ProductProps } from "../../../types/ProductTypes"
 
-export function ProductCard({ product }: { product: ProductProps }) {
+export function TrendProductCard({ product }: { product: ProductProps }) {
     return (
         <div className="flex gap-4 w-full p-4 rounded-2xl mt-4 shadow-lg">
             <div className="flex justify-center h-20 w-20 overflow-hidden">

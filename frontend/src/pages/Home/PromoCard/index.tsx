@@ -1,5 +1,5 @@
 import { api } from "../../../services/api"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { Progress } from "@mantine/core"
 
@@ -106,9 +106,11 @@ export function PromoCard() {
                                 <h3 className="text-pink font-bold text-lg sm:text-2xl">
                                     ${product.price.toFixed(2)}
                                 </h3>
-                                <del className="text-sm">
-                                    ${product.old_price.toFixed(2)}
-                                </del>
+                                {product.old_price && (
+                                    <del className="text-xs">
+                                        ${product.old_price.toFixed(2)}
+                                    </del>
+                                )}
                             </div>
 
                             <Button text="SHOP NOW" />

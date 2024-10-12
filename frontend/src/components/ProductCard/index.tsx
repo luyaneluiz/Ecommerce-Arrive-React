@@ -1,12 +1,6 @@
-import { useState } from "react"
-
-// icons
+import React, { useState } from "react"
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
-
-// types
 import { ProductProps } from "../../types/ProductTypes"
-
-// components
 import { Badge } from "../Bagde"
 import { Button } from "../../components/Button"
 
@@ -44,9 +38,11 @@ export function ProductCard({ product }: { product: ProductProps }) {
                     <h3 className="text-pink pe-2 text-lg font-extrabold">
                         ${product.price.toFixed(2)}
                     </h3>
-                    <del className="text-xs">
-                        ${product.old_price.toFixed(2)}
-                    </del>
+                    {product.old_price && (
+                        <del className="text-xs">
+                            ${product.old_price.toFixed(2)}
+                        </del>
+                    )}
                 </div>
                 <Button text="ADD TO CART" />
             </div>

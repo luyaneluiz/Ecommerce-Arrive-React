@@ -1,7 +1,7 @@
-// components
+import React from "react"
 import { Banner } from "../../components/Banner"
 import { CategoriesCards } from "./CategoriesBlock"
-import { Trends } from "./Trends"
+import { Trends } from "../../components/Trends"
 import { PromoCard } from "./PromoCard"
 import { Products } from "./Products"
 
