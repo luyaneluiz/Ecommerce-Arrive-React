@@ -20,11 +20,12 @@ export function Banner() {
                 onMouseLeave={autoplay.current.reset}
             >
                 {banners.map((banner, index) => (
-                    <Carousel.Slide key={index} className="w-full">
+                    <Carousel.Slide key={index}>
                         <img
                             src={
                                 isMobile ? banner.srcMobile : banner.srcDesktop
                             }
+                            width="100%"
                             alt={banner.alt}
                         />
                     </Carousel.Slide>

@@ -8,7 +8,7 @@ import { Products } from "./Products"
 export function Home() {
     return (
         <div className="flex flex-col items-center">
-            <main className="max-w-[1300px]">
+            <main className="w-full max-w-[1300px]">
                 <Banner />
                 <CategoriesCards />
                 <div className="flex flex-col lg:flex-row lg:gap-4 w-full px-6 items-start">
