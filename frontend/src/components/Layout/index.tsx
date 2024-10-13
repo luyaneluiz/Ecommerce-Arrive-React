@@ -1,3 +1,4 @@
+import React from "react"
 import { Header } from "./Header"
 import { NavbarItems } from "./Navbar"
 import { Outlet } from "react-router-dom"
@@ -13,7 +14,9 @@ export function Layout() {
         <div className="font-['Poppins']">
             <Header />
             {!isMobile && <NavbarItems mobile={false} />}
-            <Outlet />
+            <main className="max-w-[1300px] m-auto">
+                <Outlet />
+            </main>
             <Footer />
         </div>
     )

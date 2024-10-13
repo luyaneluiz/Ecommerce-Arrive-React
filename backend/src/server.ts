@@ -42,6 +42,11 @@ app.post("/create/product", async (req: Request, res: Response) => {
     res.send(product)
 })
 
+app.get("/product/:id", async (req: Request, res: Response) => {
+    const product = await Product.find(req.params)
+    res.send(product)
+})
+
 // ****** Post multiplo ******** //
 // app.post("/create/product", async (req: Request, res: Response) => {
 //     try {

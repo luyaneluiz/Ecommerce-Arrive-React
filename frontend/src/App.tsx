@@ -10,6 +10,7 @@ import { Bag } from "./pages/Bag"
 import { New } from "./pages/New"
 import { Trends } from "./pages/Trends"
 import { Offers } from "./pages/Offers"
+import { Product } from "./pages/Product"
 import CreateProduct from "./pages/Admin/CreateProduct"
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: "/create/product",
                 element: <CreateProduct />,
+            },
+            {
+                path: "/product/:id",
+                element: <Product />,
             },
         ],
     },

@@ -3,6 +3,7 @@ import { BiHeart, BiSolidHeart } from "react-icons/bi"
 import { ProductProps } from "../../types/ProductTypes"
 import { Badge } from "../Bagde"
 import { Button } from "../../components/Button"
+import { Link } from "react-router-dom"
 
 export function ProductCard({ product }: { product: ProductProps }) {
     const [favorite, setFavorite] = useState(false)
@@ -27,11 +28,13 @@ export function ProductCard({ product }: { product: ProductProps }) {
                 </button>
                 {product.type && <Badge {...product} />}
             </div>
-            <img
-                src={product.cover}
-                alt={product.title}
-                className="transition-all duration-500 hover:scale-105 h-60 :w-56 cursor-pointer"
-            />
+            <Link to={`/product/${product._id}`}>
+                <img
+                    src={product.cover}
+                    alt={product.title}
+                    className="transition-all duration-500 hover:scale-105 h-60 :w-56 cursor-pointer"
+                />
+            </Link>
             <div className="flex flex-col items-center text-center w-5/6 gap-2">
                 <p className="text-base">{product.title}</p>
                 <div className="flex items-center">
