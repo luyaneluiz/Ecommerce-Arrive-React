@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useProducts } from "../../hooks/useProoducts"
+import { useProducts } from "../../hooks/useProducts"
 import { useBreakpoint } from "../../contexts/BreakpointContext"
 import MobileTrends from "./Mobile"
 import DesktopTrends from "./Desktop"
