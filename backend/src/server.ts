@@ -43,9 +43,25 @@ app.post("/create/product", async (req: Request, res: Response) => {
 })
 
 app.get("/product/:id", async (req: Request, res: Response) => {
-    const product = await Product.find(req.params)
-    res.send(product)
-})
+    try {
+        const id = req.params.id;
+        const product = await Product.findById(id);
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).send({ error: 'Invalid ID' });
+            return;
+        }
+
+        if (!product) {
+            res.status(404).send({ error: 'Product not found' });
+            return;
+        }
+        
+        res.status(200).send(product);
+    } catch (error) {
+        res.status(500).send({ error: 'Error fetching product' });
+    }
+});
 
 // ****** Post multiplo ******** //
 // app.post("/create/product", async (req: Request, res: Response) => {

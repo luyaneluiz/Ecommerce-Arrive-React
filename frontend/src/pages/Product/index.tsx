@@ -1,13 +1,9 @@
 import React from "react"
-import { useProducts } from "../../hooks/useProoducts"
-import { useParams } from "react-router-dom"
+import { useProduct } from "../../hooks/useProduct"
 import { Title, Button, Text } from "@mantine/core"
 
 export function Product() {
-    const { id } = useParams<{ id: string }>()
-    const { products } = useProducts()
-
-    const product = products.find((product) => product._id === id)
+    const { product } = useProduct()
 
     if (!product) {
         return (
