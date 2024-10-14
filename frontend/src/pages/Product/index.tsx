@@ -22,7 +22,12 @@ export function Product() {
     } else {
         return (
             <div>
-                <img src={product.cover} alt="" width={300} height={300} />
+                <img
+                    src={`../../${product.cover}`}
+                    alt=""
+                    width={300}
+                    height={300}
+                />
                 <h1>{product.title}</h1>
             </div>
         )
