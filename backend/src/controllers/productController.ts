@@ -47,3 +47,24 @@ export const deleteProduct = async (req: Request, res: Response) => {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id)
     res.send(`Product deleted successfully: ${deletedProduct}`)
 }
+
+export const updateProducts = async (req: Request, res: Response) => {
+    const products = req.body
+
+    try {
+        const updatedProducts = await Promise.all(
+            products.map(async (product: any) => {
+                return await Product.findByIdAndUpdate(product._id, product, {
+                    new: true,
+                })
+            }),
+        )
+        res.send({
+            message: "Produtos atualizados com sucesso",
+            updatedProducts,
+        })
+    } catch (error) {
+        console.error("Erro ao atualizar produtos:", error)
+        res.status(500).send({ error: "Erro ao atualizar os produtos" })
+    }
+}

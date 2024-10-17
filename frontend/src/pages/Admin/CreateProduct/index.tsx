@@ -32,6 +32,80 @@ export default function CreateProduct() {
         type: "",
     })
 
+    // const updatedProductsArray = [
+    //     {
+    //         _id: "67099001c3c7d06a34b350b9",
+    //         title: "Simple T-Shirt Candle High",
+    //         category: "Women's",
+    //         price: 25,
+    //         cover: "src/assets/products/1.png",
+    //         description:
+    //             "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit ame…",
+    //         type: "New",
+    //         rating: 4.5,
+    //         colors: ["Red", "Blue"],
+    //         size: ["S", "M", "L"],
+    //         stock: 50,
+    //     },
+    //     {
+    //         _id: "67099001c3c7d06a34b350ba",
+    //         title: "Original T-Shirt Kawaii Cat",
+    //         category: "Women's",
+    //         price: 30,
+    //         cover: "src/assets/products/2.png",
+    //         description:
+    //             "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit ame…",
+    //         type: "",
+    //         rating: 4.2,
+    //         colors: ["Pink", "White"],
+    //         size: ["S", "M"],
+    //         stock: 40,
+    //     },
+    //     {
+    //         _id: "67099001c3c7d06a34b350bb",
+    //         title: "Men's Gourmet Winter Coat",
+    //         category: "Winter",
+    //         price: 130,
+    //         cover: "src/assets/products/3.png",
+    //         description:
+    //             "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit ame…",
+    //         type: "Hot",
+    //         rating: 4.8,
+    //         colors: ["Black", "Gray"],
+    //         size: ["M", "L", "XL"],
+    //         stock: 20,
+    //     },
+    //     {
+    //         _id: "67099001c3c7d06a34b350bc",
+    //         title: "Long Sleeve T-Shirt 705 Black",
+    //         category: "Men's",
+    //         price: 34,
+    //         cover: "src/assets/products/4.png",
+    //         description:
+    //             "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit ame…",
+    //         type: "Offer",
+    //         rating: 4.3,
+    //         colors: ["Black", "White"],
+    //         size: ["S", "L"],
+    //         stock: 35,
+    //     },
+    //     // Outros produtos seguem o mesmo padrão...
+    //     {
+    //         _id: "67099001c3c7d06a34b350c7",
+    //         title: "Gucci Colorful Trend Bag",
+    //         category: "Purse",
+    //         price: 90,
+    //         cover: "src/assets/products/15.png",
+    //         description:
+    //             "Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit ame…",
+    //         type: "Hot",
+    //         rating: 4.7,
+    //         colors: ["Yellow", "Green"],
+    //         size: [],
+    //         stock: 10,
+    //     },
+    // ]
+
     const handleChange = (
         e: ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -53,6 +127,16 @@ export default function CreateProduct() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
+
+        // try {
+        //     const response = await axios.put(
+        //         "http://localhost:3002/update/products",
+        //         updatedProductsArray,
+        //     )
+        //     console.log("Produto criado com sucesso:", response.data)
+        // } catch (error) {
+        //     console.error("Erro ao editar produtos:", error)
+        // }
 
         try {
             const response = await axios.post(
