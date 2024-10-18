@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     cover: String,
     rating: Number,
     colors: [String],
-    size: [String],
+    sizes: [String],
     stock: Number,
     description: String,
     type: String,
