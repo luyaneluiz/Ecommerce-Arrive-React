@@ -4,7 +4,6 @@ import {
     Button,
     Text,
     Divider,
-    Group,
     NumberFormatter,
     ActionIcon,
 } from "@mantine/core"
@@ -14,13 +13,12 @@ import ColorSelect from "../../components/ColorSelect"
 import SelectSize from "../../components/SelectSize"
 import { BiHeart } from "react-icons/bi"
 import ProductImage from "../../components/ProductImage"
+import QuantitySelector from "../../components/QuantitySelector"
 
 export function Product() {
     const { product } = useProduct()
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
-
-    // Seleção da quantidade
     const [quantity, setQuantity] = useState(1)
 
     if (product) {
@@ -57,35 +55,10 @@ export function Product() {
                         <Divider my={20} />
 
                         <div className="flex justify-between">
-                            <div>
-                                <Text fw={700} size="sm">
-                                    Quantity:
-                                </Text>
-
-                                <Group className="mt-2">
-                                    <Button
-                                        variant="default"
-                                        size="xs"
-                                        onClick={() =>
-                                            setQuantity(
-                                                quantity > 1 ? quantity - 1 : 1,
-                                            )
-                                        }
-                                    >
-                                        -
-                                    </Button>
-                                    <Text size="sm">{quantity}</Text>
-                                    <Button
-                                        variant="default"
-                                        size="xs"
-                                        onClick={() =>
-                                            setQuantity(quantity + 1)
-                                        }
-                                    >
-                                        +
-                                    </Button>
-                                </Group>
-                            </div>
+                            <QuantitySelector
+                                quantity={quantity}
+                                setQuantity={setQuantity}
+                            />
 
                             <div className="flex flex-col gap-2">
                                 <Text fw={700} size="sm">
