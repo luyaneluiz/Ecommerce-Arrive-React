@@ -1,12 +1,6 @@
 import React, { useState } from "react"
 import { useProduct } from "../../hooks/useProduct"
-import {
-    Button,
-    Text,
-    Divider,
-    NumberFormatter,
-    ActionIcon,
-} from "@mantine/core"
+import { Button, Divider, ActionIcon } from "@mantine/core"
 import PageError from "../../components/Error/PageError"
 import ProductDetails from "../../components/ProductDetails"
 import ColorSelect from "../../components/ColorSelect"
@@ -14,6 +8,7 @@ import SelectSize from "../../components/SelectSize"
 import { BiHeart } from "react-icons/bi"
 import ProductImage from "../../components/ProductImage"
 import QuantitySelector from "../../components/QuantitySelector"
+import Totalizer from "../../components/Totalizer"
 
 export function Product() {
     const { product } = useProduct()
@@ -60,20 +55,10 @@ export function Product() {
                                 setQuantity={setQuantity}
                             />
 
-                            <div className="flex flex-col gap-2">
-                                <Text fw={700} size="sm">
-                                    Total:
-                                </Text>
-
-                                <NumberFormatter
-                                    prefix="$"
-                                    value={quantity * product.price}
-                                    thousandSeparator
-                                    decimalSeparator="."
-                                    decimalScale={2}
-                                    className="text-pink font-bold text-xl"
-                                />
-                            </div>
+                            <Totalizer
+                                quantity={quantity}
+                                price={product.price}
+                            />
                         </div>
 
                         <div className="flex gap-2 mt-4 items-center">
