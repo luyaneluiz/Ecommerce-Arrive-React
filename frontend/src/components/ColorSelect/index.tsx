@@ -18,7 +18,7 @@ export default function ColorSelect({
                     <ColorSwatch
                         key={color}
                         component="button"
-                        color={`var(--mantine-color-${color.toLowerCase()}-4)`}
+                        color={color}
                         onClick={() => setSelectedColor(color)}
                         size={25}
                         style={{
