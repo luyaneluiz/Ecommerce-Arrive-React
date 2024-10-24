@@ -3,7 +3,7 @@ import {
     addFavorite,
     removeFavorite,
     getFavorites,
-} from "../controllers/favorites"
+} from "../controllers/favorite"
 // import { protect } from "../middleware/authMiddleware"
 
 const router = express.Router()

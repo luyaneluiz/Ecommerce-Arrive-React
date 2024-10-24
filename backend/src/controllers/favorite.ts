@@ -56,7 +56,7 @@ export const removeFavorite = async (req: Request, res: Response) => {
 }
 
 export const getFavorites = async (req: Request, res: Response) => {
-    const { userId } = req.body
+    const { userId } = req.query
 
     try {
         const favorite = await Favorite.findOne({ user: userId }).populate(
