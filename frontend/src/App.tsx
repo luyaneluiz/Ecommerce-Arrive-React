@@ -12,6 +12,7 @@ import { Trends } from "./pages/Trends"
 import { Offers } from "./pages/Offers"
 import { Product } from "./pages/Product"
 import CreateProduct from "./pages/Admin/CreateProduct"
+import { NotFound } from "./pages/NotFound"
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: "/product/:id",
                 element: <Product />,
+            },
+            {
+                path: "*",
+                element: <NotFound />,
             },
         ],
     },
