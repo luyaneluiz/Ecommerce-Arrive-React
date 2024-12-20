@@ -1,4 +1,4 @@
-import React from "react"
+import Auth from "@/pages/Auth/"
 import { Layout } from "../components/Layout"
 import { Trends } from "../components/Trends"
 import { Bag } from "../pages/Bag"
@@ -15,6 +15,10 @@ export const Routes = [
             {
                 index: true,
                 element: <Home />,
+            },
+            {
+                path: "/auth",
+                element: <Auth />,
             },
             {
                 path: "/bag",
