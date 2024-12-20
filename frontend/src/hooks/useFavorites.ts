@@ -30,5 +30,5 @@ export const useFavorites = (userId: string): FavoritesProps => {
         fetchFavorites()
     }, [userId])
 
-    return { favorites, error, loading }
+    return { favorites, setFavorites, error, loading }
 }
