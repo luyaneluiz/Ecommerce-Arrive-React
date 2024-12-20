@@ -1,15 +1,61 @@
-import React, { useState } from "react"
+import React from "react"
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
 import { ProductProps } from "../../types/ProductTypes"
 import { Badge } from "../Bagde"
 import { Button } from "../../components/Button"
 import { Link } from "react-router-dom"
+import { api } from "../../services/api"
+import { useFavorites } from "../../hooks/useFavorites"
 
 export function ProductCard({ product }: { product: ProductProps }) {
-    const [favorite, setFavorite] = useState(false)
+    const userId = "6718fc3fe2238b22cef334d4"
+    const { favorites, setFavorites } = useFavorites(userId)
+    const isFavorite = favorites?.some((fav) => fav._id === product._id)
 
     function handleFavoriteClick() {
-        setFavorite((prevState) => !prevState)
+        if (isFavorite) {
+            removeFavorite()
+        } else {
+            addFavorite()
+        }
+    }
+
+    async function addFavorite() {
+        try {
+            const response = await api.post("/favorites", {
+                userId: "6718fc3fe2238b22cef334d4",
+                productId: product._id,
+            })
+
+            if (response.data) {
+                setFavorites((prev) => [...(prev || []), product])
+            } else {
+                console.log(response.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function removeFavorite() {
+        try {
+            const response = await api.delete("/favorites", {
+                data: {
+                    userId: "6718fc3fe2238b22cef334d4",
+                    productId: product._id,
+                },
+            })
+
+            if (response.data) {
+                setFavorites((prev) =>
+                    prev ? prev.filter((fav) => fav._id !== product._id) : [],
+                )
+            } else {
+                console.log(response.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -20,7 +66,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
                         handleFavoriteClick()
                     }}
                 >
-                    {favorite ? (
+                    {isFavorite ? (
                         <BiSolidHeart size={28} />
                     ) : (
                         <BiHeart size={28} />
