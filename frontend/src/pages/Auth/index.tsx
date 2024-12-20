@@ -1,3 +1,4 @@
+import { api } from "@/services/api"
 import {
     Anchor,
     Button,
@@ -31,6 +32,29 @@ export default function Auth() {
         },
     })
 
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const { email, name, password, terms } = form.values
+
+        console.log(form.values)
+
+        if (type === "register" && !terms) {
+            return
+        }
+
+        try {
+            const response = await api.post(`/auth/${type}`, {
+                email,
+                name,
+                password,
+            })
+
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Stack align="center" justify="center" gap={80} py={40}>
             <Paper radius="md" p="xl" w={450} withBorder>
@@ -45,7 +69,7 @@ export default function Auth() {
                     </Text>
                 </Stack>
 
-                <form onSubmit={form.onSubmit(() => {})}>
+                <form onSubmit={handleSubmit}>
                     <Stack>
                         {type === "register" && (
                             <TextInput
