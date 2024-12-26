@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { useAuth } from "@/contexts/AuthContext"
 import {
     Anchor,
     Button,
@@ -14,6 +14,7 @@ import { useForm } from "@mantine/form"
 import { upperFirst, useToggle } from "@mantine/hooks"
 
 export default function Auth() {
+    const { login, register } = useAuth()
     const [type, toggle] = useToggle(["login", "register"])
     const form = useForm({
         initialValues: {
@@ -39,13 +40,11 @@ export default function Auth() {
         if (type === "register" && !terms) return
 
         try {
-            const response = await api.post(`/auth/${type}`, {
-                email,
-                name,
-                password,
-            })
-
-            console.log(response.data)
+            if (type === "login") {
+                await login(email, password)
+            } else {
+                await register(name, email, password)
+            }
         } catch (error) {
             console.log(error)
         }

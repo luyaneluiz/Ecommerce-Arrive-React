@@ -9,6 +9,7 @@ import "@mantine/carousel/styles.css"
 import { createTheme, MantineProvider } from "@mantine/core"
 
 import { BreakpointProvider } from "./contexts/BreakpointContext"
+import { AuthProvider } from "./contexts/AuthContext.tsx"
 
 const theme = createTheme({
     /** Put your mantine theme override here */
@@ -17,9 +18,11 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <MantineProvider theme={theme}>
-            <BreakpointProvider>
-                <RouterProvider router={router} />
-            </BreakpointProvider>
+            <AuthProvider>
+                <BreakpointProvider>
+                    <RouterProvider router={router} />
+                </BreakpointProvider>
+            </AuthProvider>
         </MantineProvider>
     </React.StrictMode>,
 )
