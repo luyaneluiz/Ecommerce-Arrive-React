@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import Logo from "../../../assets/logo.png"
 
 // components
-import { NavigationButtons } from "./NavigationButtons"
+import { LoggatedButtons } from "./LoggatedButtons"
 import { NavbarItems } from "../Navbar"
 import { InputSearch } from "../../Search"
 
@@ -32,7 +32,7 @@ export function Header() {
             {!isMobile ? (
                 <div className="flex justify-between w-2/3">
                     <InputSearch />
-                    <NavigationButtons mobile={false} />
+                    <LoggatedButtons mobile={false} />
                 </div>
             ) : (
                 <Burger
@@ -51,10 +51,7 @@ export function Header() {
             >
                 <div className="p-4">
                     <NavbarItems mobile={true} closeDrawer={closeDrawer} />
-                    <NavigationButtons
-                        mobile={true}
-                        closeDrawer={closeDrawer}
-                    />
+                    <LoggatedButtons mobile={true} closeDrawer={closeDrawer} />
                 </div>
             </Drawer>
         </header>

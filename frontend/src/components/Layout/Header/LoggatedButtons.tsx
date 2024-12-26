@@ -11,7 +11,7 @@ interface NavbarProps {
     closeDrawer?: () => void
 }
 
-export function NavigationButtons({ mobile, closeDrawer }: NavbarProps) {
+export function LoggatedButtons({ mobile, closeDrawer }: NavbarProps) {
     const [hasFavorites, setHasFavorites] = useState(false)
 
     useEffect(() => {
