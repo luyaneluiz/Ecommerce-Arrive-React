@@ -4,8 +4,8 @@ import cors from "./middleware/cors"
 import productsRouter from "./routes/productRoutes"
 import authRouter from "./routes/auth"
 import routerFavorite from "./routes/favorite"
-// import session from "express-session"
-// import MongoStore from "connect-mongo"
+import session from "express-session"
+import MongoStore from "connect-mongo"
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -18,24 +18,23 @@ app.use(express.json())
 connectDB()
 
 // Configuração de sessões
-// app.use(
-//     session({
-//         secret: "yourSuperSecretKey", // Escolha um segredo forte para proteger as sessões
-//         resave: false,
-//         saveUninitialized: false,
-//         store: MongoStore.create({
-//             mongoUrl:
-//                 "mongodb+srv://luyaneluiz:PONYlVankgoa@ecommerce.wthpq.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce",
-//             collectionName: "sessions",
-//         }),
-//         cookie: {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === "production", // Cookies seguros apenas em produção
-//             sameSite: "strict",
-//             maxAge: 1000 * 60 * 60 * 24, // 1 dia
-//         },
-//     }),
-// )
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || "defaultSecret",
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI,
+            collectionName: "sessions",
+        }),
+        cookie: {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Cookies seguros apenas em produção
+            sameSite: "strict",
+            maxAge: 1000 * 60 * 60 * 24, // 1 dia
+        },
+    }),
+)
 
 app.use("/products", productsRouter)
 app.use("/", routerFavorite)

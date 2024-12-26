@@ -1,5 +1,11 @@
 import { api } from "@/services/api"
-import React, { createContext, useContext, useState, ReactNode } from "react"
+import React, {
+    createContext,
+    useContext,
+    useState,
+    ReactNode,
+    useEffect,
+} from "react"
 
 interface AuthProviderProps {
     children: ReactNode
@@ -29,7 +35,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<UserProps | null>(null)
 
     const login = async (email: string, password: string) => {
-        const response = await api.post("/auth/login", { email, password })
+        await api.post("/auth/login", { email, password })
+
+        const response = await api.post("/auth/me")
         setUser(response.data.user)
     }
 
@@ -42,7 +50,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(response.data.user)
     }
 
-    const logout = () => setUser(null)
+    const logout = async () => {
+        await api.post("/auth/logout")
+        setUser(null)
+    }
+
+    useEffect(() => {
+        const checkUser = async () => {
+            try {
+                const response = await api.get("/auth/me")
+                setUser(response.data.user)
+            } catch (error) {
+                setUser(null)
+            }
+        }
+
+        checkUser()
+    }, [])
 
     const contextValue = {
         user,
