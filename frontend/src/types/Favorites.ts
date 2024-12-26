@@ -4,7 +4,7 @@ export interface FavoritesProps {
     favorites: ProductProps[] | null
     setFavorites: React.Dispatch<React.SetStateAction<ProductProps[] | null>>
     loading: boolean
-    error: string | null
+    error: unknown
 }
 
 export type Product = ProductProps

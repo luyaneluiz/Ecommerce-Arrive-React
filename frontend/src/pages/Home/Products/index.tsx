@@ -1,11 +1,6 @@
-import React from "react"
-
-// components
-import { ProductCard } from "../../../components/ProductCard"
-import { Title } from "../../../components/Titlte"
-
-// types
-import { useProducts } from "../../../hooks/useProducts"
+import { Title } from "@/components/Titlte"
+import { ProductCard } from "@/components/ProductCard"
+import { useProducts } from "@/hooks/useProducts"
 
 export function Products() {
     const { products } = useProducts()

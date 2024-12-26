@@ -2,9 +2,9 @@ import { api } from "../services/api"
 import { useEffect, useState } from "react"
 import { FavoritesProps, Product } from "../types/Favorites"
 
-export const useFavorites = (userId: string): FavoritesProps => {
+export const useFavorites = (userId: string | null): FavoritesProps => {
     const [favorites, setFavorites] = useState<Product[] | null>(null)
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<unknown>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {

@@ -5,9 +5,11 @@ import { Button } from "../../components/Button"
 import { Link } from "react-router-dom"
 import { api } from "../../services/api"
 import { useFavorites } from "../../hooks/useFavorites"
+import { useAuth } from "@/contexts/AuthContext"
 
 export function ProductCard({ product }: { product: ProductProps }) {
-    const userId = "6718fc3fe2238b22cef334d4"
+    const { user } = useAuth()
+    const userId = user?.id || null
     const { favorites, setFavorites } = useFavorites(userId)
     const isFavorite = favorites?.some((fav) => fav._id === product._id)
 
