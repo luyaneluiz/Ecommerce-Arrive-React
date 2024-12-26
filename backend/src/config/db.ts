@@ -2,9 +2,8 @@ import mongoose from "mongoose"
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(
-            "mongodb+srv://luyaneluiz:PONYlVankgoa@ecommerce.wthpq.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce",
-        )
+        const mongoURI = process.env.MONGO_URI as string
+        await mongoose.connect(mongoURI)
 
         console.log("MongoDB connected")
     } catch (error) {
