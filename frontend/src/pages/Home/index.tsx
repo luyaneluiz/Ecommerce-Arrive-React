@@ -1,4 +1,3 @@
-import React from "react"
 import { Banner } from "../../components/Banner"
 import { CategoriesCards } from "./CategoriesBlock"
 import { Trends } from "../../components/Trends"

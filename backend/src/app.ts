@@ -1,8 +1,8 @@
 import express from "express"
 import connectDB from "./config/db"
 import cors from "./middleware/cors"
+import productsRouter from "./routes/productRoutes"
 import authRouter from "./routes/auth"
-import router from "./routes/productRoutes"
 import routerFavorite from "./routes/favorite"
 
 const app = express()
@@ -12,7 +12,7 @@ app.use(express.json())
 
 connectDB()
 
-app.use("/", router)
+app.use("/products", productsRouter)
 app.use("/", routerFavorite)
 app.use("/auth", authRouter)
 

@@ -1,4 +1,3 @@
-import React from "react"
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
 import { ProductProps } from "../../types/ProductTypes"
 import { Badge } from "../Bagde"
