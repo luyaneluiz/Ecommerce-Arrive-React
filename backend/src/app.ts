@@ -1,6 +1,7 @@
 import express from "express"
 import connectDB from "./config/db"
 import cors from "./middleware/cors"
+import authRouter from "./routes/auth"
 import router from "./routes/productRoutes"
 import routerFavorite from "./routes/favorite"
 
@@ -13,5 +14,6 @@ connectDB()
 
 app.use("/", router)
 app.use("/", routerFavorite)
+app.use("/auth", authRouter)
 
 export default app

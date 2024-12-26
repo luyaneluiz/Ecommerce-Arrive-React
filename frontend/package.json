@@ -12,9 +12,12 @@
   "dependencies": {
     "@mantine/carousel": "^7.13.2",
     "@mantine/core": "^7.3.2",
+    "@mantine/form": "^7.15.1",
+    "@types/node": "^22.10.2",
     "axios": "^1.6.3",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
