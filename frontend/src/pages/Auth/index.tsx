@@ -1,4 +1,5 @@
-import { api } from "@/services/api"
+// import { api } from "@/services/api"
+import axios from "axios"
 import {
     Anchor,
     Button,
@@ -17,9 +18,9 @@ export default function Auth() {
     const [type, toggle] = useToggle(["login", "register"])
     const form = useForm({
         initialValues: {
-            email: "",
-            name: "",
-            password: "",
+            email: "maria@gmail.com",
+            name: "maria",
+            password: "1234",
             terms: true,
         },
 
@@ -43,11 +44,14 @@ export default function Auth() {
         }
 
         try {
-            const response = await api.post(`/auth/${type}`, {
-                email,
-                name,
-                password,
-            })
+            const response = await axios.post(
+                `http://localhost:3002/auth/${type}`,
+                {
+                    email,
+                    name,
+                    password,
+                },
+            )
 
             console.log(response.data)
         } catch (error) {
