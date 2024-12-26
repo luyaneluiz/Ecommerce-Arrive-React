@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { NavbarItems } from "../Navbar"
 import { LoggatedButtons } from "./LoggatedButtons"
 import { useAuth } from "@/contexts/AuthContext"
-import Logo from "../../../assets/logo.png"
+import Logo from "@/assets/logo.png"
 
 export function MobileHeader() {
     const { user } = useAuth()

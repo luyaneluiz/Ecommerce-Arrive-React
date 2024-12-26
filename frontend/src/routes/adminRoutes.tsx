@@ -1,5 +1,5 @@
 import React from "react"
-import { Layout } from "../components/Layout"
+import { Layout } from "../layout"
 import { AuthGuard } from "../components/Auth"
 import CreateProduct from "../pages/Admin/CreateProduct"
 

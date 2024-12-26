@@ -1,5 +1,5 @@
 import Auth from "@/pages/Auth/"
-import { Layout } from "../components/Layout"
+import { Layout } from "../layout"
 import { Trends } from "../components/Trends"
 import { Bag } from "../pages/Bag"
 import { Home } from "../pages/Home"

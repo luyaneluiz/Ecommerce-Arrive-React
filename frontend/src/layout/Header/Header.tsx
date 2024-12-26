@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import Logo from "../../../assets/logo.png"
+import Logo from "@/assets/logo.png"
 import { LoggatedButtons } from "./LoggatedButtons"
-import { InputSearch } from "../../Search"
+import { InputSearch } from "@/components/Search"
 import { useAuth } from "@/contexts/AuthContext"
 
 export function Header() {

@@ -1,11 +1,8 @@
-import { api } from "../../../services/api"
-import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-
-// icons
+import { Link } from "react-router-dom"
+import { api } from "@/services/api"
 import { BiUser, BiHeart, BiShoppingBag } from "react-icons/bi"
 
-// types
 interface NavbarProps {
     closeDrawer?: () => void
 }

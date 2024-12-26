@@ -1,5 +1,5 @@
-import Logo from "../../../assets/logo.png"
-import PaymentMethods from "../../../assets/payment-methods.png"
+import Logo from "@/assets/logo.png"
+import PaymentMethods from "@/assets/payment-methods.png"
 
 import {
     BiLogoInstagram,
@@ -28,22 +28,22 @@ export function Footer() {
                     </section>
                     <section className="flex flex-col gap-2">
                         <h2 className="font-bold text-xl">Terms</h2>
-                        <a>Privacy Policy</a>
-                        <a>Terms & Condition </a>
-                        <a>Search Terms </a>
-                        <a>About us</a>
-                        <a>Order & Return</a>
+                        <a href="/">Privacy Policy</a>
+                        <a href="/">Terms & Condition</a>
+                        <a href="/">Search Terms</a>
+                        <a href="/">About us</a>
+                        <a href="/">Order & Return</a>
                     </section>
                 </aside>
 
                 <aside className="flex flex-col gap-5 sm:flex-row sm:justify-around sm:w-[500px] sm:gap-9">
                     <section className="flex flex-col gap-2">
                         <h2 className="font-bold text-xl">Popular</h2>
-                        <a>Fashion</a>
-                        <a>Cosmetic</a>
-                        <a>New Products</a>
-                        <a>Best Sales</a>
-                        <a>Footwear</a>
+                        <a href="/">Fashion</a>
+                        <a href="/">Cosmetic</a>
+                        <a href="/">New Products</a>
+                        <a href="/">Best Sales</a>
+                        <a href="/">Footwear</a>
                     </section>
                     <div className="flex flex-col gap-5 max-w-[300px]">
                         <section className="flex flex-col gap-2">

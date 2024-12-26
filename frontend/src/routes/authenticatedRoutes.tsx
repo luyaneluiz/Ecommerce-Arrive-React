@@ -1,5 +1,5 @@
 import React from "react"
-import { Layout } from "../components/Layout"
+import { Layout } from "../layout"
 import { Profile } from "../pages/Profile"
 import { AuthGuard } from "../components/Auth"
 import { Favorites } from "../pages/Favorites"
