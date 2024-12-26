@@ -12,8 +12,10 @@ import {
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { upperFirst, useToggle } from "@mantine/hooks"
+import { useNavigate } from "react-router-dom"
 
 export default function Auth() {
+    const navigate = useNavigate()
     const { login, register } = useAuth()
     const [type, toggle] = useToggle(["login", "register"])
     const form = useForm({
@@ -42,8 +44,10 @@ export default function Auth() {
         try {
             if (type === "login") {
                 await login(email, password)
+                navigate("/")
             } else {
                 await register(name, email, password)
+                toggle()
             }
         } catch (error) {
             console.log(error)
