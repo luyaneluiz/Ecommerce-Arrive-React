@@ -1,5 +1,4 @@
-// import { api } from "@/services/api"
-import axios from "axios"
+import { api } from "@/services/api"
 import {
     Anchor,
     Button,
@@ -37,21 +36,14 @@ export default function Auth() {
         event.preventDefault()
         const { email, name, password, terms } = form.values
 
-        console.log(form.values)
-
-        if (type === "register" && !terms) {
-            return
-        }
+        if (type === "register" && !terms) return
 
         try {
-            const response = await axios.post(
-                `http://localhost:3002/auth/${type}`,
-                {
-                    email,
-                    name,
-                    password,
-                },
-            )
+            const response = await api.post(`/auth/${type}`, {
+                email,
+                name,
+                password,
+            })
 
             console.log(response.data)
         } catch (error) {
