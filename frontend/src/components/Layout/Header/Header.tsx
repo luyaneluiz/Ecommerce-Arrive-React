@@ -16,7 +16,7 @@ export function Header() {
             <InputSearch />
 
             {user ? (
-                <LoggatedButtons mobile={false} />
+                <LoggatedButtons />
             ) : (
                 <Link to="/auth" className="text-pink">
                     Login

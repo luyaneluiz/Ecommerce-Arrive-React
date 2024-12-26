@@ -35,19 +35,19 @@ export function MobileHeader() {
             >
                 <div className="p-4">
                     <NavbarItems mobile={true} closeDrawer={closeDrawer} />
-                    {user ? (
-                        <LoggatedButtons
-                            mobile={true}
-                            closeDrawer={closeDrawer}
-                        />
-                    ) : (
-                        <Link
-                            to="/auth"
-                            className="block mt-4 text-center text-pink"
-                        >
-                            Login
-                        </Link>
-                    )}
+
+                    <div className="absolute bottom-0 left-0 w-full justify-around py-4 border-t border-slate-300">
+                        {user ? (
+                            <LoggatedButtons closeDrawer={closeDrawer} />
+                        ) : (
+                            <Link
+                                to="/auth"
+                                className="block text-center text-pink"
+                            >
+                                Login
+                            </Link>
+                        )}
+                    </div>
                 </div>
             </Drawer>
         </header>
