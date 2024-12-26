@@ -1,22 +1,13 @@
 import { Burger, Drawer } from "@mantine/core"
-
 import { useState } from "react"
 import { Link } from "react-router-dom"
-
-// logo
+import { NavbarItems } from "../Navbar"
+import { LoggatedButtons } from "./LoggatedButtons"
+import { useAuth } from "@/contexts/AuthContext"
 import Logo from "../../../assets/logo.png"
 
-// components
-import { LoggatedButtons } from "./LoggatedButtons"
-import { NavbarItems } from "../Navbar"
-import { InputSearch } from "../../Search"
-
-// context
-import { useBreakpoint } from "../../../contexts/BreakpointContext"
-
-export function Header() {
-    const { isMobile } = useBreakpoint()
-
+export function MobileHeader() {
+    const { user } = useAuth()
     const [drawerOpen, setDrawerOpen] = useState(false)
 
     const closeDrawer = () => {
@@ -29,19 +20,12 @@ export function Header() {
                 <img src={Logo} alt="Logo arrive" className="w-20 md:w-24" />
             </Link>
 
-            {!isMobile ? (
-                <div className="flex justify-between w-2/3">
-                    <InputSearch />
-                    <LoggatedButtons mobile={false} />
-                </div>
-            ) : (
-                <Burger
-                    opened={drawerOpen}
-                    onClick={() => setDrawerOpen(true)}
-                    size="sm"
-                    aria-label="Toggle navigation"
-                />
-            )}
+            <Burger
+                opened={drawerOpen}
+                onClick={() => setDrawerOpen(true)}
+                size="sm"
+                aria-label="Toggle navigation"
+            />
 
             <Drawer
                 position="right"
@@ -51,7 +35,19 @@ export function Header() {
             >
                 <div className="p-4">
                     <NavbarItems mobile={true} closeDrawer={closeDrawer} />
-                    <LoggatedButtons mobile={true} closeDrawer={closeDrawer} />
+                    {user ? (
+                        <LoggatedButtons
+                            mobile={true}
+                            closeDrawer={closeDrawer}
+                        />
+                    ) : (
+                        <Link
+                            to="/auth"
+                            className="block mt-4 text-center text-pink"
+                        >
+                            Login
+                        </Link>
+                    )}
                 </div>
             </Drawer>
         </header>
