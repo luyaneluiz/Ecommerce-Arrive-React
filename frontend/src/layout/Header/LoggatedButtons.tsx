@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { api } from "@/services/api"
 import { BiUser, BiHeart, BiShoppingBag } from "react-icons/bi"
+import { useAuth } from "@/contexts/AuthContext"
 
 interface NavbarProps {
     closeDrawer?: () => void
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 export function LoggatedButtons({ closeDrawer }: NavbarProps) {
     const [hasFavorites, setHasFavorites] = useState(false)
+    const { logout } = useAuth()
 
     useEffect(() => {
         api.get("/favorites").then((response) => {
@@ -18,19 +20,25 @@ export function LoggatedButtons({ closeDrawer }: NavbarProps) {
         })
     }, [])
 
-    const handleLinkClick = () => {
-        closeDrawer?.()
+    const logoutUser = async () => {
+        try {
+            logout()
+        } catch (error) {
+            console.log(error)
+        } finally {
+            closeDrawer?.()
+        }
     }
 
     return (
         <div className="flex items-center w-24 justify-between">
-            <Link to="/Profile" onClick={handleLinkClick}>
+            <Link to="/" onClick={logoutUser}>
                 <BiUser className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5" />
             </Link>
 
             <Link
                 to="/Favorites"
-                onClick={handleLinkClick}
+                onClick={() => closeDrawer?.()}
                 className="relative"
             >
                 <BiHeart
@@ -42,7 +50,7 @@ export function LoggatedButtons({ closeDrawer }: NavbarProps) {
                 )}
             </Link>
 
-            <Link to="/Bag" onClick={handleLinkClick}>
+            <Link to="/Bag" onClick={() => closeDrawer?.()}>
                 <BiShoppingBag
                     size={20}
                     className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5"

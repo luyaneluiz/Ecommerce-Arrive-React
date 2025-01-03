@@ -88,3 +88,10 @@ export const me: RequestHandler = async (req, res, next) => {
         next(error)
     }
 }
+
+export const logout: RequestHandler = async (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie("sid")
+        res.json({ message: "Logged out" })
+    })
+}
