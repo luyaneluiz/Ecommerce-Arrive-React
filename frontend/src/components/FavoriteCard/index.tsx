@@ -1,5 +1,4 @@
-import React from "react"
-import { Button, Paper } from "@mantine/core"
+import { Button, Paper, Stack } from "@mantine/core"
 import { ProductProps } from "../../types/ProductTypes"
 import { BiShoppingBag } from "react-icons/bi"
 
@@ -21,14 +20,20 @@ export default function FavoriteCard({ product }: { product: ProductProps }) {
                 <h3 className="font-bold">${product.price.toFixed(2)}</h3>
             </div>
 
-            <Button
-                leftSection={<BiShoppingBag size={14} />}
-                variant="outline"
-                color="pink"
-                fullWidth
-            >
-                Add to bag
-            </Button>
+            <Stack gap="sm">
+                <Button
+                    leftSection={<BiShoppingBag size={14} />}
+                    variant="outline"
+                    color="pink"
+                    fullWidth
+                >
+                    Add to bag
+                </Button>
+
+                <Button color="pink" fullWidth>
+                    Shop now
+                </Button>
+            </Stack>
         </Paper>
     )
 }
