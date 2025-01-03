@@ -1,33 +1,20 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { api } from "@/services/api"
 import { BiUser, BiHeart, BiShoppingBag } from "react-icons/bi"
 import { useAuth } from "@/contexts/AuthContext"
+import { useFavorites } from "@/hooks/useFavorites"
 
 interface NavbarProps {
     closeDrawer?: () => void
 }
 
 export function LoggatedButtons({ closeDrawer }: NavbarProps) {
-    const [hasFavorites, setHasFavorites] = useState(false)
-    const { logout } = useAuth()
-
-    useEffect(() => {
-        api.get("/favorites").then((response) => {
-            if (response.data.length > 0) {
-                setHasFavorites(true)
-            }
-        })
-    }, [])
+    const { user, logout } = useAuth()
+    const userId = user?._id || null
+    const { favorites } = useFavorites(userId)
 
     const logoutUser = async () => {
-        try {
-            logout()
-        } catch (error) {
-            console.log(error)
-        } finally {
-            closeDrawer?.()
-        }
+        logout()
+        closeDrawer?.()
     }
 
     return (
@@ -45,8 +32,8 @@ export function LoggatedButtons({ closeDrawer }: NavbarProps) {
                     size={20}
                     className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5"
                 />
-                {hasFavorites && (
-                    <span className="rounded-full bg-pink w-2 h-2 absolute top-0 -right-0" />
+                {favorites && favorites.length > 0 && (
+                    <span className="rounded-full bg-pink w-2 h-2 absolute -top-px -right-px" />
                 )}
             </Link>
 
