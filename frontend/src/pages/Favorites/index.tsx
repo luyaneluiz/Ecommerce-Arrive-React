@@ -15,7 +15,7 @@ export function Favorites() {
                         Favorites
                     </Title>
 
-                    <SimpleGrid cols={3}>
+                    <SimpleGrid cols={{ base: 1, sm: 3, md: 4, lg: 5 }}>
                         {favorites.map((product) => (
                             <FavoriteCard key={product._id} product={product} />
                         ))}
