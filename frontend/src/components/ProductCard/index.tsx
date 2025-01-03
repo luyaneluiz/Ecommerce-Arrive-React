@@ -9,12 +9,11 @@ import { useAuth } from "@/contexts/AuthContext"
 
 export function ProductCard({ product }: { product: ProductProps }) {
     const { user } = useAuth()
-    const userId = user?.id || null
-    const { favorites, setFavorites } = useFavorites(userId)
-    const isFavorite = favorites?.some((fav) => fav._id === product._id)
+    const userId = user?._id || null
+    const { setFavorites } = useFavorites(userId)
 
     function handleFavoriteClick() {
-        if (isFavorite) {
+        if (product.isFavorite) {
             removeFavorite()
         } else {
             addFavorite()
@@ -24,12 +23,13 @@ export function ProductCard({ product }: { product: ProductProps }) {
     async function addFavorite() {
         try {
             const response = await api.post("/favorites", {
-                userId: "6718fc3fe2238b22cef334d4",
+                userId: userId,
                 productId: product._id,
             })
 
             if (response.data) {
                 setFavorites((prev) => [...(prev || []), product])
+                product.isFavorite = true
             } else {
                 console.log(response.data.error)
             }
@@ -42,7 +42,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
         try {
             const response = await api.delete("/favorites", {
                 data: {
-                    userId: "6718fc3fe2238b22cef334d4",
+                    userId: userId,
                     productId: product._id,
                 },
             })
@@ -51,6 +51,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
                 setFavorites((prev) =>
                     prev ? prev.filter((fav) => fav._id !== product._id) : [],
                 )
+                product.isFavorite = false
             } else {
                 console.log(response.data.error)
             }
@@ -67,7 +68,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
                         handleFavoriteClick()
                     }}
                 >
-                    {isFavorite ? (
+                    {product.isFavorite ? (
                         <BiSolidHeart size={28} />
                     ) : (
                         <BiHeart size={28} />

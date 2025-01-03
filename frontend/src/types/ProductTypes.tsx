@@ -15,4 +15,5 @@ export interface ProductProps {
     stock: number
     sold?: number
     avaliable?: number
+    isFavorite?: boolean
 }

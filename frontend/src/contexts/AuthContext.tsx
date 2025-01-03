@@ -12,7 +12,7 @@ interface AuthProviderProps {
 }
 
 interface UserProps {
-    id: string
+    _id: string
     name: string
     email: string
 }
