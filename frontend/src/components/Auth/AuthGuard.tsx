@@ -1,16 +1,17 @@
-import React, { PropsWithChildren } from "react"
+import { useAuth } from "@/contexts/AuthContext"
+import { PropsWithChildren } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function AuthGuard({ children }: PropsWithChildren) {
-    // const { user } = useAuth()
-    const user = null
+    const { user } = useAuth()
+    // const user = null
     const navigate = useNavigate()
 
-    if (!user) {
+    if (user) {
         return <>{children}</>
     }
 
-    navigate("/")
+    navigate("/not-authorized")
 
     return null
 }

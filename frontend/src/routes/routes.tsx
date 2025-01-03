@@ -6,6 +6,7 @@ import { Home } from "../pages/Home"
 import { New } from "../pages/New"
 import { Offers } from "../pages/Offers"
 import { Product } from "../pages/Product"
+import PageError from "@/components/Error/PageError"
 
 export const Routes = [
     {
@@ -39,6 +40,10 @@ export const Routes = [
             {
                 path: "/product/:id",
                 element: <Product />,
+            },
+            {
+                path: "/not-authorized",
+                element: <PageError />,
             },
         ],
     },

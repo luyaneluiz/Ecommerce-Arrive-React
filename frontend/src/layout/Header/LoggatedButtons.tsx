@@ -37,7 +37,7 @@ export function LoggatedButtons({ closeDrawer }: NavbarProps) {
             </Link>
 
             <Link
-                to="/Favorites"
+                to="/favorites"
                 onClick={() => closeDrawer?.()}
                 className="relative"
             >
