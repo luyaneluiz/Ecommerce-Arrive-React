@@ -12,7 +12,7 @@ interface InputSearchProps {
     data: ProductProps[] // A base de dados JSON
 }
 
-export function InputSearch() {
+export default function InputSearch() {
     const [searchTerm, setSearchTerm] = useState<string>("")
     const [searchResults, setSearchResults] = useState<ProductProps[]>([])
 

@@ -7,7 +7,7 @@ interface NavbarProps {
     closeDrawer?: () => void
 }
 
-export function LoggatedButtons({ closeDrawer }: NavbarProps) {
+export default function LoggatedActions({ closeDrawer }: NavbarProps) {
     const { user, logout } = useAuth()
     const userId = user?._id || null
     const { favorites } = useFavorites(userId)
