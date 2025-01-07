@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom"
-import { BiUser, BiHeart, BiShoppingBag } from "react-icons/bi"
+import {
+    BiUser,
+    BiHeart,
+    BiShoppingBag,
+    BiUserCheck,
+    BiExit,
+} from "react-icons/bi"
 import { useAuth } from "@/contexts/AuthContext"
 import { useFavorites } from "@/hooks/useFavorites"
-import { Indicator } from "@mantine/core"
+import { Indicator, Menu, rem } from "@mantine/core"
 import IconButtonAction from "../IconButtonAction"
 
 interface NavbarProps {
@@ -36,9 +42,41 @@ export default function LoggatedActions({ closeDrawer }: NavbarProps) {
                 onClick={closeDrawer}
             />
 
-            <Link to="/" onClick={logoutUser}>
-                <BiUser className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5" />
-            </Link>
+            <Menu position="bottom">
+                <Menu.Target>
+                    <BiUser className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5" />
+                </Menu.Target>
+
+                <Menu.Dropdown>
+                    <Menu.Label>Profile</Menu.Label>
+
+                    <Menu.Item
+                        leftSection={
+                            <BiUserCheck
+                                style={{ width: rem(14), height: rem(14) }}
+                            />
+                        }
+                    >
+                        <Link to="/profile" onClick={closeDrawer}>
+                            Account
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Divider />
+
+                    <Menu.Item
+                        color="red"
+                        onClick={logoutUser}
+                        leftSection={
+                            <BiExit
+                                style={{ width: rem(14), height: rem(14) }}
+                            />
+                        }
+                    >
+                        Logout
+                    </Menu.Item>
+                </Menu.Dropdown>
+            </Menu>
         </div>
     )
 }
