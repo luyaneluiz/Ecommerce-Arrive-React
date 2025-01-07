@@ -20,7 +20,7 @@ export default function MobileDrawer({
             <div className="p-4">
                 <NavbarItems mobile={true} closeDrawer={closeDrawer} />
 
-                <div className="absolute bottom-0 left-0 w-full justify-around py-4 border-t border-slate-300">
+                <div className="absolute bottom-0 left-0 w-full flex justify-center py-4 border-t border-slate-300">
                     {isLoggated ? (
                         <LoggatedActions closeDrawer={closeDrawer} />
                     ) : (
