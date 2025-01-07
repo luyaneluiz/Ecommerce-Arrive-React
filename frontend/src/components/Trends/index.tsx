@@ -18,7 +18,7 @@ export function Trends() {
     }
 
     return (
-        <div className="mb-6 w-full">
+        <div className="flex justify-center mb-6 w-full lg:max-w-[370px]">
             {isMobile ? (
                 <MobileTrends
                     products={filteredProducts}
