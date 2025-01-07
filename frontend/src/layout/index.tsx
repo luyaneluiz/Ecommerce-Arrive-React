@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 // Components
-import { Header } from "./Header/Header"
+import { Header } from "./Header"
 import { NavbarItems } from "./Navbar"
 import { Footer } from "./Footer"
 // Context

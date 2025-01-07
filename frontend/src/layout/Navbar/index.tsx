@@ -1,6 +1,5 @@
-import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { CategoriesBlock } from "./CategoriesBlock"
+import { CategoriesBlock } from "./Categories/CategoriesBlock"
 
 interface NavbarProps {
     mobile: boolean
@@ -8,14 +7,15 @@ interface NavbarProps {
 }
 
 export function NavbarItems({ mobile, closeDrawer }: NavbarProps) {
-    const [showCategories, setShowCategories] = useState(false)
     const location = useLocation()
-
     const isActive = (path: string) => location.pathname === path
 
-    const handleLinkClick = () => {
-        closeDrawer?.()
-    }
+    const navLinks = [
+        { label: "home", path: "/" },
+        { label: "new", path: "/new" },
+        { label: "trends", path: "/trends" },
+        { label: "offers", path: "/offers" },
+    ]
 
     return (
         <div
@@ -26,56 +26,54 @@ export function NavbarItems({ mobile, closeDrawer }: NavbarProps) {
             <ul
                 className={`flex ${mobile ? "flex-col gap-4" : "flex-row gap-5"}`}
             >
-                <li className="cursor-pointer flex hover:text-pink">
-                    <Link
-                        to="/"
-                        onClick={handleLinkClick}
-                        className={isActive("/") ? "text-pink" : ""}
-                    >
-                        HOME
-                    </Link>
-                </li>
-
-                <li
-                    onMouseEnter={() => setShowCategories(true)}
-                    onMouseLeave={() => setShowCategories(false)}
-                >
-                    <CategoriesBlock
-                        mobile={mobile}
-                        showCategories={showCategories}
+                {navLinks.slice(0, 2).map(({ path, label }) => (
+                    <NavbarItemLink
+                        key={label}
+                        path={path}
+                        label={label}
+                        isActive={isActive}
+                        closeDrawer={closeDrawer}
                     />
+                ))}
+
+                <li>
+                    <CategoriesBlock mobile={mobile} />
                 </li>
 
-                <li className="cursor-pointer flex hover:text-pink">
-                    <Link
-                        to="/new"
-                        onClick={handleLinkClick}
-                        className={isActive("/new") ? "text-pink" : ""}
-                    >
-                        NEW
-                    </Link>
-                </li>
-
-                <li className="cursor-pointer flex hover:text-pink">
-                    <Link
-                        to="/trends"
-                        onClick={handleLinkClick}
-                        className={isActive("/trends") ? "text-pink" : ""}
-                    >
-                        TRENDS
-                    </Link>
-                </li>
-
-                <li className="cursor-pointer flex hover:text-pink">
-                    <Link
-                        to="/offers"
-                        onClick={handleLinkClick}
-                        className={isActive("/offers") ? "text-pink" : ""}
-                    >
-                        OFFERS
-                    </Link>
-                </li>
+                {navLinks.slice(2).map(({ path, label }) => (
+                    <NavbarItemLink
+                        key={label}
+                        path={path}
+                        label={label}
+                        isActive={isActive}
+                        closeDrawer={closeDrawer}
+                    />
+                ))}
             </ul>
         </div>
     )
 }
+
+interface NavbarItemLinkProps {
+    path: string
+    label: string
+    isActive: (path: string) => boolean
+    closeDrawer?: () => void
+}
+
+const NavbarItemLink = ({
+    path,
+    label,
+    isActive,
+    closeDrawer,
+}: NavbarItemLinkProps) => (
+    <li key={label} className="cursor-pointer flex hover:text-pink">
+        <Link
+            to={path}
+            onClick={closeDrawer}
+            className={isActive(path) ? "text-pink" : ""}
+        >
+            {label.toUpperCase()}
+        </Link>
+    </li>
+)

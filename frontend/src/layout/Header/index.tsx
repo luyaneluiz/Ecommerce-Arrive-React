@@ -6,7 +6,7 @@ import Logo from "@/components/Logo"
 import RedirectLink from "@/components/RedirectLink"
 import LoggatedActions from "@/components/LoggatedActions"
 import InputSearch from "@/components/Search"
-import MobileDrawer from "./MobileDrawer"
+import MobileDrawer from "../MobileDrawer"
 // Mantine components
 import { Burger } from "@mantine/core"
 
