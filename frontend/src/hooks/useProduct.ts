@@ -9,10 +9,12 @@ export const useProduct = () => {
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
+    console.log(id)
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await api.get(`/product/${id}`)
+                const response = await api.get(`/products/product/${id}`)
 
                 if (response.data) {
                     setProduct(response.data)
