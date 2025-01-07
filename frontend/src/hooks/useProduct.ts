@@ -22,7 +22,7 @@ export const useProduct = () => {
                     setError(response.data.error)
                 }
             } catch (error) {
-                setError(error)
+                setError((error as Error).message)
                 console.log(error)
             } finally {
                 setLoading(false)
