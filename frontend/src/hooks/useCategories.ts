@@ -1,9 +1,8 @@
 import { api } from "@/services/api"
 import { useState, useEffect } from "react"
-import { CategoriesProps } from "@/types/CategoriesTypes"
 
 export const useCategories = () => {
-    const [categories, setCategories] = useState<CategoriesProps[]>([])
+    const [categories, setCategories] = useState<string[]>([])
     const [error, setError] = useState<unknown>(null)
 
     useEffect(() => {
