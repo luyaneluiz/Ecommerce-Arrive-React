@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react"
-import { useProducts } from "../../hooks/useProducts"
-import { useBreakpoint } from "../../contexts/BreakpointContext"
+// Hooks
+import { useProducts } from "@/hooks/useProducts"
+// Contexts
+import { useBreakpoint } from "@/contexts/BreakpointContext"
+// Components
 import { Stack } from "@mantine/core"
 import HeaderTrend from "./Header"
-import { TrendProductCard } from "./Card"
+import TrendProductCard from "./Card"
 
 type Trend = "New" | "Hot"
 
@@ -36,24 +39,38 @@ export function Trends() {
                         hasArrows={isMobile}
                     />
 
-                    {filteredProducts.map((product) => (
-                        <TrendProductCard key={product._id} product={product} />
-                    ))}
+                    <Stack gap="lg">
+                        {filteredProducts.map((product) => (
+                            <TrendProductCard
+                                key={product._id}
+                                title={product.title}
+                                price={product.price}
+                                cover={product.cover}
+                                old_price={product.old_price}
+                            />
+                        ))}
+                    </Stack>
                 </>
             ) : (
-                <Stack>
+                <>
                     {Object.entries(trendsData).map(([key, products]) => (
                         <Stack key={key}>
                             <HeaderTrend trend={key as Trend} />
-                            {products.map((product) => (
-                                <TrendProductCard
-                                    key={product._id}
-                                    product={product}
-                                />
-                            ))}
+
+                            <Stack gap="lg">
+                                {products.map((product) => (
+                                    <TrendProductCard
+                                        key={product._id}
+                                        title={product.title}
+                                        price={product.price}
+                                        cover={product.cover}
+                                        old_price={product.old_price}
+                                    />
+                                ))}
+                            </Stack>
                         </Stack>
                     ))}
-                </Stack>
+                </>
             )}
         </section>
     )
