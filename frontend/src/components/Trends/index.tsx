@@ -42,6 +42,7 @@ export function Trends() {
                     {filteredProducts.map((product) => (
                         <TrendProductCard
                             key={product._id}
+                            id={product._id}
                             title={product.title}
                             price={product.price}
                             cover={product.cover}
@@ -58,6 +59,7 @@ export function Trends() {
                             {products.map((product) => (
                                 <TrendProductCard
                                     key={product._id}
+                                    id={product._id}
                                     title={product.title}
                                     price={product.price}
                                     cover={product.cover}

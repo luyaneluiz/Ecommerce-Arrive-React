@@ -1,6 +1,7 @@
 import { Card, Flex, Image, Stack, Text } from "@mantine/core"
 
 interface ProductProps {
+    id: string
     title: string
     price: number
     cover: string
@@ -8,6 +9,7 @@ interface ProductProps {
 }
 
 export default function TrendProductCard({
+    id,
     title,
     price,
     cover,
@@ -20,7 +22,7 @@ export default function TrendProductCard({
             radius="md"
             className="!flex-row gap-4"
             component="a"
-            href="#"
+            href={`/product/${id}`}
         >
             <Image src={cover} alt={title} w={70} h={70} />
 
