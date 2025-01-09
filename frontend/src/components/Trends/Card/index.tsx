@@ -1,13 +1,4 @@
-import {
-    ActionIcon,
-    Button,
-    Card,
-    Flex,
-    Image,
-    Stack,
-    Text,
-} from "@mantine/core"
-import { BiHeart } from "react-icons/bi"
+import { Card, Flex, Image, Stack, Text } from "@mantine/core"
 
 interface ProductProps {
     title: string
@@ -29,10 +20,11 @@ export default function TrendProductCard({
             radius="md"
             className="!flex-row gap-4"
             component="a"
+            href="#"
         >
-            <Image src={cover} alt={title} w={60} />
+            <Image src={cover} alt={title} w={70} h={70} />
 
-            <Stack gap={4} align="flex-start" w="100%">
+            <Stack gap={4} justify="center" align="flex-start" w="100%">
                 <Text fw={500} size="lg">
                     {title}
                 </Text>
@@ -46,16 +38,6 @@ export default function TrendProductCard({
                             ${old_price}
                         </Text>
                     )}
-                </Flex>
-
-                <Flex gap={8} w="100%" pt={4}>
-                    <Button color="grape" size="xs" variant="light" fullWidth>
-                        View product
-                    </Button>
-
-                    <ActionIcon color="pink" radius="xl" variant="light">
-                        <BiHeart />
-                    </ActionIcon>
                 </Flex>
             </Stack>
         </Card>
