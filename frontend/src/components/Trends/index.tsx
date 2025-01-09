@@ -30,7 +30,7 @@ export function Trends() {
     const handleChangeTrend = () => setTrend(trend === "New" ? "Hot" : "New")
 
     return (
-        <section className="mb-6 w-full lg:max-w-[370px]">
+        <section className="mb-6 w-full lg:max-w-xs">
             {isMobile ? (
                 <Stack gap="md">
                     <HeaderTrend
