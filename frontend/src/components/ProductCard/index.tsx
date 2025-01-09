@@ -89,11 +89,11 @@ export function ProductCard({ product }: { product: ProductProps }) {
                     <h3 className="text-pink pe-2 text-lg font-extrabold">
                         ${product.price.toFixed(2)}
                     </h3>
-                    {product.old_price && (
+                    {/* {product.old_price && (
                         <del className="text-xs">
                             ${product.old_price.toFixed(2)}
                         </del>
-                    )}
+                    )} */}
                 </div>
                 <Button text="ADD TO CART" />
             </div>

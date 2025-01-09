@@ -1,32 +1,63 @@
-import React from "react"
-import { ProductProps } from "../../../types/ProductTypes"
+import {
+    ActionIcon,
+    Button,
+    Card,
+    Flex,
+    Image,
+    Stack,
+    Text,
+} from "@mantine/core"
+import { BiHeart } from "react-icons/bi"
 
-export function TrendProductCard({ product }: { product: ProductProps }) {
+interface ProductProps {
+    title: string
+    price: number
+    cover: string
+    old_price?: number
+}
+
+export default function TrendProductCard({
+    title,
+    price,
+    cover,
+    old_price,
+}: ProductProps) {
     return (
-        <div className="flex gap-4 w-full p-4 rounded-2xl mt-4 shadow-lg">
-            <div className="flex justify-center h-20 w-20 overflow-hidden">
-                <img
-                    src={product.cover}
-                    alt={product.title}
-                    className="h-20 transition-all duration-500 hover:scale-105 cursor-pointer"
-                />
-            </div>
-            <div className="w-4/5">
-                <h4 className="text-ellipsis overflow-hidden whitespace-nowrap">
-                    {product.title}
-                </h4>
-                <p>{product.category}</p>
-                <div className="flex items-center">
-                    <h3 className="text-pink pe-2">
-                        ${product.price.toFixed(2)}
-                    </h3>
-                    {product.old_price && (
-                        <del className="text-xs">
-                            ${product.old_price.toFixed(2)}
-                        </del>
+        <Card
+            shadow="sm"
+            padding="md"
+            radius="md"
+            className="!flex-row gap-4"
+            component="a"
+        >
+            <Image src={cover} alt={title} w={60} />
+
+            <Stack gap={4} align="flex-start" w="100%">
+                <Text fw={500} size="lg">
+                    {title}
+                </Text>
+
+                <Flex align="center" gap={4}>
+                    <Text size="md" c="pink" fw={600}>
+                        ${price.toFixed(2)}
+                    </Text>
+                    {old_price && (
+                        <Text td="line-through" c="gray" size="sm">
+                            ${old_price}
+                        </Text>
                     )}
-                </div>
-            </div>
-        </div>
+                </Flex>
+
+                <Flex gap={8} w="100%" pt={4}>
+                    <Button color="grape" size="xs" variant="light" fullWidth>
+                        View product
+                    </Button>
+
+                    <ActionIcon color="pink" radius="xl" variant="light">
+                        <BiHeart />
+                    </ActionIcon>
+                </Flex>
+            </Stack>
+        </Card>
     )
 }

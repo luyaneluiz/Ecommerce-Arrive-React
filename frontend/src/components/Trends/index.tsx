@@ -32,45 +32,41 @@ export function Trends() {
     return (
         <section className="mb-6 w-full lg:max-w-[370px]">
             {isMobile ? (
-                <>
+                <Stack gap="md">
                     <HeaderTrend
                         trend={trend}
                         changeTrend={handleChangeTrend}
                         hasArrows={isMobile}
                     />
 
-                    <Stack gap="lg">
-                        {filteredProducts.map((product) => (
-                            <TrendProductCard
-                                key={product._id}
-                                title={product.title}
-                                price={product.price}
-                                cover={product.cover}
-                                old_price={product.old_price}
-                            />
-                        ))}
-                    </Stack>
-                </>
+                    {filteredProducts.map((product) => (
+                        <TrendProductCard
+                            key={product._id}
+                            title={product.title}
+                            price={product.price}
+                            cover={product.cover}
+                            old_price={product.old_price}
+                        />
+                    ))}
+                </Stack>
             ) : (
-                <>
+                <Stack gap="lg">
                     {Object.entries(trendsData).map(([key, products]) => (
-                        <Stack key={key}>
+                        <Stack key={key} gap="md">
                             <HeaderTrend trend={key as Trend} />
 
-                            <Stack gap="lg">
-                                {products.map((product) => (
-                                    <TrendProductCard
-                                        key={product._id}
-                                        title={product.title}
-                                        price={product.price}
-                                        cover={product.cover}
-                                        old_price={product.old_price}
-                                    />
-                                ))}
-                            </Stack>
+                            {products.map((product) => (
+                                <TrendProductCard
+                                    key={product._id}
+                                    title={product.title}
+                                    price={product.price}
+                                    cover={product.cover}
+                                    old_price={product.old_price}
+                                />
+                            ))}
                         </Stack>
                     ))}
-                </>
+                </Stack>
             )}
         </section>
     )
