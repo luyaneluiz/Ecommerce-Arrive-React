@@ -1,7 +1,7 @@
 import { api } from "../../../services/api"
 import React, { useEffect, useState } from "react"
 
-import { Progress } from "@mantine/core"
+import { Card, Image, Progress, Stack } from "@mantine/core"
 
 import { CounterBlock } from "../CounterBlock"
 import { Button } from "../../../components/Button"
@@ -84,14 +84,23 @@ export function PromoCard() {
 
     if (product) {
         return (
-            <section className="flex flex-col items-center">
-                <Title text="Daily Deal" />
+            <Stack>
+                <Title text="Daily deal" />
 
-                <div className="flex flex-col items-center border rounded-xl p-6 w-full lg:flex-row">
-                    <img
+                <Card
+                    component="a"
+                    href="#"
+                    className="items-center w-full"
+                    radius={8}
+                    padding="xl"
+                    withBorder
+                >
+                    <Image
                         src={product.cover}
                         alt={product.title}
-                        className="w-full sm:max-w-[300px] lg:max-w-[50%] px-3 cursor-pointer transition-all duration-500 hover:scale-105"
+                        className="transition-all duration-500 hover:scale-105"
+                        h={200}
+                        w={200}
                     />
 
                     <section className="sm:ps-3 lg:max-w-[50%]">
@@ -140,8 +149,8 @@ export function PromoCard() {
                             <Timer {...timerValues} />
                         </section>
                     </section>
-                </div>
-            </section>
+                </Card>
+            </Stack>
         )
     }
 }
