@@ -1,14 +1,10 @@
-import { api } from "../../../services/api"
-import React, { useEffect, useState } from "react"
-
-import { Card, Image, Progress, Stack } from "@mantine/core"
-
+import { api } from "@/services/api"
+import { useEffect, useState } from "react"
+import { Button, Card, Flex, Image, Progress, Stack, Text } from "@mantine/core"
+import { Title } from "@/components/Titlte"
+import { ProductProps } from "@/types/ProductTypes"
 import { CounterBlock } from "../CounterBlock"
-import { Button } from "../../../components/Button"
-import { Title } from "../../../components/Titlte"
 
-// types
-import { ProductProps } from "../../../types/ProductTypes"
 interface TimerProps {
     days: number
     hours: number
@@ -35,7 +31,6 @@ export function PromoCard() {
     })
 
     const time = 900
-    let counter: number
 
     useEffect(() => {
         api.get("/products").then((response) => {
@@ -46,7 +41,7 @@ export function PromoCard() {
             setProduct(promoProduct)
         })
 
-        counter = setInterval(() => {
+        const counter = setInterval(() => {
             setTimerValues((prevValues) => {
                 let newSeconds = prevValues.seconds - 1
                 let newMinutes = prevValues.minutes
@@ -77,9 +72,7 @@ export function PromoCard() {
             })
         }, time)
 
-        return () => {
-            clearInterval(counter)
-        }
+        return () => clearInterval(counter)
     }, [])
 
     if (product) {
@@ -90,7 +83,7 @@ export function PromoCard() {
                 <Card
                     component="a"
                     href="#"
-                    className="items-center w-full"
+                    className="md:!flex-row items-center w-full gap-4"
                     radius={8}
                     padding="xl"
                     withBorder
@@ -98,57 +91,56 @@ export function PromoCard() {
                     <Image
                         src={product.cover}
                         alt={product.title}
-                        className="transition-all duration-500 hover:scale-105"
-                        h={200}
-                        w={200}
+                        className="transition-all duration-500 hover:scale-105 w-52 h-52 md:w-64 md:h-64"
                     />
 
-                    <section className="sm:ps-3 lg:max-w-[50%]">
-                        <div className="flex flex-col">
-                            <h4 className="overflow-hidden whitespace-nowrap text-ellipsis font-bold mb-1 sm:text-2xl">
-                                {product.title}
-                            </h4>
+                    <Stack>
+                        <Text size="xl" fw={700} lineClamp={2}>
+                            {product.title}
+                        </Text>
 
-                            <p className="text-xs">{product.description}</p>
+                        <Text size="xs" lineClamp={5}>
+                            {product.description}
+                        </Text>
 
-                            <div className="flex items-center gap-1 my-2">
-                                <h3 className="text-pink font-bold text-lg sm:text-2xl">
-                                    ${product.price.toFixed(2)}
-                                </h3>
-                                {product.old_price && (
-                                    <del className="text-xs">
-                                        ${product.old_price.toFixed(2)}
-                                    </del>
-                                )}
-                            </div>
+                        <Flex align="center" gap={4}>
+                            <Text size="xl" c="pink" fw={700}>
+                                ${product.price.toFixed(2)}
+                            </Text>
 
-                            <Button text="SHOP NOW" />
+                            {product.old_price && (
+                                <Text size="xs" c="gray" td="line-through">
+                                    ${product.old_price.toFixed(2)}
+                                </Text>
+                            )}
+                        </Flex>
 
-                            <div>
-                                <div className="flex justify-between text-xs my-3">
-                                    <p>
-                                        SOLD: <b>30</b>
-                                    </p>
-                                    <p>
-                                        AVALIABE: <b>20</b>
-                                    </p>
-                                </div>
-                                <Progress
-                                    value={60}
-                                    size="lg"
-                                    radius="lg"
-                                    color="grape"
-                                />
-                            </div>
-                        </div>
+                        <Button color="pink">SHOP NOW</Button>
 
-                        <section className="mt-4">
-                            <h5 className="font-bold uppercase">
-                                Offer ends in
-                            </h5>
+                        <Stack gap={4}>
+                            <Flex justify="space-between">
+                                <Text size="xs">
+                                    SOLD: <b>30</b>
+                                </Text>
+
+                                <Text size="xs">
+                                    AVAILABLE: <b>20</b>
+                                </Text>
+                            </Flex>
+
+                            <Progress
+                                value={60}
+                                size="lg"
+                                radius="lg"
+                                color="grape"
+                            />
+                        </Stack>
+
+                        <Stack gap={2}>
+                            <Text fw={700}>OFFER ENDS IN</Text>
                             <Timer {...timerValues} />
-                        </section>
-                    </section>
+                        </Stack>
+                    </Stack>
                 </Card>
             </Stack>
         )
