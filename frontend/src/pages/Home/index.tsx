@@ -3,7 +3,7 @@ import { CategoriesCards } from "./CategoriesBlock"
 import { Trends } from "../../components/Trends"
 import { PromoCard } from "./PromoCard"
 import { Products } from "./Products"
-import { Stack } from "@mantine/core"
+import { Flex, Stack } from "@mantine/core"
 
 export function Home() {
     return (
@@ -11,14 +11,20 @@ export function Home() {
             <Banner />
             <CategoriesCards />
 
-            <div className="flex flex-col lg:flex-row lg:gap-8 w-full px-8 items-start">
+            <Flex
+                direction={{ base: "column", md: "row" }}
+                gap="lg"
+                align="start"
+                w={"100%"}
+                p={32}
+            >
                 <Trends />
 
                 <Stack>
                     <PromoCard />
                     <Products />
                 </Stack>
-            </div>
+            </Flex>
         </Stack>
     )
 }
