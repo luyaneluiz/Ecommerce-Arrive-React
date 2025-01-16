@@ -83,7 +83,7 @@ export function PromoCard() {
                 <Card
                     component="a"
                     href="#"
-                    className="md:!flex-row items-center w-full gap-4"
+                    className="lg:!flex-row items-center w-full gap-4"
                     radius={8}
                     padding="xl"
                     withBorder
@@ -91,7 +91,7 @@ export function PromoCard() {
                     <Image
                         src={product.cover}
                         alt={product.title}
-                        className="transition-all duration-500 hover:scale-105 w-52 h-52 md:w-64 md:h-64"
+                        className="transition-all duration-500 hover:scale-105 w-52 h-52 max-w-md md:w-64 md:h-64"
                     />
 
                     <Stack>
