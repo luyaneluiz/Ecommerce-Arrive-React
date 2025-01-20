@@ -3,8 +3,8 @@ import { addToCart, removeFromCart, getCartProducts } from "../controllers/cart"
 
 const router = express.Router()
 
-router.post("/cart", addToCart)
-router.delete("/cart", removeFromCart)
-router.get("/cart", getCartProducts)
+router.post("/add", addToCart)
+router.delete("/remove", removeFromCart)
+router.get("/products", getCartProducts)
 
 export default router

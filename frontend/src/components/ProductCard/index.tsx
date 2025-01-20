@@ -1,16 +1,18 @@
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
 import { ProductProps } from "../../types/ProductTypes"
 import { Badge } from "../Bagde"
-import { Button } from "../../components/Button"
 import { Link } from "react-router-dom"
 import { api } from "../../services/api"
 import { useFavorites } from "../../hooks/useFavorites"
 import { useAuth } from "@/contexts/AuthContext"
+import { Button } from "@mantine/core"
+import { useCart } from "@/hooks/useCart"
 
 export function ProductCard({ product }: { product: ProductProps }) {
     const { user } = useAuth()
     const userId = user?._id || null
     const { setFavorites } = useFavorites(userId)
+    const { handleAddToCart } = useCart(userId)
 
     function handleFavoriteClick() {
         if (product.isFavorite) {
@@ -95,7 +97,13 @@ export function ProductCard({ product }: { product: ProductProps }) {
                         </del>
                     )} */}
                 </div>
-                <Button text="ADD TO CART" />
+                <Button
+                    color="pink"
+                    fullWidth
+                    onClick={() => handleAddToCart(product)}
+                >
+                    Add to cart
+                </Button>
             </div>
         </div>
     )
