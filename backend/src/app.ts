@@ -4,6 +4,7 @@ import cors from "./middleware/cors"
 import productsRouter from "./routes/productRoutes"
 import authRouter from "./routes/auth"
 import routerFavorite from "./routes/favorite"
+import cartRouter from "./routes/cart"
 import session from "express-session"
 import MongoStore from "connect-mongo"
 import dotenv from "dotenv"
@@ -39,5 +40,6 @@ app.use(
 app.use("/products", productsRouter)
 app.use("/", routerFavorite)
 app.use("/auth", authRouter)
+app.use("/cart", cartRouter)
 
 export default app
