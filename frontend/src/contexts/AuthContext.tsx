@@ -38,6 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         await api.post("/auth/login", { email, password })
 
         const response = await api.get("/auth/me")
+        localStorage.setItem("user", response.data.user._id)
         setUser(response.data.user)
     }
 
