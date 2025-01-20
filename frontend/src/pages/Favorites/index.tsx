@@ -21,7 +21,7 @@ export function Favorites() {
                     </SimpleGrid>
                 </Stack>
             ) : (
-                <EmptyPage />
+                <EmptyPage message="No favorites yet." />
             )}
         </main>
     )
