@@ -13,7 +13,7 @@ export function Home() {
 
             <Flex
                 direction={{ base: "column", md: "row" }}
-                gap="lg"
+                gap="xl"
                 align="start"
                 w={"100%"}
                 p={32}
