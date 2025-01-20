@@ -27,7 +27,15 @@ export function Products() {
                 spacing="lg"
             >
                 {products.map((product) => (
-                    <ProductCard key={product._id} product={product} />
+                    <ProductCard
+                        key={product._id}
+                        id={product._id}
+                        title={product.title}
+                        price={product.price}
+                        cover={product.cover}
+                        old_price={product.old_price}
+                        isFavorite={product.isFavorite}
+                    />
                 ))}
             </SimpleGrid>
         </Stack>

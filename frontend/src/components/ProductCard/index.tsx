@@ -1,21 +1,38 @@
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
-import { ProductProps } from "../../types/ProductTypes"
-import { Badge } from "../Bagde"
+// import { Badge } from "../Bagde"
 import { Link } from "react-router-dom"
 import { api } from "../../services/api"
 import { useFavorites } from "../../hooks/useFavorites"
 import { useAuth } from "@/contexts/AuthContext"
-import { Button } from "@mantine/core"
+import { Button, Flex, Text } from "@mantine/core"
 import { useCart } from "@/hooks/useCart"
 
-export function ProductCard({ product }: { product: ProductProps }) {
+interface ProductProps {
+    id: string
+    title: string
+    price: number
+    cover: string
+    old_price?: number
+    isFavorite?: boolean
+    type?: string
+}
+
+export function ProductCard({
+    id,
+    title,
+    price,
+    cover,
+    old_price,
+    isFavorite,
+    // type,
+}: ProductProps) {
     const { user } = useAuth()
     const userId = user?._id || null
     const { setFavorites } = useFavorites(userId)
     const { handleAddToCart } = useCart(userId)
 
     function handleFavoriteClick() {
-        if (product.isFavorite) {
+        if (isFavorite) {
             removeFavorite()
         } else {
             addFavorite()
@@ -26,12 +43,12 @@ export function ProductCard({ product }: { product: ProductProps }) {
         try {
             const response = await api.post("/favorites", {
                 userId: userId,
-                productId: product._id,
+                productId: id,
             })
 
             if (response.data) {
-                setFavorites((prev) => [...(prev || []), product])
-                product.isFavorite = true
+                setFavorites((prev) => [...(prev || []), response.data])
+                isFavorite = true
             } else {
                 console.log(response.data.error)
             }
@@ -45,15 +62,15 @@ export function ProductCard({ product }: { product: ProductProps }) {
             const response = await api.delete("/favorites", {
                 data: {
                     userId: userId,
-                    productId: product._id,
+                    productId: id,
                 },
             })
 
             if (response.data) {
                 setFavorites((prev) =>
-                    prev ? prev.filter((fav) => fav._id !== product._id) : [],
+                    prev ? prev.filter((fav) => fav._id !== id) : [],
                 )
-                product.isFavorite = false
+                isFavorite = false
             } else {
                 console.log(response.data.error)
             }
@@ -70,37 +87,39 @@ export function ProductCard({ product }: { product: ProductProps }) {
                         handleFavoriteClick()
                     }}
                 >
-                    {product.isFavorite ? (
+                    {isFavorite ? (
                         <BiSolidHeart size={28} />
                     ) : (
                         <BiHeart size={28} />
                     )}
                 </button>
-                {product.type && <Badge {...product} />}
+                {/* {type && <Badge {...product} />} */}
             </div>
-            <Link to={`/product/${product._id}`}>
+            <Link to={`/product/${id}`}>
                 <img
-                    src={product.cover}
-                    alt={product.title}
+                    src={cover}
+                    alt={title}
                     className="transition-all duration-500 hover:scale-105 h-60 :w-56 cursor-pointer"
                 />
             </Link>
             <div className="flex flex-col items-center text-center w-5/6 gap-2">
-                <p className="text-base">{product.title}</p>
-                <div className="flex items-center">
-                    <h3 className="text-pink pe-2 text-lg font-extrabold">
-                        ${product.price.toFixed(2)}
-                    </h3>
-                    {/* {product.old_price && (
-                        <del className="text-xs">
-                            ${product.old_price.toFixed(2)}
-                        </del>
-                    )} */}
-                </div>
+                <p className="text-base">{title}</p>
+
+                <Flex align="center" gap={4}>
+                    <Text size="lg" c="pink" fw={600}>
+                        ${price.toFixed(2)}
+                    </Text>
+                    {old_price && (
+                        <Text td="line-through" c="gray" size="sm">
+                            ${old_price}
+                        </Text>
+                    )}
+                </Flex>
+
                 <Button
                     color="pink"
                     fullWidth
-                    onClick={() => handleAddToCart(product)}
+                    onClick={() => handleAddToCart(id)}
                 >
                     Add to cart
                 </Button>

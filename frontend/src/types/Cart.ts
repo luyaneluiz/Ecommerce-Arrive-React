@@ -5,7 +5,7 @@ export interface CartProps {
     setCart: React.Dispatch<React.SetStateAction<ProductProps[] | null>>
     loading: boolean
     error: unknown
-    handleAddToCart: (product: ProductProps) => void
+    handleAddToCart: (id: string) => void
 }
 
 export type Product = ProductProps
