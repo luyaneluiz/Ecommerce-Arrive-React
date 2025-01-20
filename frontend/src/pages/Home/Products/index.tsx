@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/ProductCard"
 import { useProducts } from "@/hooks/useProducts"
 import { useAuth } from "@/contexts/AuthContext"
 import { useFavorites } from "@/hooks/useFavorites"
+import { SimpleGrid, Stack } from "@mantine/core"
 
 export function Products() {
     const { products } = useProducts()
@@ -18,14 +19,17 @@ export function Products() {
     })
 
     return (
-        <section className="flex flex-col items-center pb-6">
+        <Stack>
             <Title text="Products" />
 
-            <div className="flex flex-col items-center gap-4 w-full sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:sm:grid-cols-3">
+            <SimpleGrid
+                cols={{ base: 1, xs: 2, sm: 3, md: 2, lg: 3 }}
+                spacing="lg"
+            >
                 {products.map((product) => (
                     <ProductCard key={product._id} product={product} />
                 ))}
-            </div>
-        </section>
+            </SimpleGrid>
+        </Stack>
     )
 }
