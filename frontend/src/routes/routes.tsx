@@ -1,7 +1,7 @@
 import Auth from "@/pages/Auth/"
 import { Layout } from "../layout"
 import { Trends } from "../components/Trends"
-import { Bag } from "../pages/Bag"
+import { Cart } from "../pages/Cart"
 import { Home } from "../pages/Home"
 import { New } from "../pages/New"
 import { Offers } from "../pages/Offers"
@@ -22,8 +22,8 @@ export const Routes = [
                 element: <Auth />,
             },
             {
-                path: "/bag",
-                element: <Bag />,
+                path: "/cart",
+                element: <Cart />,
             },
             {
                 path: "/new",

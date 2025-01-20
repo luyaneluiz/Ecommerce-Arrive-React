@@ -1,5 +1,5 @@
 import { CreatingPage } from "../../components/CreatingPage"
 
-export function Bag() {
+export function Cart() {
     return <CreatingPage />
 }

@@ -38,7 +38,7 @@ export default function LoggatedActions({ closeDrawer }: NavbarProps) {
 
             <IconButtonAction
                 Icon={BiShoppingBag}
-                path="/bag"
+                path="/cart"
                 onClick={closeDrawer}
             />
 
