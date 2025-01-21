@@ -4,8 +4,10 @@ import { Link } from "react-router-dom"
 import { api } from "../../services/api"
 import { useFavorites } from "../../hooks/useFavorites"
 import { useAuth } from "@/contexts/AuthContext"
-import { Button, Flex, Text } from "@mantine/core"
+import { Badge, Button, Flex, Image, Stack, Text } from "@mantine/core"
 import { useCart } from "@/hooks/useCart"
+
+type TypeProps = "New" | "Offer" | "Hot"
 
 interface ProductProps {
     id: string
@@ -14,7 +16,7 @@ interface ProductProps {
     cover: string
     old_price?: number
     isFavorite?: boolean
-    type?: string
+    type?: TypeProps
 }
 
 export function ProductCard({
@@ -24,7 +26,7 @@ export function ProductCard({
     cover,
     old_price,
     isFavorite,
-    // type,
+    type,
 }: ProductProps) {
     const { user } = useAuth()
     const userId = user?._id || null
@@ -79,6 +81,19 @@ export function ProductCard({
         }
     }
 
+    const badgeColor = () => {
+        switch (type) {
+            case "New":
+                return "yellow"
+            case "Offer":
+                return "green"
+            case "Hot":
+                return "red"
+            default:
+                return "blue"
+        }
+    }
+
     return (
         <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
             <div className="w-full flex flex-row-reverse justify-between">
@@ -93,17 +108,21 @@ export function ProductCard({
                         <BiHeart size={28} />
                     )}
                 </button>
-                {/* {type && <Badge {...product} />} */}
+
+                {type && <Badge color={badgeColor()}>{type}</Badge>}
             </div>
+
             <Link to={`/product/${id}`}>
-                <img
+                <Image
                     src={cover}
                     alt={title}
-                    className="transition-all duration-500 hover:scale-105 h-60 :w-56 cursor-pointer"
+                    h={230}
+                    className="transition-all duration-700 hover:scale-105"
                 />
             </Link>
-            <div className="flex flex-col items-center text-center w-5/6 gap-2">
-                <p className="text-base">{title}</p>
+
+            <Stack w="100%" align="center">
+                <Text>{title}</Text>
 
                 <Flex align="center" gap={4}>
                     <Text size="lg" c="pink" fw={600}>
@@ -123,7 +142,7 @@ export function ProductCard({
                 >
                     Add to cart
                 </Button>
-            </div>
+            </Stack>
         </div>
     )
 }

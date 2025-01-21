@@ -5,6 +5,8 @@ import { useAuth } from "@/contexts/AuthContext"
 import { useFavorites } from "@/hooks/useFavorites"
 import { SimpleGrid, Stack } from "@mantine/core"
 
+type TypeProps = "New" | "Offer" | "Hot"
+
 export function Products() {
     const { products } = useProducts()
     const { user } = useAuth()
@@ -35,6 +37,7 @@ export function Products() {
                         cover={product.cover}
                         old_price={product.old_price}
                         isFavorite={product.isFavorite}
+                        type={product.type as TypeProps}
                     />
                 ))}
             </SimpleGrid>
