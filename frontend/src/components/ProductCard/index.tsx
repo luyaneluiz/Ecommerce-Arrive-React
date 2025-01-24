@@ -1,10 +1,15 @@
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
-// import { Badge } from "../Bagde"
 import { Link } from "react-router-dom"
-import { api } from "../../services/api"
-import { useFavorites } from "../../hooks/useFavorites"
 import { useAuth } from "@/contexts/AuthContext"
-import { Badge, Button, Flex, Image, Stack, Text } from "@mantine/core"
+import {
+    ActionIcon,
+    Badge,
+    Button,
+    Flex,
+    Image,
+    Stack,
+    Text,
+} from "@mantine/core"
 import { useCart } from "@/hooks/useCart"
 
 type TypeProps = "New" | "Offer" | "Hot"
@@ -17,6 +22,7 @@ interface ProductProps {
     old_price?: number
     isFavorite?: boolean
     type?: TypeProps
+    onToggleFavorite: (id: string) => void
 }
 
 export function ProductCard({
@@ -27,59 +33,11 @@ export function ProductCard({
     old_price,
     isFavorite,
     type,
+    onToggleFavorite,
 }: ProductProps) {
     const { user } = useAuth()
     const userId = user?._id || null
-    const { setFavorites } = useFavorites(userId)
     const { handleAddToCart } = useCart(userId)
-
-    function handleFavoriteClick() {
-        if (isFavorite) {
-            removeFavorite()
-        } else {
-            addFavorite()
-        }
-    }
-
-    async function addFavorite() {
-        try {
-            const response = await api.post("/favorites", {
-                userId: userId,
-                productId: id,
-            })
-
-            if (response.data) {
-                setFavorites((prev) => [...(prev || []), response.data])
-                isFavorite = true
-            } else {
-                console.log(response.data.error)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    async function removeFavorite() {
-        try {
-            const response = await api.delete("/favorites", {
-                data: {
-                    userId: userId,
-                    productId: id,
-                },
-            })
-
-            if (response.data) {
-                setFavorites((prev) =>
-                    prev ? prev.filter((fav) => fav._id !== id) : [],
-                )
-                isFavorite = false
-            } else {
-                console.log(response.data.error)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     const badgeColor = () => {
         switch (type) {
@@ -94,20 +52,20 @@ export function ProductCard({
         }
     }
 
+    const FavoriteIcon = () => {
+        return isFavorite ? <BiSolidHeart size={24} /> : <BiHeart size={24} />
+    }
+
     return (
         <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
             <div className="w-full flex flex-row-reverse justify-between">
-                <button
-                    onClick={() => {
-                        handleFavoriteClick()
-                    }}
+                <ActionIcon
+                    variant="transparent"
+                    color="dark"
+                    onClick={() => onToggleFavorite(id)}
                 >
-                    {isFavorite ? (
-                        <BiSolidHeart size={28} />
-                    ) : (
-                        <BiHeart size={28} />
-                    )}
-                </button>
+                    {FavoriteIcon()}
+                </ActionIcon>
 
                 {type && <Badge color={badgeColor()}>{type}</Badge>}
             </div>

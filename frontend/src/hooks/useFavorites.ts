@@ -30,5 +30,49 @@ export const useFavorites = (userId: string | null): FavoritesProps => {
         fetchFavorites()
     }, [userId])
 
-    return { favorites, setFavorites, error, loading }
+    async function handleAddFavorite(id: string) {
+        try {
+            const response = await api.post("/favorites", {
+                userId: userId,
+                productId: id,
+            })
+
+            if (response.data) {
+                setFavorites((prev) => [...(prev || []), response.data])
+            } else {
+                console.log(response.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleRemoveFavorite(id: string) {
+        try {
+            const response = await api.delete("/favorites", {
+                data: {
+                    userId: userId,
+                    productId: id,
+                },
+            })
+
+            if (response.data) {
+                setFavorites((prev) =>
+                    prev ? prev.filter((fav) => fav._id !== id) : [],
+                )
+            } else {
+                console.log(response.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return {
+        favorites,
+        handleAddFavorite,
+        handleRemoveFavorite,
+        error,
+        loading,
+    }
 }
