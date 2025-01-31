@@ -21,7 +21,7 @@ export function Products() {
     )
 
     useEffect(() => {
-        if (favorites) {
+        if (userId && favorites) {
             const favoriteIds = new Set(favorites.map((fav) => fav._id))
             const updatedProducts = fetchedProducts.map((product) => ({
                 ...product,
