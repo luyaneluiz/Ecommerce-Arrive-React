@@ -1,12 +1,11 @@
 import { useState } from "react"
 import { useProduct } from "../../hooks/useProduct"
-import { Button, Divider, ActionIcon } from "@mantine/core"
+import { Button, Divider, ActionIcon, Image } from "@mantine/core"
 import PageError from "../../components/Error/PageError"
 import ProductDetails from "../../components/ProductDetails"
 import ColorSelect from "../../components/ColorSelect"
 import SelectSize from "../../components/SelectSize"
 import { BiHeart } from "react-icons/bi"
-import ProductImage from "../../components/ProductImage"
 import QuantitySelector from "../../components/QuantitySelector"
 import Totalizer from "../../components/Totalizer"
 
@@ -20,7 +19,13 @@ export function Product() {
         return (
             <div className="flex justify-center p-8">
                 <section className="flex flex-col lg:flex-row lg:max-w-[1000px] gap-10">
-                    <ProductImage cover={`../../${product.cover}`} />
+                    <Image
+                        src={`../../${product.cover}`}
+                        alt={product.title}
+                        width={300}
+                        mah={300}
+                        fit="contain"
+                    />
 
                     <aside>
                         <ProductDetails

@@ -1,14 +1,21 @@
-import React from "react"
-import { Group, Button, Text } from "@mantine/core"
+import { Group, Button, Text, Flex } from "@mantine/core"
 
-export default function QuantitySelector({ quantity, setQuantity }) {
+interface QuantitySelectorProps {
+    quantity: number
+    setQuantity: (quantity: number) => void
+}
+
+export default function QuantitySelector({
+    quantity,
+    setQuantity,
+}: QuantitySelectorProps) {
     return (
-        <div>
+        <Flex align="center" justify="center" gap={10}>
             <Text fw={700} size="sm">
-                Quantity:
+                Quantity
             </Text>
 
-            <Group className="mt-2">
+            <Group>
                 <Button
                     variant="default"
                     size="xs"
@@ -16,7 +23,9 @@ export default function QuantitySelector({ quantity, setQuantity }) {
                 >
                     -
                 </Button>
+
                 <Text size="sm">{quantity}</Text>
+
                 <Button
                     variant="default"
                     size="xs"
@@ -25,6 +34,6 @@ export default function QuantitySelector({ quantity, setQuantity }) {
                     +
                 </Button>
             </Group>
-        </div>
+        </Flex>
     )
 }

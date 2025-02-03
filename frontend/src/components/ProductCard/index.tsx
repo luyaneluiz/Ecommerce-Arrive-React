@@ -1,5 +1,5 @@
 import { BiHeart, BiSolidHeart } from "react-icons/bi"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "@/contexts/AuthContext"
 import {
     ActionIcon,
@@ -10,7 +10,8 @@ import {
     Stack,
     Text,
 } from "@mantine/core"
-import { useCart } from "@/hooks/useCart"
+import { useState } from "react"
+import AddToCartModal from "../Modal/AddToCart"
 
 type TypeProps = "New" | "Offer" | "Hot"
 
@@ -35,9 +36,9 @@ export function ProductCard({
     type,
     onToggleFavorite,
 }: ProductProps) {
+    const navigate = useNavigate()
     const { user } = useAuth()
-    const userId = user?._id || null
-    const { handleAddToCart } = useCart(userId)
+    const [openModal, setOpenModal] = useState(false)
 
     const badgeColor = () => {
         switch (type) {
@@ -56,51 +57,67 @@ export function ProductCard({
         return isFavorite ? <BiSolidHeart size={24} /> : <BiHeart size={24} />
     }
 
+    const handleAddToCartClick = () => {
+        if (user) {
+            setOpenModal(true)
+        } else {
+            navigate("/login")
+        }
+    }
+
     return (
-        <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
-            <div className="w-full flex flex-row-reverse justify-between">
-                <ActionIcon
-                    variant="transparent"
-                    color="dark"
-                    onClick={() => onToggleFavorite(id)}
-                >
-                    {FavoriteIcon()}
-                </ActionIcon>
+        <>
+            <AddToCartModal
+                opened={openModal}
+                setOpened={setOpenModal}
+                id={id}
+            />
 
-                {type && <Badge color={badgeColor()}>{type}</Badge>}
-            </div>
+            <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
+                <div className="w-full flex flex-row-reverse justify-between">
+                    <ActionIcon
+                        variant="transparent"
+                        color="dark"
+                        onClick={() => onToggleFavorite(id)}
+                    >
+                        {FavoriteIcon()}
+                    </ActionIcon>
 
-            <Link to={`/product/${id}`}>
-                <Image
-                    src={cover}
-                    alt={title}
-                    h={230}
-                    className="transition-all duration-700 hover:scale-105"
-                />
-            </Link>
+                    {type && <Badge color={badgeColor()}>{type}</Badge>}
+                </div>
 
-            <Stack w="100%" align="center">
-                <Text>{title}</Text>
+                <Link to={`/product/${id}`}>
+                    <Image
+                        src={cover}
+                        alt={title}
+                        h={230}
+                        className="transition-all duration-700 hover:scale-105"
+                    />
+                </Link>
 
-                <Flex align="center" gap={4}>
-                    <Text size="lg" c="pink" fw={600}>
-                        ${price.toFixed(2)}
-                    </Text>
-                    {old_price && (
-                        <Text td="line-through" c="gray" size="sm">
-                            ${old_price}
+                <Stack w="100%" align="center">
+                    <Text>{title}</Text>
+
+                    <Flex align="center" gap={4}>
+                        <Text size="lg" c="pink" fw={600}>
+                            ${price.toFixed(2)}
                         </Text>
-                    )}
-                </Flex>
+                        {old_price && (
+                            <Text td="line-through" c="gray" size="sm">
+                                ${old_price}
+                            </Text>
+                        )}
+                    </Flex>
 
-                <Button
-                    color="pink"
-                    fullWidth
-                    onClick={() => handleAddToCart(id)}
-                >
-                    Add to cart
-                </Button>
-            </Stack>
-        </div>
+                    <Button
+                        color="pink"
+                        fullWidth
+                        onClick={handleAddToCartClick}
+                    >
+                        Add to cart
+                    </Button>
+                </Stack>
+            </div>
+        </>
     )
 }

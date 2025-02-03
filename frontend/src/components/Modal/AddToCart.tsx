@@ -1,7 +1,13 @@
-import { Modal, Button } from "@mantine/core"
+import { Modal, Button, Image, Divider, Flex } from "@mantine/core"
 import ProductDetails from "../ProductDetails"
-import ProductImage from "../ProductImage"
 import { useProduct } from "@/hooks/useProduct"
+import { useState } from "react"
+import ColorSelect from "../ColorSelect"
+import QuantitySelector from "../QuantitySelector"
+import SelectSize from "../SelectSize"
+import Totalizer from "../Totalizer"
+import { useAuth } from "@/contexts/AuthContext"
+import { useCart } from "@/hooks/useCart"
 
 interface AddToCartModalProps {
     opened: boolean
@@ -14,29 +20,82 @@ export default function AddToCartModal({
     setOpened,
     id,
 }: AddToCartModalProps) {
+    const { user } = useAuth()
+    const userId = user?._id || null
+    const { handleAddToCart } = useCart(userId)
     const { product } = useProduct(id)
+    const [selectedColor, setSelectedColor] = useState<string | null>(null)
+    const [selectedSize, setSelectedSize] = useState<string | null>(null)
+    const [quantity, setQuantity] = useState(1)
 
     if (product) {
         return (
             <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}
+                centered
+                size="lg"
                 title="Add item to cart"
             >
-                <ProductImage cover={`../../${product.cover}`} />
+                <Flex
+                    gap={{ base: 0, md: 60 }}
+                    direction={{ base: "column", md: "row" }}
+                    align="center"
+                >
+                    <Image
+                        src={`../../${product.cover}`}
+                        alt={product.title}
+                        width={200}
+                        mah={{ base: 200, md: 250 }}
+                        fit="contain"
+                    />
 
-                <ProductDetails
-                    type={product.type}
-                    title={product.title}
-                    rating={product.rating}
-                    price={product.price}
-                    description={product.description}
-                />
+                    <ProductDetails
+                        type={product.type}
+                        title={product.title}
+                        rating={product.rating}
+                        price={product.price}
+                        description={product.description}
+                    />
+                </Flex>
+
+                <Divider my={20} />
+
+                <Flex
+                    direction={{ base: "column", sm: "row" }}
+                    justify="space-between"
+                    align="start"
+                    gap={20}
+                >
+                    <ColorSelect
+                        colors={product.colors}
+                        selectedColor={selectedColor}
+                        setSelectedColor={setSelectedColor}
+                    />
+
+                    <SelectSize
+                        sizes={product.sizes}
+                        selectedSize={selectedSize}
+                        setSelectedSize={setSelectedSize}
+                    />
+
+                    <QuantitySelector
+                        quantity={quantity}
+                        setQuantity={setQuantity}
+                    />
+                </Flex>
+
+                <Divider my={20} />
+
+                <Totalizer quantity={quantity} price={product.price} />
+
                 <Button
                     mt="md"
                     fullWidth
                     color="pink"
-                    onClick={() => setOpened(false)}
+                    disabled={!selectedColor || !selectedSize}
+                    onClick={() => handleAddToCart(id)}
+                    // onClick={() => setOpened(false)}
                 >
                     Continue Shopping
                 </Button>
