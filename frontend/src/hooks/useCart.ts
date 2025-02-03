@@ -1,6 +1,7 @@
 import { api } from "../services/api"
 import { useEffect, useState } from "react"
-import { CartProps, ProductCartProps } from "../types/Cart"
+import { CartProps, ProductCartProps, AddToCartProps } from "../types/Cart"
+import { Bounce, toast } from "react-toastify"
 
 export const useCart = (userId: string | null): CartProps => {
     const [cart, setCart] = useState<ProductCartProps[] | null>(null)
@@ -16,8 +17,17 @@ export const useCart = (userId: string | null): CartProps => {
 
                 if (response.data) {
                     setCart(response.data)
-                } else {
-                    setError(response.data.error)
+                    toast("🦄 Wow so easy!", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    })
                 }
             } catch (error) {
                 setError(error)
@@ -30,11 +40,19 @@ export const useCart = (userId: string | null): CartProps => {
         fetchCart()
     }, [userId])
 
-    async function handleAddToCart(id: string) {
+    async function handleAddToCart({
+        productId,
+        color,
+        size,
+        quantity,
+    }: AddToCartProps) {
         try {
             const response = await api.post("/cart/add", {
                 userId: userId,
-                productId: id,
+                productId: productId,
+                color: color,
+                size: size,
+                quantity: quantity,
             })
 
             if (response.data) {

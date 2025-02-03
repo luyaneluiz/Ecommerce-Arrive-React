@@ -28,6 +28,19 @@ export default function AddToCartModal({
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
     const [quantity, setQuantity] = useState(1)
 
+    const handleAddToCartClick = () => {
+        if (!product) return
+
+        handleAddToCart({
+            productId: product._id,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+            subtotal: product.price * quantity,
+        })
+        setOpened(false)
+    }
+
     if (product) {
         return (
             <Modal
@@ -94,7 +107,7 @@ export default function AddToCartModal({
                     fullWidth
                     color="pink"
                     disabled={!selectedColor || !selectedSize}
-                    onClick={() => handleAddToCart(id)}
+                    onClick={handleAddToCartClick}
                     // onClick={() => setOpened(false)}
                 >
                     Continue Shopping

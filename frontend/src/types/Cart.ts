@@ -3,7 +3,16 @@ export interface CartProps {
     setCart: React.Dispatch<React.SetStateAction<ProductCartProps[] | null>>
     loading: boolean
     error: unknown
-    handleAddToCart: (id: string) => void
+    handleAddToCart: (props: AddToCartProps) => void
+}
+
+export interface AddToCartProps {
+    userId?: string | null
+    productId: string
+    color: string | null
+    size: string | null
+    quantity: number
+    subtotal: number
 }
 
 export interface ProductCartProps {
