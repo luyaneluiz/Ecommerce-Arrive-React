@@ -12,6 +12,7 @@ import {
     Stack,
     Text,
     NumberFormatter,
+    ColorSwatch,
 } from "@mantine/core"
 import { BiTrash } from "react-icons/bi"
 import { TbHeartShare } from "react-icons/tb"
@@ -44,9 +45,23 @@ const CartProductsContainer = (cart: ProductCartProps[]) => {
                     </Box>
                     <Stack gap="sm">
                         <Text size="sm">{product.title}</Text>
-                        <Text size="xs" c="dimmed">
-                            Size: {product.size} | Color: {product.color}
-                        </Text>
+                        <Flex align="center" gap={5}>
+                            <Text size="xs" c="dimmed">
+                                Size: {product.size} |
+                            </Text>
+
+                            <Text size="xs" c="dimmed">
+                                Color:
+                            </Text>
+
+                            <ColorSwatch
+                                key={product.color}
+                                component="button"
+                                color={product.color}
+                                size={18}
+                                disabled
+                            />
+                        </Flex>
                         <Text size="xs">
                             <NumberFormatter
                                 value={product.price}
