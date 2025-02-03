@@ -1,9 +1,20 @@
 import EmptyPage from "@/components/Empty"
-import FavoriteCard from "@/components/FavoriteCard"
 import { Title } from "@/components/Titlte"
 import { useCart } from "@/hooks/useCart"
-import { ProductProps } from "@/types/ProductTypes"
-import { Stack, SimpleGrid } from "@mantine/core"
+import { ProductCartProps } from "@/types/Cart"
+import {
+    Table,
+    Image,
+    Flex,
+    Box,
+    ActionIcon,
+    Tooltip,
+    Stack,
+    Text,
+    NumberFormatter,
+} from "@mantine/core"
+import { BiTrash } from "react-icons/bi"
+import { TbHeartShare } from "react-icons/tb"
 
 export function Cart() {
     const userId = localStorage.getItem("user")
@@ -18,13 +29,72 @@ export function Cart() {
     )
 }
 
-const CartProductsContainer = (cart: ProductProps[]) => {
+const CartProductsContainer = (cart: ProductCartProps[]) => {
+    const rows = cart.map((product) => (
+        <Table.Tr key={product._id}>
+            <Table.Td>
+                <Flex gap="md" align="center">
+                    <Box w={70} h={70}>
+                        <Image
+                            src={product.cover}
+                            alt={product.title}
+                            fit="contain"
+                            h={70}
+                        />
+                    </Box>
+                    <Stack gap="sm">
+                        <Text size="sm">{product.title}</Text>
+                        <Text size="xs" c="dimmed">
+                            Size: {product.size} | Color: {product.color}
+                        </Text>
+                        <Text size="xs">
+                            <NumberFormatter
+                                value={product.price}
+                                prefix="$"
+                                decimalScale={2}
+                            />
+                        </Text>
+                    </Stack>
+                </Flex>
+            </Table.Td>
+            <Table.Td>{product.quantity}</Table.Td>
+            <Table.Td>
+                <NumberFormatter
+                    value={product.subtotal}
+                    prefix="$"
+                    decimalScale={2}
+                />
+            </Table.Td>
+            <Table.Td>
+                <Flex gap={5}>
+                    <Tooltip label="Move to favorite" position="bottom" fz="xs">
+                        <ActionIcon color="dark" variant="subtle">
+                            <TbHeartShare />
+                        </ActionIcon>
+                    </Tooltip>
+                    <Tooltip label="Remove" position="bottom" fz="xs">
+                        <ActionIcon color="red" variant="subtle">
+                            <BiTrash />
+                        </ActionIcon>
+                    </Tooltip>
+                </Flex>
+            </Table.Td>
+        </Table.Tr>
+    ))
+
     return (
-        <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }}>
-            {cart.map((product) => (
-                <FavoriteCard key={product._id} product={product} />
-            ))}
-        </SimpleGrid>
+        <Table layout="fixed" verticalSpacing="md">
+            <Table.Thead>
+                <Table.Tr>
+                    <Table.Th w={350}>Items</Table.Th>
+                    <Table.Th>Quantity</Table.Th>
+                    <Table.Th>Subtotal</Table.Th>
+                    <Table.Th>Actions</Table.Th>
+                </Table.Tr>
+            </Table.Thead>
+
+            <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
     )
 }
 

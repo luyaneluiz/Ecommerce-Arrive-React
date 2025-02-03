@@ -1,11 +1,18 @@
-import { ProductProps } from "./ProductTypes"
-
 export interface CartProps {
-    cart: ProductProps[] | null
-    setCart: React.Dispatch<React.SetStateAction<ProductProps[] | null>>
+    cart: ProductCartProps[] | null
+    setCart: React.Dispatch<React.SetStateAction<ProductCartProps[] | null>>
     loading: boolean
     error: unknown
     handleAddToCart: (id: string) => void
 }
 
-export type Product = ProductProps
+export interface ProductCartProps {
+    _id: string
+    cover: string
+    title: string
+    quantity: number
+    subtotal: number
+    price: number
+    size: string
+    color: string
+}

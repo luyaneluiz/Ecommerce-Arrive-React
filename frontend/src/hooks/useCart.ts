@@ -1,9 +1,9 @@
 import { api } from "../services/api"
 import { useEffect, useState } from "react"
-import { CartProps, Product } from "../types/Cart"
+import { CartProps, ProductCartProps } from "../types/Cart"
 
 export const useCart = (userId: string | null): CartProps => {
-    const [cart, setCart] = useState<Product[] | null>(null)
+    const [cart, setCart] = useState<ProductCartProps[] | null>(null)
     const [error, setError] = useState<unknown>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
