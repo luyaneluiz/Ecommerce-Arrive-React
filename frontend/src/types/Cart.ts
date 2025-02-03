@@ -8,11 +8,14 @@ export interface CartProps {
 
 export interface AddToCartProps {
     userId?: string | null
-    productId: string
+    id: string
     color: string | null
     size: string | null
     quantity: number
+    price: number
     subtotal: number
+    cover: string
+    title: string
 }
 
 export interface ProductCartProps {

@@ -40,19 +40,11 @@ export const useCart = (userId: string | null): CartProps => {
         fetchCart()
     }, [userId])
 
-    async function handleAddToCart({
-        productId,
-        color,
-        size,
-        quantity,
-    }: AddToCartProps) {
+    async function handleAddToCart(item: AddToCartProps) {
         try {
             const response = await api.post("/cart/add", {
                 userId: userId,
-                productId: productId,
-                color: color,
-                size: size,
-                quantity: quantity,
+                product: item,
             })
 
             if (response.data) {

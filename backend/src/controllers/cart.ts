@@ -2,30 +2,40 @@ import { Request, Response } from "express"
 import Cart from "../models/cart"
 
 export const addToCart = async (req: Request, res: Response) => {
-    const { userId, productId } = req.body
+    const { userId, product } = req.body
 
     try {
         let cart = await Cart.findOne({ user: userId })
 
         if (!cart) {
-            cart = new Cart({ user: userId, products: [productId] })
+            cart = new Cart({
+                user: userId,
+                products: [product],
+            })
         } else {
-            if (cart.products.includes(productId)) {
-                res.status(400).json({
-                    message: "Product already in cart",
-                })
-                return
-            }
+            const productIndex = cart.products.findIndex(
+                (item) =>
+                    item.id.toString() === product.id &&
+                    item.size === product.size &&
+                    item.color === product.color,
+            )
 
-            cart.products.push(productId)
+            if (productIndex > -1) {
+                cart.products[productIndex].quantity += product.quantity
+                cart.products[productIndex].subtotal += product.subtotal
+            } else {
+                cart.products.push(product)
+            }
         }
 
         await cart.save()
+
+        console.log("final cart", cart.products)
         res.status(201).json({
             message: `Product added to cart: ${cart}`,
         })
     } catch (error) {
-        res.status(500).json({ message: "Internal server error" })
+        res.status(500).json({ message: error })
     }
 }
 

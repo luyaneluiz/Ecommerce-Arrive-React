@@ -31,13 +31,18 @@ export default function AddToCartModal({
     const handleAddToCartClick = () => {
         if (!product) return
 
-        handleAddToCart({
-            productId: product._id,
+        const item = {
+            id: product._id,
             color: selectedColor,
             size: selectedSize,
             quantity: quantity,
+            price: product.price,
             subtotal: product.price * quantity,
-        })
+            cover: product.cover,
+            title: product.title,
+        }
+
+        handleAddToCart(item)
         setOpened(false)
     }
 
