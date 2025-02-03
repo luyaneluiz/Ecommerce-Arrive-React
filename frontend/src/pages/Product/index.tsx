@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useProduct } from "../../hooks/useProduct"
 import { Button, Divider, ActionIcon } from "@mantine/core"
 import PageError from "../../components/Error/PageError"

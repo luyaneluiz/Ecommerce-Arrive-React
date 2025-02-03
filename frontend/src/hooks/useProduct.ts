@@ -3,17 +3,11 @@ import { api } from "../services/api"
 import { ProductProps } from "../types/ProductTypes"
 import { useParams } from "react-router-dom"
 
-interface useProductProps {
-    id?: string
-}
-
-export const useProduct = (props: useProductProps) => {
-    const { id } = props || useParams<{ id: string }>()
+export const useProduct = (identifier?: string) => {
+    const { id } = identifier ? { id: identifier } : useParams<{ id: string }>()
     const [product, setProduct] = useState<ProductProps>()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-
-    console.log(id)
 
     useEffect(() => {
         const fetchProduct = async () => {
