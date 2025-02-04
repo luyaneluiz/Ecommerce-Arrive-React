@@ -5,6 +5,7 @@ export interface CartProps {
     error: unknown
     handleAddToCart: (props: AddToCartProps) => void
     handleRemoveFromCart: (productId: string) => void
+    cartTotal: number
 }
 
 export interface AddToCartProps {
