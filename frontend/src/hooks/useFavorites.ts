@@ -27,7 +27,7 @@ export const useFavorites = (userId: string | null): FavoritesProps => {
             }
         }
 
-        fetchFavorites()
+        if (userId) fetchFavorites()
     }, [userId])
 
     async function handleAddFavorite(id: string) {
