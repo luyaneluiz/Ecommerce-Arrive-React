@@ -113,7 +113,6 @@ export default function AddToCartModal({
                     color="pink"
                     disabled={!selectedColor || !selectedSize}
                     onClick={handleAddToCartClick}
-                    // onClick={() => setOpened(false)}
                 >
                     Continue Shopping
                 </Button>
