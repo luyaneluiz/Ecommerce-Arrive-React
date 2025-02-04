@@ -37,7 +37,7 @@ export default function Recommendations() {
                             </Box>
 
                             <Stack mt="sm">
-                                <Text fw={600} size="sm">
+                                <Text fw={600} size="sm" lineClamp={1}>
                                     {product.title}
                                 </Text>
 

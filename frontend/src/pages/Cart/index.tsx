@@ -17,17 +17,19 @@ export function Cart() {
             <Title text="Cart" />
 
             {hasProductsInCart ? (
-                <Flex direction={{ base: "column", md: "row" }} gap={20}>
-                    <CartTable cart={cart} />
+                <Stack gap={20}>
+                    <Flex direction={{ base: "column", md: "row" }} gap={20}>
+                        <CartTable cart={cart} />
 
-                    <Stack gap={10}>
-                        <OrderSummary cart={cart} />
+                        <Stack gap={10}>
+                            <OrderSummary cart={cart} />
 
-                        <PromoCode />
-                    </Stack>
+                            <PromoCode />
+                        </Stack>
+                    </Flex>
 
                     <Recommendations />
-                </Flex>
+                </Stack>
             ) : (
                 <EmptyPage
                     message="No products in your cart."
