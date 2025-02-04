@@ -66,7 +66,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             }
         }
 
-        checkUser()
+        if (user) checkUser()
     }, [])
 
     const contextValue = {
