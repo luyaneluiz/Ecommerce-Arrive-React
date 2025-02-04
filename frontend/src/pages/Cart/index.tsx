@@ -5,6 +5,7 @@ import { Flex, Stack } from "@mantine/core"
 import CartTable from "./CartTable"
 import OrderSummary from "./OrderSummary/indext"
 import PromoCode from "./PromoCode"
+import Recommendations from "./Recommendations"
 
 export function Cart() {
     const userId = localStorage.getItem("user")
@@ -24,6 +25,8 @@ export function Cart() {
 
                         <PromoCode />
                     </Stack>
+
+                    <Recommendations />
                 </Flex>
             ) : (
                 <EmptyPage
