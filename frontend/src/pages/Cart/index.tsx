@@ -4,6 +4,7 @@ import { useCart } from "@/hooks/useCart"
 import { Flex, Stack } from "@mantine/core"
 import CartTable from "./CartTable"
 import OrderSummary from "./OrderSummary/indext"
+import PromoCode from "./PromoCode"
 
 export function Cart() {
     const userId = localStorage.getItem("user")
@@ -18,7 +19,11 @@ export function Cart() {
                 <Flex direction={{ base: "column", md: "row" }} gap={20}>
                     <CartTable cart={cart} />
 
-                    <OrderSummary cart={cart} />
+                    <Stack gap={10}>
+                        <OrderSummary cart={cart} />
+
+                        <PromoCode />
+                    </Stack>
                 </Flex>
             ) : (
                 <EmptyPage
