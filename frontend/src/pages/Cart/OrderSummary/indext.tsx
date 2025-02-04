@@ -7,9 +7,14 @@ import {
     Text,
     Stack,
     Button,
+    Image,
 } from "@mantine/core"
+import PaymentMethods from "@/assets/payment-methods.png"
 
 export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
+    const fixTax = 2.0
+    const fixShipping = 8.0
+
     return (
         <Paper bg="#f1f1f1" p={20} miw={300}>
             <Text fw={800} size="md">
@@ -36,14 +41,14 @@ export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
                 <Flex>
                     <Text size="sm">Estimated tax:</Text>
                     <Text size="sm" ml="auto">
-                        $0.00
+                        ${fixTax}
                     </Text>
                 </Flex>
 
                 <Flex>
                     <Text size="sm">Shipping:</Text>
                     <Text size="sm" ml="auto">
-                        $0.00
+                        ${fixShipping}
                     </Text>
                 </Flex>
             </Stack>
@@ -69,6 +74,10 @@ export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
             <Button color="pink" fullWidth>
                 Proceed to checkout
             </Button>
+
+            <Flex justify="center" mt={20}>
+                <Image src={PaymentMethods} alt="Payments Methods" w={200} />
+            </Flex>
         </Paper>
     )
 }
