@@ -103,6 +103,7 @@ export function ProductCard({
                         src={cover}
                         alt={title}
                         h={230}
+                        fit="contain"
                         className="transition-all duration-700 hover:scale-105"
                     />
                 </Link>
