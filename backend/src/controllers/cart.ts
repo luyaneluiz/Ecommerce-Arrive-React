@@ -15,8 +15,8 @@ export const addToCart = async (req: Request, res: Response) => {
         } else {
             const productIndex = cart.products.findIndex(
                 (item) =>
-                    item.id.toString() === product.id &&
-                    item.size === product.size &&
+                    item._id.toString() === product._id &&
+                    item.size === product.id &&
                     item.color === product.color,
             )
 
@@ -30,7 +30,6 @@ export const addToCart = async (req: Request, res: Response) => {
 
         await cart.save()
 
-        console.log("final cart", cart.products)
         res.status(201).json({
             message: `Product added to cart: ${cart}`,
         })
@@ -49,17 +48,17 @@ export const removeFromCart = async (req: Request, res: Response) => {
             res.status(404).json({
                 message: "No cart found for this user",
             })
-            return
+        } else {
+            cart.products = cart.products.filter(
+                (product) => product._id.toString() !== productId,
+            )
+
+            await cart.save()
+
+            res.status(200).json({
+                message: `Product removed from cart: ${productId}`,
+            })
         }
-
-        cart.products = cart.products.filter(
-            (id) => id.toString() !== productId,
-        )
-
-        await cart.save()
-        res.status(201).json({
-            message: `Product removed from cart: ${cart}`,
-        })
     } catch (error) {
         res.status(500).json({ message: "Internal server error" })
     }

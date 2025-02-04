@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 interface ICart extends Document {
     user: mongoose.Schema.Types.ObjectId
     products: {
-        id: mongoose.Schema.Types.ObjectId
+        _id: mongoose.Schema.Types.ObjectId
         size: string
         color: string
         quantity: number
@@ -23,7 +23,7 @@ const cartSchema = new mongoose.Schema<ICart>(
         },
         products: [
             {
-                id: {
+                _id: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Product",
                     required: true,

@@ -32,7 +32,7 @@ export default function AddToCartModal({
         if (!product) return
 
         const item = {
-            id: product._id,
+            _id: product._id,
             color: selectedColor,
             size: selectedSize,
             quantity: quantity,

@@ -4,11 +4,12 @@ export interface CartProps {
     loading: boolean
     error: unknown
     handleAddToCart: (props: AddToCartProps) => void
+    handleRemoveFromCart: (productId: string) => void
 }
 
 export interface AddToCartProps {
     userId?: string | null
-    id: string
+    _id: string
     color: string | null
     size: string | null
     quantity: number
