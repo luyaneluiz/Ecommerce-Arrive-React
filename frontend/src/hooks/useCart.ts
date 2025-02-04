@@ -27,7 +27,7 @@ export const useCart = (userId: string | null): CartProps => {
             }
         }
 
-        fetchCart()
+        if (userId) fetchCart()
     }, [userId])
 
     async function handleAddToCart(item: AddToCartProps) {
