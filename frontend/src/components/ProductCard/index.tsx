@@ -12,6 +12,7 @@ import {
 } from "@mantine/core"
 import { useState } from "react"
 import AddToCartModal from "../Modal/AddToCart"
+import { useFavoritesContext } from "@/contexts/FavoritesContext"
 
 type TypeProps = "New" | "Offer" | "Hot"
 
@@ -21,9 +22,7 @@ interface ProductProps {
     price: number
     cover: string
     old_price?: number
-    isFavorite?: boolean
     type?: TypeProps
-    onToggleFavorite: (id: string) => void
 }
 
 export function ProductCard({
@@ -32,13 +31,24 @@ export function ProductCard({
     price,
     cover,
     old_price,
-    isFavorite,
     type,
-    onToggleFavorite,
 }: ProductProps) {
     const navigate = useNavigate()
     const { user } = useAuth()
     const [openModal, setOpenModal] = useState(false)
+    const { favorites, handleAddFavorite, handleRemoveFavorite } =
+        useFavoritesContext()
+    const [isFavorite, setIsFavorite] = useState(favorites.includes(id))
+
+    const toggleFavorite = () => {
+        if (isFavorite) {
+            handleRemoveFavorite(id)
+        } else {
+            handleAddFavorite(id)
+        }
+
+        setIsFavorite(!isFavorite)
+    }
 
     const badgeColor = () => {
         switch (type) {
@@ -53,34 +63,36 @@ export function ProductCard({
         }
     }
 
-    const FavoriteIcon = () => {
-        return isFavorite ? <BiSolidHeart size={24} /> : <BiHeart size={24} />
-    }
-
     const handleAddToCartClick = () => {
         if (user) {
             setOpenModal(true)
         } else {
-            navigate("/login")
+            navigate("/auth")
         }
     }
 
     return (
         <>
-            <AddToCartModal
-                opened={openModal}
-                setOpened={setOpenModal}
-                id={id}
-            />
+            {openModal && (
+                <AddToCartModal
+                    opened={openModal}
+                    setOpened={setOpenModal}
+                    id={id}
+                />
+            )}
 
             <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
                 <div className="w-full flex flex-row-reverse justify-between">
                     <ActionIcon
                         variant="transparent"
                         color="dark"
-                        onClick={() => onToggleFavorite(id)}
+                        onClick={toggleFavorite}
                     >
-                        {FavoriteIcon()}
+                        {isFavorite ? (
+                            <BiSolidHeart size={24} />
+                        ) : (
+                            <BiHeart size={24} />
+                        )}
                     </ActionIcon>
 
                     {type && <Badge color={badgeColor()}>{type}</Badge>}
