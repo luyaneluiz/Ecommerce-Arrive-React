@@ -43,8 +43,6 @@ export default function InputSearch() {
         setSearchResults(filteredResults)
     }
 
-    console.log(searchResults)
-
     return (
         <div className="flex items-center relative border border-slate-100 rounded-md px-3 w-3/5 max-w-sm h-10 md:h-11">
             <input
