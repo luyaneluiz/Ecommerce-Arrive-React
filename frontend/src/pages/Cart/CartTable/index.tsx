@@ -1,3 +1,6 @@
+import { useAuth } from "@/contexts/AuthContext"
+import { useCart } from "@/hooks/useCart"
+import { useFavorites } from "@/hooks/useFavorites"
 import { ProductCartProps } from "@/types/Cart"
 import {
     Table,
@@ -15,6 +18,19 @@ import { BiTrash } from "react-icons/bi"
 import { TbHeartShare } from "react-icons/tb"
 
 export default function CartTable({ cart }: { cart: ProductCartProps[] }) {
+    const { user } = useAuth()
+    const { handleRemoveFromCart } = useCart(user ? user._id : null)
+    const { handleAddFavorite } = useFavorites(user ? user._id : null)
+
+    const handleMoveToFavorites = (product: ProductCartProps) => {
+        handleRemoveFromCart(product._id)
+        handleAddFavorite(product._id)
+    }
+
+    const handleRemoveProduct = (product: ProductCartProps) => {
+        handleRemoveFromCart(product._id)
+    }
+
     const rows = cart.map((product) => (
         <Table.Tr key={product._id}>
             <Table.Td>
@@ -56,7 +72,9 @@ export default function CartTable({ cart }: { cart: ProductCartProps[] }) {
                     </Stack>
                 </Flex>
             </Table.Td>
+
             <Table.Td>{product.quantity}</Table.Td>
+
             <Table.Td>
                 <NumberFormatter
                     value={product.subtotal}
@@ -64,15 +82,24 @@ export default function CartTable({ cart }: { cart: ProductCartProps[] }) {
                     decimalScale={2}
                 />
             </Table.Td>
+
             <Table.Td>
                 <Flex gap={5}>
                     <Tooltip label="Move to favorite" position="bottom" fz="xs">
-                        <ActionIcon color="dark" variant="subtle">
+                        <ActionIcon
+                            color="dark"
+                            variant="subtle"
+                            onClick={() => handleMoveToFavorites(product)}
+                        >
                             <TbHeartShare />
                         </ActionIcon>
                     </Tooltip>
                     <Tooltip label="Remove" position="bottom" fz="xs">
-                        <ActionIcon color="red" variant="subtle">
+                        <ActionIcon
+                            color="red"
+                            variant="subtle"
+                            onClick={() => handleRemoveProduct(product)}
+                        >
                             <BiTrash />
                         </ActionIcon>
                     </Tooltip>

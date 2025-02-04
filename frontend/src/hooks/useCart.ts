@@ -58,5 +58,33 @@ export const useCart = (userId: string | null): CartProps => {
         }
     }
 
-    return { cart, setCart, handleAddToCart, error, loading }
+    async function handleRemoveFromCart(productId: string) {
+        try {
+            const response = await api.delete("/cart/remove", {
+                data: { userId, productId },
+            })
+
+            if (response.data) {
+                setCart((prev) =>
+                    [...(prev || [])].filter(
+                        (product) => product._id !== productId,
+                    ),
+                )
+                console.log("Product removed from cart")
+            } else {
+                console.log(response.data.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return {
+        cart,
+        setCart,
+        handleAddToCart,
+        handleRemoveFromCart,
+        error,
+        loading,
+    }
 }
