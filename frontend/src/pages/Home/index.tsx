@@ -20,7 +20,7 @@ export function Home() {
             >
                 <Trends />
 
-                <Stack>
+                <Stack w="100%">
                     <PromoCard />
                     <Products />
                 </Stack>
