@@ -8,7 +8,7 @@ import {
 } from "react-icons/bi"
 import { useAuth } from "@/contexts/AuthContext"
 import { useFavorites } from "@/hooks/useFavorites"
-import { Indicator, Menu, rem } from "@mantine/core"
+import { ActionIcon, Indicator, Menu, rem } from "@mantine/core"
 import IconButtonAction from "../IconButtonAction"
 
 interface NavbarProps {
@@ -44,7 +44,9 @@ export default function LoggatedActions({ closeDrawer }: NavbarProps) {
 
             <Menu position="bottom">
                 <Menu.Target>
-                    <BiUser className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5" />
+                    <ActionIcon variant="transparent" radius="xl">
+                        <BiUser className="text-black hover:text-pink w-6 min-[600px]:w-5 h-6 min-[600px]:h-5" />
+                    </ActionIcon>
                 </Menu.Target>
 
                 <Menu.Dropdown>
