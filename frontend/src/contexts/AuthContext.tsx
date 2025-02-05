@@ -1,11 +1,5 @@
 import { api } from "@/services/api"
-import React, {
-    createContext,
-    useContext,
-    useState,
-    ReactNode,
-    useEffect,
-} from "react"
+import React, { createContext, useContext, useState, ReactNode } from "react"
 
 interface AuthProviderProps {
     children: ReactNode
@@ -32,13 +26,16 @@ const AuthContext = createContext<AuthContextProps>({
 })
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<UserProps | null>(null)
+    const [user, setUser] = useState<UserProps | null>(() => {
+        const storagedUser = localStorage.getItem("user")
+        return storagedUser ? JSON.parse(storagedUser) : null
+    })
 
     const login = async (email: string, password: string) => {
         await api.post("/auth/login", { email, password })
 
         const response = await api.get("/auth/me")
-        localStorage.setItem("user", response.data.user._id)
+        localStorage.setItem("user", JSON.stringify(response.data.user))
         setUser(response.data.user)
     }
 
@@ -48,26 +45,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             email,
             password,
         })
+
+        localStorage.setItem("user", JSON.stringify(response.data.user))
         setUser(response.data.user)
     }
 
     const logout = async () => {
         await api.post("/auth/logout")
+
+        localStorage.removeItem("user")
         setUser(null)
     }
-
-    useEffect(() => {
-        const checkUser = async () => {
-            try {
-                const response = await api.get("/auth/me")
-                setUser(response.data.user)
-            } catch (error) {
-                setUser(null)
-            }
-        }
-
-        if (user) checkUser()
-    }, [])
 
     const contextValue = {
         user,
