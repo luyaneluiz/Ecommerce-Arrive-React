@@ -1,17 +1,16 @@
 import { useMemo, useState } from "react"
 // Hooks
 import { useProducts } from "@/hooks/useProducts"
-// Contexts
-import { useBreakpoint } from "@/contexts/BreakpointContext"
 // Components
 import { Stack } from "@mantine/core"
 import HeaderTrend from "./Header"
 import TrendProductCard from "./Card"
+import isMobile from "@/utils/isMobile"
 
 type Trend = "New" | "Hot"
 
 export function Trends() {
-    const { isMobile } = useBreakpoint()
+    const mobile = isMobile()
     const { products } = useProducts()
     const [trend, setTrend] = useState<Trend>("New")
 
@@ -31,12 +30,12 @@ export function Trends() {
 
     return (
         <section className="mb-6 w-full lg:max-w-xs">
-            {isMobile ? (
+            {mobile ? (
                 <Stack gap="md">
                     <HeaderTrend
                         trend={trend}
                         changeTrend={handleChangeTrend}
-                        hasArrows={isMobile}
+                        hasArrows={mobile}
                     />
 
                     {filteredProducts.map((product) => (

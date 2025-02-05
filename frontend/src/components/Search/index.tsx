@@ -1,7 +1,7 @@
-import { useState, ChangeEvent, useEffect } from "react"
+import { useState } from "react"
 
 // api
-import { api } from "../../services/api"
+// import { api } from "../../services/api"
 
 // icons
 import { BiSearch } from "react-icons/bi"
@@ -16,18 +16,18 @@ export default function InputSearch() {
     const [searchTerm, setSearchTerm] = useState<string>("")
     const [searchResults, setSearchResults] = useState<ProductProps[]>([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.get("/products")
-                setSearchResults(response.data)
-            } catch (error) {
-                console.error("Error fetching data:", error)
-            }
-        }
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await api.get("/products")
+    //             setSearchResults(response.data)
+    //         } catch (error) {
+    //             console.error("Error fetching data:", error)
+    //         }
+    //     }
 
-        fetchData()
-    }, [])
+    //     fetchData()
+    // }, [])
 
     const handleSearchChange = (event: any) => {
         setSearchTerm(event.target.value)

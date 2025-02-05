@@ -1,12 +1,11 @@
-import React from "react"
 import { Carousel } from "@mantine/carousel"
-import { useBreakpoint } from "../../contexts/BreakpointContext"
 import { banners } from "../../assets/banner/banners"
 import { useRef } from "react"
 import Autoplay from "embla-carousel-autoplay"
+import isMobile from "@/utils/isMobile"
 
 export function Banner() {
-    const { isMobile } = useBreakpoint()
+    const mobile = isMobile()
     const autoplay = useRef(Autoplay({ delay: 2000 }))
 
     return (
@@ -22,9 +21,7 @@ export function Banner() {
                 {banners.map((banner, index) => (
                     <Carousel.Slide key={index}>
                         <img
-                            src={
-                                isMobile ? banner.srcMobile : banner.srcDesktop
-                            }
+                            src={mobile ? banner.srcMobile : banner.srcDesktop}
                             width="100%"
                             alt={banner.alt}
                         />

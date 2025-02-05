@@ -3,29 +3,28 @@ import { Outlet } from "react-router-dom"
 import { Header } from "./Header"
 import { NavbarItems } from "./Navbar"
 import { Footer } from "./Footer"
-// Context
-import { useBreakpoint } from "@/contexts/BreakpointContext"
 import { Affix, ActionIcon, Indicator } from "@mantine/core"
 import { BiCart } from "react-icons/bi"
 import { useCart } from "@/hooks/useCart"
 import { useAuth } from "@/contexts/AuthContext"
+import isMobile from "@/utils/isMobile"
 
 export function Layout() {
-    const { isMobile } = useBreakpoint()
+    const mobile = isMobile()
     const { user } = useAuth()
     const { cartTotal } = useCart(user?._id || "")
 
     return (
         <>
-            <Header isMobile={isMobile} />
+            <Header isMobile={mobile} />
 
-            {!isMobile && <NavbarItems mobile={false} />}
+            {!mobile && <NavbarItems mobile={false} />}
 
             <main className="max-w-[1300px] m-auto">
                 <Outlet />
             </main>
 
-            {user && isMobile && (
+            {user && mobile && (
                 <Affix position={{ bottom: 30, right: 30 }}>
                     <Indicator
                         color="pink"
