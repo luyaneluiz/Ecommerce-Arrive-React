@@ -10,8 +10,15 @@ import QuantitySelector from "../../components/QuantitySelector"
 import Totalizer from "../../components/Totalizer"
 import LoadingPage from "@/components/LoadingPage"
 import Recommendations from "../Cart/Recommendations"
+import { useAuth } from "@/contexts/AuthContext"
+import { useCart } from "@/hooks/useCart"
+import { useNavigate } from "react-router-dom"
 
 export function Product() {
+    const { user } = useAuth()
+    const userId = user?._id || null
+    const navigate = useNavigate()
+    const { handleAddToCart } = useCart(userId)
     const { product, loading } = useProduct()
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
@@ -20,6 +27,24 @@ export function Product() {
     if (loading) return <LoadingPage />
 
     if (!product) return <PageError />
+
+    const handleBuyNowClick = () => {
+        if (!userId) return navigate("/auth")
+
+        const item = {
+            _id: product._id,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+            price: product.price,
+            subtotal: product.price * quantity,
+            cover: product.cover,
+            title: product.title,
+        }
+
+        handleAddToCart(item)
+        navigate("/cart")
+    }
 
     return (
         <Flex direction="column" justify="center" gap={45} p={32}>
@@ -74,7 +99,13 @@ export function Product() {
                     </Flex>
 
                     <Flex align="center" gap={8}>
-                        <Button color="pink" size="md" fullWidth>
+                        <Button
+                            color="pink"
+                            size="md"
+                            disabled={!selectedColor || !selectedSize}
+                            onClick={handleBuyNowClick}
+                            fullWidth
+                        >
                             Buy now
                         </Button>
 
