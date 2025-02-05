@@ -29,7 +29,7 @@ export default function Recommendations() {
 
                             <Box w={200} h={200} m="auto">
                                 <Image
-                                    src={product.cover}
+                                    src={`../../${product.cover}`}
                                     alt={product.title}
                                     h="100%"
                                     fit="contain"
