@@ -6,9 +6,10 @@ import CartTable from "./CartTable"
 import OrderSummary from "./OrderSummary/indext"
 import PromoCode from "./PromoCode"
 import Recommendations from "./Recommendations"
+import { useAuth } from "@/contexts/AuthContext"
 
 export function Cart() {
-    const userId = localStorage.getItem("user")
+    const userId = useAuth().user?._id || null
     const { cart } = useCart(userId)
     const hasProductsInCart = cart && cart.length > 0
 
