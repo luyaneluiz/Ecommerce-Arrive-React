@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useProduct } from "../../hooks/useProduct"
-import { Button, Divider, ActionIcon, Image } from "@mantine/core"
+import { Button, Divider, ActionIcon, Image, Flex, Stack } from "@mantine/core"
 import PageError from "../../components/Error/PageError"
 import ProductDetails from "../../components/ProductDetails"
 import ColorSelect from "../../components/ColorSelect"
@@ -9,6 +9,7 @@ import { BiHeart } from "react-icons/bi"
 import QuantitySelector from "../../components/QuantitySelector"
 import Totalizer from "../../components/Totalizer"
 import LoadingPage from "@/components/LoadingPage"
+import Recommendations from "../Cart/Recommendations"
 
 export function Product() {
     const { product, loading } = useProduct()
@@ -21,17 +22,22 @@ export function Product() {
     if (!product) return <PageError />
 
     return (
-        <div className="flex justify-center p-8">
-            <section className="flex flex-col lg:flex-row lg:max-w-[1000px] gap-10">
+        <Flex direction="column" justify="center" gap={45} p={32}>
+            <Flex
+                direction={{ base: "column", lg: "row" }}
+                gap={40}
+                maw={900}
+                align="center"
+            >
                 <Image
                     src={`../../${product.cover}`}
                     alt={product.title}
-                    width={300}
-                    mah={300}
+                    w={{ base: 300, md: 400 }}
+                    h={{ base: 300, md: 400 }}
                     fit="contain"
                 />
 
-                <aside>
+                <Stack gap={20}>
                     <ProductDetails
                         type={product.type}
                         title={product.title}
@@ -40,9 +46,9 @@ export function Product() {
                         description={product.description}
                     />
 
-                    <Divider my={20} />
+                    <Divider />
 
-                    <section className="flex justify-between">
+                    <Flex justify="space-between" align="center">
                         <ColorSelect
                             colors={product.colors}
                             selectedColor={selectedColor}
@@ -54,20 +60,20 @@ export function Product() {
                             selectedSize={selectedSize}
                             setSelectedSize={setSelectedSize}
                         />
-                    </section>
+                    </Flex>
 
-                    <Divider my={20} />
+                    <Divider />
 
-                    <div className="flex justify-between">
+                    <Flex justify="space-between" align="center">
                         <QuantitySelector
                             quantity={quantity}
                             setQuantity={setQuantity}
                         />
 
                         <Totalizer quantity={quantity} price={product.price} />
-                    </div>
+                    </Flex>
 
-                    <div className="flex gap-2 mt-4 items-center">
+                    <Flex align="center" gap={8}>
                         <Button color="pink" size="md" fullWidth>
                             Buy now
                         </Button>
@@ -75,9 +81,11 @@ export function Product() {
                         <ActionIcon variant="light" size="xl" color="pink">
                             <BiHeart />
                         </ActionIcon>
-                    </div>
-                </aside>
-            </section>
-        </div>
+                    </Flex>
+                </Stack>
+            </Flex>
+
+            <Recommendations />
+        </Flex>
     )
 }
