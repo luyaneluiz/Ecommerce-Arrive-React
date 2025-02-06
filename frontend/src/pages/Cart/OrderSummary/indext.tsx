@@ -61,10 +61,14 @@ export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
                 </Text>
                 <Text size="md" ml="auto" fw={900}>
                     <NumberFormatter
-                        value={cart.reduce(
-                            (acc, product) => acc + product.subtotal,
-                            0,
-                        )}
+                        value={
+                            cart.reduce(
+                                (acc, product) => acc + product.subtotal,
+                                0,
+                            ) +
+                            fixTax +
+                            fixShipping
+                        }
                         prefix="$"
                         decimalScale={2}
                     />
