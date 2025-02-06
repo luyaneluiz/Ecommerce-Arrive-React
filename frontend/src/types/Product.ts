@@ -1,4 +1,5 @@
 import Sizes from "./Sizes"
+import { TypeProps } from "./Type"
 
 export interface ProductProps {
     _id: string
@@ -16,4 +17,13 @@ export interface ProductProps {
     sold?: number
     avaliable?: number
     isFavorite?: boolean
+}
+
+export interface CartProductProps {
+    id: string
+    title: string
+    price: number
+    cover: string
+    old_price?: number
+    type?: TypeProps
 }
