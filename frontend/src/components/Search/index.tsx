@@ -7,7 +7,7 @@ import { useState } from "react"
 import { BiSearch } from "react-icons/bi"
 
 // types
-import { ProductProps } from "../../types/ProductTypes"
+import { ProductProps } from "../../types/Product"
 interface InputSearchProps {
     data: ProductProps[] // A base de dados JSON
 }

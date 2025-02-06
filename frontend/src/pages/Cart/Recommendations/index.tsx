@@ -1,5 +1,5 @@
 import { useProducts } from "@/hooks/useProducts"
-import { ProductProps } from "@/types/ProductTypes"
+import { ProductProps } from "@/types/Product"
 import { Carousel } from "@mantine/carousel"
 import { Box, Button, Flex, Image, Paper, Stack, Text } from "@mantine/core"
 import { BiHeart } from "react-icons/bi"

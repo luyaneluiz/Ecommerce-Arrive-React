@@ -1,5 +1,5 @@
 import { Button, Paper, Stack } from "@mantine/core"
-import { ProductProps } from "../../types/ProductTypes"
+import { ProductProps } from "../../types/Product"
 import { BiShoppingBag } from "react-icons/bi"
 
 export default function FavoriteCard({ product }: { product: ProductProps }) {

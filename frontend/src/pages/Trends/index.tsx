@@ -2,7 +2,7 @@ import { api } from "../../services/api"
 import { useEffect, useState } from "react"
 import { ProductCard } from "../../components/ProductCard"
 import { Title } from "../../components/Titlte"
-import { ProductProps } from "../../types/ProductTypes"
+import { ProductProps } from "../../types/Product"
 
 export function Trends() {
     const [products, setProducts] = useState<ProductProps[]>([])

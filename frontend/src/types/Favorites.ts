@@ -1,4 +1,4 @@
-import { ProductProps } from "./ProductTypes"
+import { ProductProps } from "./Product"
 
 export interface FavoritesProps {
     favorites: ProductProps[] | null
