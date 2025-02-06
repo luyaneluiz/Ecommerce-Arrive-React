@@ -63,9 +63,10 @@ export const getFavorites = async (req: Request, res: Response) => {
             "products",
         )
 
-        if (!favorite) {
-            res.status(404).json({
+        if (!favorite || favorite.products.length === 0) {
+            res.status(200).json({
                 message: "No favorites found for this user",
+                products: [],
             })
         } else {
             res.status(200).json(favorite.products)
