@@ -11,14 +11,14 @@ import Totalizer from "../../components/Totalizer"
 import LoadingPage from "@/components/LoadingPage"
 import Recommendations from "../../components/Recommendations"
 import { useAuth } from "@/contexts/AuthContext"
-import { useCart } from "@/hooks/useCart"
 import { useNavigate } from "react-router-dom"
+import { useCartContext } from "@/contexts/CartContext"
 
 export function Product() {
     const { user } = useAuth()
     const userId = user?._id || null
     const navigate = useNavigate()
-    const { handleAddToCart } = useCart(userId)
+    const { handleAddToCart } = useCartContext()
     const { product, loading } = useProduct()
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)

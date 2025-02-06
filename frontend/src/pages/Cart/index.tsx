@@ -1,16 +1,14 @@
 import EmptyPage from "@/components/Empty"
 import { Title } from "@/components/Titlte"
-import { useCart } from "@/hooks/useCart"
 import { Flex, Stack } from "@mantine/core"
 import CartTable from "./CartTable"
 import OrderSummary from "./OrderSummary/indext"
 import PromoCode from "./PromoCode"
 import Recommendations from "../../components/Recommendations"
-import { useAuth } from "@/contexts/AuthContext"
+import { useCartContext } from "@/contexts/CartContext"
 
 export function Cart() {
-    const userId = useAuth().user?._id || null
-    const { cart } = useCart(userId)
+    const { cart } = useCartContext()
     const hasProductsInCart = cart && cart.length > 0
 
     return (

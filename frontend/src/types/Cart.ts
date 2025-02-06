@@ -3,6 +3,7 @@ export interface CartProps {
     setCart: React.Dispatch<React.SetStateAction<ProductCartProps[] | null>>
     loading: boolean
     error: unknown
+    isAnimating: boolean
     handleAddToCart: (props: AddToCartProps) => void
     handleRemoveFromCart: (productId: string) => void
     cartTotal: number

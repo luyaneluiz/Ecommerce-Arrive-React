@@ -6,8 +6,7 @@ import ColorSelect from "../ColorSelect"
 import QuantitySelector from "../QuantitySelector"
 import SelectSize from "../SelectSize"
 import Totalizer from "../Totalizer"
-import { useAuth } from "@/contexts/AuthContext"
-import { useCart } from "@/hooks/useCart"
+import { useCartContext } from "@/contexts/CartContext"
 
 interface AddToCartModalProps {
     opened: boolean
@@ -22,9 +21,7 @@ export default function AddToCartModal({
     onClose,
     id,
 }: AddToCartModalProps) {
-    const { user } = useAuth()
-    const userId = user?._id || null
-    const { handleAddToCart } = useCart(userId)
+    const { handleAddToCart } = useCartContext()
     const { product } = useProduct(id)
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
