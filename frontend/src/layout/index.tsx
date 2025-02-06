@@ -33,6 +33,8 @@ export function Layout() {
                         size={20}
                     >
                         <ActionIcon
+                            component="a"
+                            href="/cart"
                             color="pink"
                             variant="outline"
                             bg="white"
