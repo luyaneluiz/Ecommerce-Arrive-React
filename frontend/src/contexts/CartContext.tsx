@@ -27,7 +27,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const response = await api.get("/cart/products", {
+                const response = await api.get("/cart", {
                     params: { userId },
                 })
 

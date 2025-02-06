@@ -31,6 +31,7 @@ export default function FloatingCartButton() {
                     <Indicator
                         color="pink"
                         offset={5}
+                        disabled={!cartTotal || cartTotal === 0}
                         label={cartTotal}
                         size={20}
                     >

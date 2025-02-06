@@ -70,9 +70,10 @@ export const getCartProducts = async (req: Request, res: Response) => {
     try {
         const cart = await Cart.findOne({ user: userId }).populate("products")
 
-        if (!cart) {
-            res.status(404).json({
-                message: "No cart found for this user",
+        if (!cart || cart.products.length === 0) {
+            res.status(200).json({
+                message: "No products in the cart for this user.",
+                products: [],
             })
         } else {
             res.status(200).json(cart.products)
