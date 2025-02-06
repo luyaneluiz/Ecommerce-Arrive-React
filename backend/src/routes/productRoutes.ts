@@ -6,11 +6,13 @@ import {
     updateProduct,
     deleteProduct,
     updateProducts,
+    getProductsByType,
 } from "../controllers/productController"
 
 const router = express.Router()
 
 router.get("/", getProducts)
+router.get("/type", getProductsByType)
 router.post("/create/product", createProduct)
 router.get("/product/:id", getProductById)
 router.put("/update/product/:id", updateProduct)
