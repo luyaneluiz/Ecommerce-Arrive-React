@@ -4,9 +4,11 @@ import { useAuth } from "@/contexts/AuthContext"
 import {
     ActionIcon,
     Badge,
+    Box,
     Button,
     Flex,
     Image,
+    Paper,
     Stack,
     Text,
 } from "@mantine/core"
@@ -18,6 +20,7 @@ import { useModalContext } from "@/contexts/ModalContext"
 export function ProductCard({
     id,
     title,
+    description,
     price,
     cover,
     old_price,
@@ -62,57 +65,70 @@ export function ProductCard({
     }
 
     return (
-        <>
-            <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
-                <div className="w-full flex flex-row-reverse justify-between">
-                    <ActionIcon
-                        variant="transparent"
-                        color="dark"
-                        onClick={toggleFavorite}
+        <Paper shadow="xs" radius="md" p="sm" withBorder>
+            <Flex justify="space-between" direction="row-reverse">
+                <ActionIcon
+                    variant="transparent"
+                    color="gray"
+                    onClick={toggleFavorite}
+                >
+                    {isFavorite ? (
+                        <BiSolidHeart size={22} />
+                    ) : (
+                        <BiHeart size={22} />
+                    )}
+                </ActionIcon>
+
+                {type && !description && (
+                    <Badge color={badgeColor()}>{type}</Badge>
+                )}
+            </Flex>
+
+            <Link to={`/product/${id}`}>
+                <Box w={200} h={200} m="auto">
+                    <Image src={cover} alt={title} h="100%" fit="contain" />
+                </Box>
+            </Link>
+
+            <Stack mt="sm" align={description ? "flex-start" : "center"}>
+                <Text
+                    fw={description ? "bold" : 500}
+                    size={description ? "sm" : "md"}
+                    lineClamp={1}
+                >
+                    {title}
+                </Text>
+
+                {description && (
+                    <Text size="xs" c="dimmed" lineClamp={3}>
+                        {description}
+                    </Text>
+                )}
+
+                <Flex align="center" gap={4}>
+                    <Text
+                        size={description ? "md" : "lg"}
+                        c={description ? "dark" : "pink"}
+                        fw={700}
                     >
-                        {isFavorite ? (
-                            <BiSolidHeart size={24} />
-                        ) : (
-                            <BiHeart size={24} />
-                        )}
-                    </ActionIcon>
-
-                    {type && <Badge color={badgeColor()}>{type}</Badge>}
-                </div>
-
-                <Link to={`/product/${id}`}>
-                    <Image
-                        src={cover}
-                        alt={title}
-                        h={230}
-                        fit="contain"
-                        className="transition-all duration-700 hover:scale-105"
-                    />
-                </Link>
-
-                <Stack w="100%" align="center">
-                    <Text>{title}</Text>
-
-                    <Flex align="center" gap={4}>
-                        <Text size="lg" c="pink" fw={600}>
-                            ${price.toFixed(2)}
+                        ${price.toFixed(2)}
+                    </Text>
+                    {old_price && (
+                        <Text td="line-through" c="gray" size="xs">
+                            ${old_price}
                         </Text>
-                        {old_price && (
-                            <Text td="line-through" c="gray" size="sm">
-                                ${old_price}
-                            </Text>
-                        )}
-                    </Flex>
+                    )}
+                </Flex>
 
-                    <Button
-                        color="pink"
-                        fullWidth
-                        onClick={handleAddToCartClick}
-                    >
-                        Add to cart
-                    </Button>
-                </Stack>
-            </div>
-        </>
+                <Button
+                    variant={description ? "outline" : "filled"}
+                    color="pink"
+                    fullWidth
+                    onClick={handleAddToCartClick}
+                >
+                    ADD TO BAG
+                </Button>
+            </Stack>
+        </Paper>
     )
 }

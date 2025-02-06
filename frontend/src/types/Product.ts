@@ -22,6 +22,7 @@ export interface ProductProps {
 export interface CartProductProps {
     id: string
     title: string
+    description?: string
     price: number
     cover: string
     old_price?: number

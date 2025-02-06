@@ -5,7 +5,7 @@ import { Flex, Stack } from "@mantine/core"
 import CartTable from "./CartTable"
 import OrderSummary from "./OrderSummary/indext"
 import PromoCode from "./PromoCode"
-import Recommendations from "./Recommendations"
+import Recommendations from "../../components/Recommendations"
 import { useAuth } from "@/contexts/AuthContext"
 
 export function Cart() {
