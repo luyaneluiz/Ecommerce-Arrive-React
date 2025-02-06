@@ -12,12 +12,14 @@ import { useCart } from "@/hooks/useCart"
 interface AddToCartModalProps {
     opened: boolean
     setOpened: (opened: boolean) => void
+    onClose: () => void
     id: string
 }
 
 export default function AddToCartModal({
     opened,
     setOpened,
+    onClose,
     id,
 }: AddToCartModalProps) {
     const { user } = useAuth()
@@ -50,7 +52,7 @@ export default function AddToCartModal({
         return (
             <Modal
                 opened={opened}
-                onClose={() => setOpened(false)}
+                onClose={onClose}
                 centered
                 size="lg"
                 title="Add item to cart"

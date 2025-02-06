@@ -11,18 +11,9 @@ import {
     Text,
 } from "@mantine/core"
 import { useState } from "react"
-import AddToCartModal from "../Modal/AddToCart"
 import { useFavoritesContext } from "@/contexts/FavoritesContext"
-import { TypeProps } from "@/types/Type"
-
-interface ProductProps {
-    id: string
-    title: string
-    price: number
-    cover: string
-    old_price?: number
-    type?: TypeProps
-}
+import { CartProductProps } from "@/types/Product"
+import { useModalContext } from "@/contexts/ModalContext"
 
 export function ProductCard({
     id,
@@ -31,10 +22,10 @@ export function ProductCard({
     cover,
     old_price,
     type,
-}: ProductProps) {
+}: CartProductProps) {
     const navigate = useNavigate()
+    const { openModal } = useModalContext()
     const { user } = useAuth()
-    const [openModal, setOpenModal] = useState(false)
     const { favorites, handleAddFavorite, handleRemoveFavorite } =
         useFavoritesContext()
     const [isFavorite, setIsFavorite] = useState(favorites.includes(id))
@@ -64,7 +55,7 @@ export function ProductCard({
 
     const handleAddToCartClick = () => {
         if (user) {
-            setOpenModal(true)
+            openModal({ id, title, price, cover })
         } else {
             navigate("/auth")
         }
@@ -72,14 +63,6 @@ export function ProductCard({
 
     return (
         <>
-            {openModal && (
-                <AddToCartModal
-                    opened={openModal}
-                    setOpened={setOpenModal}
-                    id={id}
-                />
-            )}
-
             <div className="flex flex-col items-center w-full border border-gray-300 rounded-xl bg-white p-6 sm:h-[460px]">
                 <div className="w-full flex flex-row-reverse justify-between">
                     <ActionIcon
