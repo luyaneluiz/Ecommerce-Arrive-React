@@ -3,8 +3,7 @@ import { ProductCard } from "@/components/ProductCard"
 import { useProducts } from "@/hooks/useProducts"
 import { SimpleGrid, Skeleton, Stack } from "@mantine/core"
 import { FavoritesProvider } from "@/contexts/FavoritesContext"
-
-type TypeProps = "New" | "Offer" | "Hot"
+import { TypeProps } from "@/types/Type"
 
 export function Products() {
     const { products, loading } = useProducts()

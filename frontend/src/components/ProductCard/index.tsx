@@ -13,8 +13,7 @@ import {
 import { useState } from "react"
 import AddToCartModal from "../Modal/AddToCart"
 import { useFavoritesContext } from "@/contexts/FavoritesContext"
-
-type TypeProps = "New" | "Offer" | "Hot"
+import { TypeProps } from "@/types/Type"
 
 interface ProductProps {
     id: string
