@@ -4,6 +4,8 @@ import { ProductProps } from "@/types/ProductTypes"
 
 export const useProducts = () => {
     const [products, setProducts] = useState<ProductProps[]>([])
+    const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<unknown>(null)
 
     useEffect(() => {
@@ -15,11 +17,26 @@ export const useProducts = () => {
             } catch (error) {
                 setError(error)
                 console.error("Erro ao buscar produtos:", error)
+            } finally {
+                setLoading(false)
             }
         }
 
         fetchProducts()
     }, [])
 
-    return { products, error }
+    async function fetchProductsByType(type: string) {
+        try {
+            const response = await api.get(`/products/type?type=${type}`)
+
+            setFilteredProducts(response.data)
+        } catch (error) {
+            setError(error)
+            console.error("Erro ao buscar produtos:", error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return { products, filteredProducts, fetchProductsByType, loading, error }
 }

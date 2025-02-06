@@ -1,18 +1,29 @@
 import { Title } from "@/components/Titlte"
 import { ProductCard } from "@/components/ProductCard"
 import { useProducts } from "@/hooks/useProducts"
-import { SimpleGrid, Stack } from "@mantine/core"
+import { SimpleGrid, Skeleton, Stack } from "@mantine/core"
 import { FavoritesProvider } from "@/contexts/FavoritesContext"
 
 type TypeProps = "New" | "Offer" | "Hot"
 
 export function Products() {
-    const { products } = useProducts()
+    const { products, loading } = useProducts()
 
     return (
         <FavoritesProvider>
             <Stack>
                 <Title text="Products" />
+
+                {loading && (
+                    <SimpleGrid
+                        cols={{ base: 1, xs: 2, sm: 3, md: 2, lg: 3 }}
+                        spacing="lg"
+                    >
+                        <Skeleton height={300} radius="lg" />
+                        <Skeleton height={300} radius="lg" />
+                        <Skeleton height={300} radius="lg" />
+                    </SimpleGrid>
+                )}
 
                 <SimpleGrid
                     cols={{ base: 1, xs: 2, sm: 3, md: 2, lg: 3 }}

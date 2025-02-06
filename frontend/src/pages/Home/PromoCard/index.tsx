@@ -1,9 +1,17 @@
-import { api } from "@/services/api"
 import { useEffect, useState } from "react"
-import { Button, Card, Flex, Image, Progress, Stack, Text } from "@mantine/core"
+import {
+    Button,
+    Card,
+    Flex,
+    Image,
+    Progress,
+    Skeleton,
+    Stack,
+    Text,
+} from "@mantine/core"
 import { Title } from "@/components/Titlte"
-import { ProductProps } from "@/types/ProductTypes"
 import { CounterBlock } from "../CounterBlock"
+import { useProducts } from "@/hooks/useProducts"
 
 interface TimerProps {
     days: number
@@ -22,7 +30,12 @@ const Timer: React.FC<TimerProps> = ({ days, hours, minutes, seconds }) => (
 )
 
 export function PromoCard() {
-    const [product, setProduct] = useState<ProductProps>()
+    const {
+        filteredProducts: products,
+        loading,
+        fetchProductsByType,
+    } = useProducts()
+
     const [timerValues, setTimerValues] = useState({
         days: 10,
         hours: 4,
@@ -33,13 +46,7 @@ export function PromoCard() {
     const time = 900
 
     useEffect(() => {
-        api.get("/products").then((response) => {
-            const promoProduct: ProductProps = response.data.find(
-                (product: ProductProps) => product.type === "Promo",
-            )
-
-            setProduct(promoProduct)
-        })
+        fetchProductsByType("Promo")
 
         const counter = setInterval(() => {
             setTimerValues((prevValues) => {
@@ -75,74 +82,76 @@ export function PromoCard() {
         return () => clearInterval(counter)
     }, [])
 
-    if (product) {
-        return (
-            <Stack>
-                <Title text="Daily deal" />
+    if (loading) <Skeleton radius="lg" height={400} />
 
-                <Card
-                    component="a"
-                    href="#"
-                    className="lg:!flex-row items-center w-full gap-4"
-                    radius={8}
-                    padding="xl"
-                    withBorder
-                >
-                    <Image
-                        src={product.cover}
-                        alt={product.title}
-                        className="transition-all duration-500 hover:scale-105 w-52 h-52 max-w-sm md:w-64 md:h-64"
-                    />
+    if (products.length === 0) return
 
-                    <Stack>
-                        <Text size="xl" fw={700} lineClamp={2}>
-                            {product.title}
+    return (
+        <Stack>
+            <Title text="Daily deal" />
+
+            <Card
+                component="a"
+                href={`/product/${products[0]._id}`}
+                className="lg:!flex-row items-center w-full gap-4"
+                radius={8}
+                padding="xl"
+                withBorder
+            >
+                <Image
+                    src={products[0].cover}
+                    alt={products[0].title}
+                    className="transition-all duration-500 hover:scale-105 w-52 h-52 max-w-sm md:w-64 md:h-64"
+                />
+
+                <Stack>
+                    <Text size="xl" fw={700} lineClamp={2}>
+                        {products[0].title}
+                    </Text>
+
+                    <Text size="xs" lineClamp={5}>
+                        {products[0].description}
+                    </Text>
+
+                    <Flex align="center" gap={4}>
+                        <Text size="xl" c="pink" fw={700}>
+                            ${products[0].price.toFixed(2)}
                         </Text>
 
-                        <Text size="xs" lineClamp={5}>
-                            {product.description}
-                        </Text>
+                        {products[0].old_price && (
+                            <Text size="xs" c="gray" td="line-through">
+                                ${products[0].old_price.toFixed(2)}
+                            </Text>
+                        )}
+                    </Flex>
 
-                        <Flex align="center" gap={4}>
-                            <Text size="xl" c="pink" fw={700}>
-                                ${product.price.toFixed(2)}
+                    <Button color="pink">SHOP NOW</Button>
+
+                    <Stack gap={4}>
+                        <Flex justify="space-between">
+                            <Text size="xs">
+                                SOLD: <b>30</b>
                             </Text>
 
-                            {product.old_price && (
-                                <Text size="xs" c="gray" td="line-through">
-                                    ${product.old_price.toFixed(2)}
-                                </Text>
-                            )}
+                            <Text size="xs">
+                                AVAILABLE: <b>20</b>
+                            </Text>
                         </Flex>
 
-                        <Button color="pink">SHOP NOW</Button>
-
-                        <Stack gap={4}>
-                            <Flex justify="space-between">
-                                <Text size="xs">
-                                    SOLD: <b>30</b>
-                                </Text>
-
-                                <Text size="xs">
-                                    AVAILABLE: <b>20</b>
-                                </Text>
-                            </Flex>
-
-                            <Progress
-                                value={60}
-                                size="lg"
-                                radius="lg"
-                                color="grape"
-                            />
-                        </Stack>
-
-                        <Stack gap={2}>
-                            <Text fw={700}>OFFER ENDS IN</Text>
-                            <Timer {...timerValues} />
-                        </Stack>
+                        <Progress
+                            value={60}
+                            size="lg"
+                            radius="lg"
+                            color="grape"
+                        />
                     </Stack>
-                </Card>
-            </Stack>
-        )
-    }
+
+                    <Stack gap={2}>
+                        <Text fw={700}>OFFER ENDS IN</Text>
+                        <Timer {...timerValues} />
+                    </Stack>
+                </Stack>
+            </Card>
+        </Stack>
+    )
 }
