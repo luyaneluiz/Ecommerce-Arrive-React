@@ -7,18 +7,17 @@ import {
     BiExit,
 } from "react-icons/bi"
 import { useAuth } from "@/contexts/AuthContext"
-import { useFavorites } from "@/hooks/useFavorites"
 import { ActionIcon, Indicator, Menu, rem } from "@mantine/core"
 import IconButtonAction from "../IconButtonAction"
+import { useFavoritesContext } from "@/contexts/FavoritesContext"
 
 interface NavbarProps {
     closeDrawer?: () => void
 }
 
 export default function LoggatedActions({ closeDrawer }: NavbarProps) {
-    const { user, logout } = useAuth()
-    const userId = user?._id || null
-    const { favorites } = useFavorites(userId)
+    const { logout } = useAuth()
+    const { favorites } = useFavoritesContext()
     const hasFavorites = favorites && favorites.length > 0
 
     const logoutUser = async () => {

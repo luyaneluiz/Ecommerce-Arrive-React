@@ -13,13 +13,15 @@ import Recommendations from "../../components/Recommendations"
 import { useAuth } from "@/contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { useCartContext } from "@/contexts/CartContext"
+import { useFavoritesContext } from "@/contexts/FavoritesContext"
 
 export function Product() {
     const { user } = useAuth()
     const userId = user?._id || null
     const navigate = useNavigate()
-    const { handleAddToCart } = useCartContext()
     const { product, loading } = useProduct()
+    const { handleAddFavorite, handleRemoveFavorite } = useFavoritesContext()
+    const { handleAddToCart } = useCartContext()
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
     const [quantity, setQuantity] = useState(1)
@@ -44,6 +46,16 @@ export function Product() {
 
         handleAddToCart(item)
         navigate("/cart")
+    }
+
+    const handleFavoriteClick = () => {
+        if (!userId) return navigate("/auth")
+
+        if (product.isFavorite) {
+            handleRemoveFavorite(product._id)
+        } else {
+            handleAddFavorite(product._id)
+        }
     }
 
     return (
@@ -114,7 +126,12 @@ export function Product() {
                             Buy now
                         </Button>
 
-                        <ActionIcon variant="light" size="xl" color="pink">
+                        <ActionIcon
+                            variant="light"
+                            size="xl"
+                            color="pink"
+                            onClick={handleFavoriteClick}
+                        >
                             <BiHeart />
                         </ActionIcon>
                     </Flex>

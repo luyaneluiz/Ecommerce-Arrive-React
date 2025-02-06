@@ -1,6 +1,5 @@
-import { useAuth } from "@/contexts/AuthContext"
 import { useCartContext } from "@/contexts/CartContext"
-import { useFavorites } from "@/hooks/useFavorites"
+import { useFavoritesContext } from "@/contexts/FavoritesContext"
 import { ProductCartProps } from "@/types/Cart"
 import {
     Table,
@@ -18,9 +17,8 @@ import { BiTrash } from "react-icons/bi"
 import { TbHeartShare } from "react-icons/tb"
 
 export default function CartTable({ cart }: { cart: ProductCartProps[] }) {
-    const { user } = useAuth()
     const { handleRemoveFromCart } = useCartContext()
-    const { handleAddFavorite } = useFavorites(user ? user._id : null)
+    const { handleAddFavorite } = useFavoritesContext()
 
     const handleMoveToFavorites = (product: ProductCartProps) => {
         handleRemoveFromCart(product._id)

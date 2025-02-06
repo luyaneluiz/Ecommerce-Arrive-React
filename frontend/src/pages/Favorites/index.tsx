@@ -1,12 +1,11 @@
 import { SimpleGrid, Stack } from "@mantine/core"
 import FavoriteCard from "../../components/FavoriteCard"
-import { useFavorites } from "../../hooks/useFavorites"
 import EmptyPage from "@/components/Empty"
 import { Title } from "@/components/Titlte"
+import { useFavoritesContext } from "@/contexts/FavoritesContext"
 
 export function Favorites() {
-    const userId = localStorage.getItem("user")
-    const { favorites } = useFavorites(userId)
+    const { favorites } = useFavoritesContext()
 
     return (
         <main className="px-4 md:px-12 pb-8">
