@@ -16,7 +16,7 @@ export const addToCart = async (req: Request, res: Response) => {
             const productIndex = cart.products.findIndex(
                 (item) =>
                     item._id.toString() === product._id &&
-                    item.size === product.id &&
+                    item.size === product.size &&
                     item.color === product.color,
             )
 
