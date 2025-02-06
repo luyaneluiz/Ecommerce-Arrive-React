@@ -10,7 +10,7 @@ export default function QuantitySelector({
     setQuantity,
 }: QuantitySelectorProps) {
     return (
-        <Flex align="center" justify="center" gap={10}>
+        <Flex align="center" justify="space-between" gap={10}>
             <Text fw={700} size="sm">
                 Quantity
             </Text>

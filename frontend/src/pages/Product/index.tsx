@@ -89,7 +89,12 @@ export function Product() {
 
                     <Divider />
 
-                    <Flex justify="space-between" align="center">
+                    <Flex
+                        justify="space-between"
+                        direction={{ base: "column", sm: "row" }}
+                        align={{ base: "normal", sm: "center" }}
+                        gap={10}
+                    >
                         <QuantitySelector
                             quantity={quantity}
                             setQuantity={setQuantity}
