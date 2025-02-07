@@ -14,7 +14,7 @@ export function CategoryCard({ title, cover }: CategoriesProps) {
                 style={{ overflow: "hidden" }}
                 h={100}
                 component="a"
-                href="/"
+                href={`/products/${title}`}
             >
                 <Flex
                     p="md"
