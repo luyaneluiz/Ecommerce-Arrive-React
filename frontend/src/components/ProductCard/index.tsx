@@ -32,7 +32,9 @@ export function ProductCard({
     const { favorites, handleAddFavorite, handleRemoveFavorite } =
         useFavoritesContext()
     const [isFavorite, setIsFavorite] = useState<boolean>(
-        favorites ? favorites.some((product) => product._id === id) : false,
+        favorites && favorites.length > 0
+            ? favorites.some((product) => product._id === id)
+            : false,
     )
 
     const toggleFavorite = () => {
