@@ -7,6 +7,7 @@ import { New } from "../pages/New"
 import { Offers } from "../pages/Offers"
 import { Product } from "../pages/Product"
 import PageError from "@/components/Error/PageError"
+import { NotFound } from "@/pages/NotFound"
 
 export const Routes = [
     {
@@ -44,6 +45,10 @@ export const Routes = [
             {
                 path: "/not-authorized",
                 element: <PageError />,
+            },
+            {
+                path: "*",
+                element: <NotFound />,
             },
         ],
     },
