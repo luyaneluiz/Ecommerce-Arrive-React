@@ -1,46 +1,75 @@
-import { useState } from "react"
-import { Radio, Stack, Text, Flex } from "@mantine/core"
+import { Radio, Text, Flex, Box } from "@mantine/core"
+
+interface OptionProps {
+    name: string
+    value?: number
+    description?: string
+    icon?: React.ReactNode
+}
 
 interface RadioCardGroupProps {
-    name: string
-    description: string
-    value: number
+    options: OptionProps[]
+    selected: string | null
+    setSelected: (value: string) => void
+    layout?: "horizontal" | "vertical"
+    indicator?: "radio" | "icon"
 }
 
 export default function RadioCardGroup({
-    data,
-}: {
-    data: RadioCardGroupProps[]
-}) {
-    const [value, setValue] = useState<string | null>(null)
-
-    const cards = data.map((item) => (
+    options,
+    selected,
+    setSelected,
+    layout = "vertical",
+    indicator = "radio",
+}: RadioCardGroupProps) {
+    const cards = options.map((item) => (
         <Radio.Card
             p={15}
-            style={value === item.name ? { border: "1px solid pink" } : {}}
+            style={selected === item.name ? { border: "1px solid pink" } : {}}
+            c={
+                selected === item.name && indicator === "icon"
+                    ? "pink"
+                    : "black"
+            }
             className="transition-colors duration-150 ease-in-out hover:border-gray-300"
             radius="md"
             value={item.name}
             key={item.name}
         >
-            <Flex justify="space-between" align="center" gap={10}>
-                <Radio.Indicator color="pink" />
+            <Flex
+                justify="space-between"
+                align="center"
+                gap={10}
+                direction={layout === "horizontal" ? "column" : "row"}
+            >
+                {indicator === "radio" && <Radio.Indicator color="pink" />}
 
-                <Flex direction="column" w="100%">
+                <Flex
+                    direction="column"
+                    w="100%"
+                    align={layout === "horizontal" ? "center" : "start"}
+                >
+                    {item.icon && <Box mb={5}>{item.icon}</Box>}
+
                     <Text size="md">{item.name}</Text>
                     <Text c="dimmed" size="xs">
                         {item.description}
                     </Text>
                 </Flex>
 
-                <Text size="sm">${item.value}</Text>
+                {item.value && <Text size="sm">${item.value}</Text>}
             </Flex>
         </Radio.Card>
     ))
 
     return (
-        <Radio.Group value={value} onChange={setValue}>
-            <Stack gap="xs">{cards}</Stack>
+        <Radio.Group value={selected} onChange={setSelected}>
+            <Flex
+                direction={layout === "horizontal" ? "row" : "column"}
+                gap="xs"
+            >
+                {cards}
+            </Flex>
         </Radio.Group>
     )
 }
