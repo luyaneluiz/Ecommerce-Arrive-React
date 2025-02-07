@@ -9,7 +9,7 @@ export function New() {
 
     useEffect(() => {
         fetchProductsByType("New")
-    }, [fetchProductsByType])
+    }, [])
 
     return (
         <Stack px={{ base: 20, md: 52 }} mb={30}>

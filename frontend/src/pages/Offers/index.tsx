@@ -1,30 +1,33 @@
-import { api } from "../../services/api"
-import { useEffect, useState } from "react"
 import { ProductCard } from "../../components/ProductCard"
 import { PageTitle } from "../../components/PageTitle"
-import { ProductProps } from "../../types/Product"
+import { useProducts } from "@/hooks/useProducts"
+import { useEffect } from "react"
+import { SimpleGrid, Stack } from "@mantine/core"
 
 export function Offers() {
-    const [products, setProducts] = useState<ProductProps[]>([])
-    const offers = products.filter((product) => product.type === "Offer")
+    const { filteredProducts: products, fetchProductsByType } = useProducts()
 
     useEffect(() => {
-        api.get("/products").then((response) => {
-            setProducts(response.data)
-        })
+        fetchProductsByType("Offer")
     }, [])
 
     return (
-        <main className="flex justify-center">
-            <section className="flex flex-col items-center pb-6 max-w-[1300px]">
+        <Stack px={{ base: 20, md: 52 }} mb={30}>
+            <Stack>
                 <PageTitle text="Offers" />
 
-                <div className="flex flex-col items-center gap-4 w-full sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:sm:grid-cols-3">
-                    {offers.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                <SimpleGrid cols={{ base: 2, sm: 3, md: 4, xl: 5 }}>
+                    {products.map((product) => (
+                        <ProductCard
+                            key={product._id}
+                            id={product._id}
+                            title={product.title}
+                            price={product.price}
+                            cover={product.cover}
+                        />
                     ))}
-                </div>
-            </section>
-        </main>
+                </SimpleGrid>
+            </Stack>
+        </Stack>
     )
 }
