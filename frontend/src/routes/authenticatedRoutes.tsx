@@ -1,9 +1,9 @@
-import React from "react"
 import { Layout } from "../layout"
 import { Profile } from "../pages/Profile"
 import { AuthGuard } from "../components/Auth"
 import { Favorites } from "../pages/Favorites"
 import CreateProduct from "../pages/Admin/CreateProduct"
+import Checkout from "../pages/Checkout"
 
 export const AuthenticatedRoutes = [
     {
@@ -25,6 +25,10 @@ export const AuthenticatedRoutes = [
             {
                 path: "/create/product",
                 element: <CreateProduct />,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
             },
         ],
     },
