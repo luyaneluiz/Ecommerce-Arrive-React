@@ -14,14 +14,22 @@ import { BiArrowBack } from "react-icons/bi"
 import AddressSection from "./AddressSection"
 import DeliverySection from "./DeliverySection"
 import PaymentSection from "./PaymentSection"
+import { useCartContext } from "@/contexts/CartContext"
 
 export default function Checkout() {
+    const { cart } = useCartContext()
+    const [subtotal, setSubtotal] = useState<number>(0)
     const [total, setTotal] = useState<number>(0)
     const [shipping, setShipping] = useState<number>(8)
 
     useEffect(() => {
-        setTotal(100 + 2 + shipping)
-    }, [shipping])
+        if (cart && cart.length > 0) {
+            setSubtotal(
+                cart.reduce((acc, product) => acc + product.subtotal, 0),
+            )
+            setTotal(subtotal + 2 + shipping)
+        }
+    }, [cart, shipping])
 
     return (
         <Stack px={{ base: 20, md: 52 }} mb={30}>
@@ -40,7 +48,12 @@ export default function Checkout() {
                     <PaymentSection />
 
                     <Flex justify="space-between">
-                        <Button variant="default" leftSection={<BiArrowBack />}>
+                        <Button
+                            variant="default"
+                            leftSection={<BiArrowBack />}
+                            component="a"
+                            href="/cart"
+                        >
                             Back to bag
                         </Button>
                         <Button color="pink">Confirm order</Button>
@@ -57,36 +70,55 @@ export default function Checkout() {
                         MY SHOPPING BAG
                     </Text>
 
-                    <Flex gap={15} align="center">
-                        <Box w={60} miw={60} h={60} m="auto">
-                            <Image
-                                src="https://images.unsplash.com/photo-1738672688024-5ce3b389f76b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
-                                alt="Product title"
-                                w="100%"
-                                h="100%"
-                                fit="cover"
-                            />
-                        </Box>
+                    <Stack>
+                        {cart &&
+                            cart.map((product) => (
+                                <Flex gap={15} align="center" key={product._id}>
+                                    <Box w={60} miw={60} h={60} p={2}>
+                                        <Image
+                                            src={product.cover}
+                                            alt={product.title}
+                                            w="100%"
+                                            h="100%"
+                                            fit="contain"
+                                        />
+                                    </Box>
 
-                        <Stack gap={2} w="100%">
-                            <Text fw={600} size="sm">
-                                Product title
-                            </Text>
+                                    <Flex
+                                        w="100%"
+                                        justify="space-between"
+                                        align="flex-end"
+                                    >
+                                        <Stack gap={2} w="100%">
+                                            <Text
+                                                fw={600}
+                                                size="sm"
+                                                lineClamp={1}
+                                            >
+                                                {product.title}
+                                            </Text>
 
-                            <Flex align="center" gap={4}>
-                                <Text size="xs" c="dimmed">
-                                    $100.00
-                                </Text>
-                            </Flex>
-                        </Stack>
-                    </Flex>
+                                            <Flex align="center" gap={4}>
+                                                <Text size="xs" c="dimmed">
+                                                    ${product.price.toFixed(2)}{" "}
+                                                    x {product.quantity}
+                                                </Text>
+                                            </Flex>
+                                        </Stack>
+                                        <Text size="sm" fw={500}>
+                                            ${product.subtotal.toFixed(2)}
+                                        </Text>
+                                    </Flex>
+                                </Flex>
+                            ))}
+                    </Stack>
 
                     <Divider my={20} />
 
                     <Stack gap={5}>
                         <Flex justify="space-between">
                             <Text size="xs">Subtotal</Text>
-                            <Text size="xs">$ 100.00</Text>
+                            <Text size="xs">$ {subtotal.toFixed(2)}</Text>
                         </Flex>
 
                         <Flex justify="space-between">

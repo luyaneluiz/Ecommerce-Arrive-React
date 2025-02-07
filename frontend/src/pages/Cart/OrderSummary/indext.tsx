@@ -75,7 +75,7 @@ export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
                 </Text>
             </Flex>
 
-            <Button color="pink" fullWidth>
+            <Button color="pink" fullWidth component="a" href="/checkout">
                 Proceed to checkout
             </Button>
 
