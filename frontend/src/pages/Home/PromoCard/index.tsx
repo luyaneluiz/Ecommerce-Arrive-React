@@ -1,14 +1,22 @@
-import { api } from "../../../services/api"
-import React, { useEffect, useState } from "react"
-
-import { Progress } from "@mantine/core"
-
+import { useEffect, useState } from "react"
+import {
+    Box,
+    Button,
+    Card,
+    Flex,
+    Image,
+    Progress,
+    Skeleton,
+    Stack,
+    Text,
+} from "@mantine/core"
+import { PageTitle } from "@/components/PageTitle"
 import { CounterBlock } from "../CounterBlock"
-import { Button } from "../../../components/Button"
-import { Title } from "../../../components/Titlte"
+import { useProducts } from "@/hooks/useProducts"
+import { Link, useNavigate } from "react-router-dom"
+import { useModalContext } from "@/contexts/ModalContext"
+import { useAuth } from "@/contexts/AuthContext"
 
-// types
-import { ProductProps } from "../../../types/ProductTypes"
 interface TimerProps {
     days: number
     hours: number
@@ -26,7 +34,15 @@ const Timer: React.FC<TimerProps> = ({ days, hours, minutes, seconds }) => (
 )
 
 export function PromoCard() {
-    const [product, setProduct] = useState<ProductProps>()
+    const {
+        filteredProducts: products,
+        loading,
+        fetchProductsByType,
+    } = useProducts()
+    const navigate = useNavigate()
+    const { openModal } = useModalContext()
+    const { user } = useAuth()
+
     const [timerValues, setTimerValues] = useState({
         days: 10,
         hours: 4,
@@ -35,18 +51,11 @@ export function PromoCard() {
     })
 
     const time = 900
-    let counter: number
 
     useEffect(() => {
-        api.get("/products").then((response) => {
-            const promoProduct: ProductProps = response.data.find(
-                (product: ProductProps) => product.type === "Promo",
-            )
+        fetchProductsByType("Promo")
 
-            setProduct(promoProduct)
-        })
-
-        counter = setInterval(() => {
+        const counter = setInterval(() => {
             setTimerValues((prevValues) => {
                 let newSeconds = prevValues.seconds - 1
                 let newMinutes = prevValues.minutes
@@ -77,71 +86,97 @@ export function PromoCard() {
             })
         }, time)
 
-        return () => {
-            clearInterval(counter)
-        }
+        return () => clearInterval(counter)
     }, [])
 
-    if (product) {
-        return (
-            <section className="flex flex-col items-center">
-                <Title text="Daily Deal" />
-
-                <div className="flex flex-col items-center border rounded-xl p-6 w-full lg:flex-row">
-                    <img
-                        src={product.cover}
-                        alt={product.title}
-                        className="w-full sm:max-w-[300px] lg:max-w-[50%] px-3 cursor-pointer transition-all duration-500 hover:scale-105"
-                    />
-
-                    <section className="sm:ps-3 lg:max-w-[50%]">
-                        <div className="flex flex-col">
-                            <h4 className="overflow-hidden whitespace-nowrap text-ellipsis font-bold mb-1 sm:text-2xl">
-                                {product.title}
-                            </h4>
-
-                            <p className="text-xs">{product.description}</p>
-
-                            <div className="flex items-center gap-1 my-2">
-                                <h3 className="text-pink font-bold text-lg sm:text-2xl">
-                                    ${product.price.toFixed(2)}
-                                </h3>
-                                {product.old_price && (
-                                    <del className="text-xs">
-                                        ${product.old_price.toFixed(2)}
-                                    </del>
-                                )}
-                            </div>
-
-                            <Button text="SHOP NOW" />
-
-                            <div>
-                                <div className="flex justify-between text-xs my-3">
-                                    <p>
-                                        SOLD: <b>30</b>
-                                    </p>
-                                    <p>
-                                        AVALIABE: <b>20</b>
-                                    </p>
-                                </div>
-                                <Progress
-                                    value={60}
-                                    size="lg"
-                                    radius="lg"
-                                    color="grape"
-                                />
-                            </div>
-                        </div>
-
-                        <section className="mt-4">
-                            <h5 className="font-bold uppercase">
-                                Offer ends in
-                            </h5>
-                            <Timer {...timerValues} />
-                        </section>
-                    </section>
-                </div>
-            </section>
-        )
+    const handleAddToCartClick = () => {
+        const { _id: id, title, price, cover } = products[0]
+        if (user) {
+            openModal({ id, title, price, cover })
+        } else {
+            navigate("/auth")
+        }
     }
+
+    if (loading) <Skeleton radius="lg" height={400} />
+
+    if (products.length === 0) return
+
+    return (
+        <Stack>
+            <PageTitle text="Daily deal" />
+
+            <Card
+                className="lg:!flex-row items-center w-full gap-4"
+                radius={8}
+                padding="xl"
+                withBorder
+            >
+                <Link to={`/product/${products[0]._id}`}>
+                    <Box
+                        w={{ base: "auto", md: 250, lg: 300 }}
+                        h={{ base: 200, md: 250, lg: 300 }}
+                        m="auto"
+                    >
+                        <Image
+                            src={products[0].cover}
+                            alt={products[0].title}
+                            h="100%"
+                            fit="contain"
+                        />
+                    </Box>
+                </Link>
+
+                <Stack>
+                    <Text size="xl" fw={700} lineClamp={2}>
+                        {products[0].title}
+                    </Text>
+
+                    <Text size="xs" lineClamp={5}>
+                        {products[0].description}
+                    </Text>
+
+                    <Flex align="center" gap={4}>
+                        <Text size="xl" c="pink" fw={700}>
+                            ${products[0].price.toFixed(2)}
+                        </Text>
+
+                        {products[0].old_price && (
+                            <Text size="xs" c="gray" td="line-through">
+                                ${products[0].old_price.toFixed(2)}
+                            </Text>
+                        )}
+                    </Flex>
+
+                    <Button color="pink" onClick={handleAddToCartClick}>
+                        SHOP NOW
+                    </Button>
+
+                    <Stack gap={4}>
+                        <Flex justify="space-between">
+                            <Text size="xs">
+                                SOLD: <b>30</b>
+                            </Text>
+
+                            <Text size="xs">
+                                AVAILABLE: <b>20</b>
+                            </Text>
+                        </Flex>
+
+                        <Progress
+                            value={60}
+                            size="lg"
+                            radius="lg"
+                            color="grape"
+                        />
+                    </Stack>
+
+                    <Stack gap={2}>
+                        <Text fw={700}>OFFER ENDS IN</Text>
+                        <Timer {...timerValues} />
+                    </Stack>
+                </Stack>
+            </Card>
+        </Stack>
+    )
 }

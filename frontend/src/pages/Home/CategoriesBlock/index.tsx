@@ -1,37 +1,44 @@
-import { useEffect, useState } from "react"
-import { api } from "../../../services/api"
 import { CategoryCard } from "../CategoryCard"
-import { CategoriesProps } from "../../../types/CategoriesTypes"
+import { Grid } from "@mantine/core"
+
+const categories = [
+    {
+        id: 1,
+        title: "Women's",
+        cover: "https://plus.unsplash.com/premium_photo-1691367279381-0bc5f1048916?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjF8fG1vZGElMjBmZW1pbmluYXxlbnwwfDB8MHx8fDA%3D",
+    },
+    {
+        id: 2,
+        title: "Men's",
+        cover: "https://images.unsplash.com/photo-1548883354-caf6b10b1e1b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vZGElMjBtYXNjdWxpbmF8ZW58MHwwfDB8fHww",
+    },
+    {
+        id: 3,
+        title: "Accessories",
+        cover: "https://images.unsplash.com/photo-1506152983158-b4a74a01c721?q=80&w=1773&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    // {
+    //     id: 4,
+    //     title: "Beach",
+    //     cover: "https://plus.unsplash.com/premium_photo-1680411666376-780805551be8?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fG1vZGElMjBwcmFpYXxlbnwwfDB8MHx8fDA%3D",
+    // },
+]
 
 export function CategoriesCards() {
-    const [categories, setCategories] = useState<CategoriesProps[]>([])
-
-    useEffect(() => {
-        async function getCategories() {
-            const response = await api.get("/categories")
-            setCategories(response.data)
-        }
-
-        getCategories()
-    }, [])
-
     return (
-        <section className="flex justify-center my-5 w-full">
-            <div className="flex sm:grid sm:grid-cols-3 gap-3 w-full max-w-[1000px] px-4 overflow-y-hidden sm:overflow-visible snap-x snap-mandatory overscroll-contain">
-                {categories.map((category) => (
-                    <div
-                        key={category.id}
-                        className="flex justify-center my-7 snap-center min-w-full"
-                    >
-                        <CategoryCard
-                            id={category.id}
-                            title={category.title}
-                            amount={category.amount}
-                            cover={category.cover}
-                        />
-                    </div>
-                ))}
-            </div>
-        </section>
+        <Grid p={30} w="100%">
+            {categories.map((category) => (
+                <Grid.Col
+                    span={4}
+                    key={category.title}
+                    className="flex justify-center snap-center w-full"
+                >
+                    <CategoryCard
+                        title={category.title}
+                        cover={category.cover}
+                    />
+                </Grid.Col>
+            ))}
+        </Grid>
     )
 }

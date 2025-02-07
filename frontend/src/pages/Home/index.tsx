@@ -1,24 +1,33 @@
-import React from "react"
 import { Banner } from "../../components/Banner"
 import { CategoriesCards } from "./CategoriesBlock"
 import { Trends } from "../../components/Trends"
 import { PromoCard } from "./PromoCard"
 import { Products } from "./Products"
+import { Flex, Stack } from "@mantine/core"
+import { ModalProvider } from "@/contexts/ModalContext"
 
 export function Home() {
     return (
-        <div className="flex flex-col items-center w-full">
+        <Stack>
             <Banner />
             <CategoriesCards />
-            <div className="flex flex-col lg:flex-row lg:gap-4 w-full px-6 items-start">
-                <div className="flex justify-center w-full lg:max-w-[370px]">
-                    <Trends />
-                </div>
-                <div className="w-full flex flex-col gap-4">
-                    <PromoCard />
-                    <Products />
-                </div>
-            </div>
-        </div>
+
+            <Flex
+                direction={{ base: "column", sm: "row" }}
+                gap="xl"
+                align="start"
+                w="100%"
+                p={32}
+            >
+                <Trends />
+
+                <Stack w="100%">
+                    <ModalProvider>
+                        <PromoCard />
+                        <Products />
+                    </ModalProvider>
+                </Stack>
+            </Flex>
+        </Stack>
     )
 }

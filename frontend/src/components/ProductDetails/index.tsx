@@ -1,4 +1,3 @@
-import React from "react"
 import { Badge, Title, Rating, NumberFormatter, Text } from "@mantine/core"
 import ProductDetailsProps from "./type"
 

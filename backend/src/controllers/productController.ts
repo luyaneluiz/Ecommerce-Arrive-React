@@ -7,9 +7,17 @@ export const getProducts = async (req: Request, res: Response) => {
     res.send(products)
 }
 
+export const getProductsByType = async (req: Request, res: Response) => {
+    const { type } = req.query
+    const products = await Product.find({ type })
+
+    res.send(products)
+}
+
 export const createProduct = async (req: Request, res: Response) => {
     const product = new Product(req.body)
     await product.save()
+
     res.send(product)
 }
 
@@ -53,7 +61,7 @@ export const updateProducts = async (req: Request, res: Response) => {
 
     try {
         const updatedProducts = await Promise.all(
-            products.map(async (product: any) => {
+            products.map(async (product: typeof Product.prototype) => {
                 return await Product.findByIdAndUpdate(product._id, product, {
                     new: true,
                 })

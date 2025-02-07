@@ -1,4 +1,3 @@
-import React from "react"
 import { Group, ColorSwatch, CheckIcon, rem, Text } from "@mantine/core"
 import ColorSelectProps from "./type"
 

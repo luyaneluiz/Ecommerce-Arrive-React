@@ -1,31 +1,43 @@
-import { api } from "../../../services/api"
-import { useEffect, useState } from "react"
-
-// components
-import { ProductCard } from "../../../components/ProductCard"
-import { Title } from "../../../components/Titlte"
-
-// types
-import { ProductProps } from "../../../types/ProductTypes"
+import { PageTitle } from "@/components/PageTitle"
+import { ProductCard } from "@/components/ProductCard"
+import { useProducts } from "@/hooks/useProducts"
+import { SimpleGrid, Skeleton, Stack } from "@mantine/core"
+import { TypeProps } from "@/types/Type"
 
 export function Products() {
-    const [products, setProducts] = useState<ProductProps[]>([])
-
-    useEffect(() => {
-        api.get("/products").then((response) => {
-            setProducts(response.data)
-        })
-    }, [])
+    const { products, loading } = useProducts()
 
     return (
-        <section className="flex flex-col items-center pb-6">
-            <Title text="Products" />
+        <Stack>
+            <PageTitle text="Products" />
 
-            <div className="flex flex-col items-center gap-4 w-full sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:sm:grid-cols-3">
+            {loading && (
+                <SimpleGrid
+                    cols={{ base: 2, sm: 3, md: 2, lg: 3 }}
+                    spacing={{ base: "sm", md: "lg" }}
+                >
+                    <Skeleton height={300} radius="lg" />
+                    <Skeleton height={300} radius="lg" />
+                    <Skeleton height={300} radius="lg" />
+                </SimpleGrid>
+            )}
+
+            <SimpleGrid
+                cols={{ base: 2, sm: 3, md: 2, lg: 3 }}
+                spacing={{ base: "sm", md: "lg" }}
+            >
                 {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard
+                        key={product._id}
+                        id={product._id}
+                        title={product.title}
+                        price={product.price}
+                        cover={product.cover}
+                        old_price={product.old_price}
+                        type={product.type as TypeProps}
+                    />
                 ))}
-            </div>
-        </section>
+            </SimpleGrid>
+        </Stack>
     )
 }

@@ -1,33 +1,33 @@
-import { useState, ChangeEvent, useEffect } from "react"
+import { useState } from "react"
 
 // api
-import { api } from "../../services/api"
+// import { api } from "../../services/api"
 
 // icons
 import { BiSearch } from "react-icons/bi"
 
 // types
-import { ProductProps } from "../../types/ProductTypes"
+import { ProductProps } from "../../types/Product"
 interface InputSearchProps {
     data: ProductProps[] // A base de dados JSON
 }
 
-export function InputSearch() {
+export default function InputSearch() {
     const [searchTerm, setSearchTerm] = useState<string>("")
     const [searchResults, setSearchResults] = useState<ProductProps[]>([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.get("/products")
-                setSearchResults(response.data)
-            } catch (error) {
-                console.error("Error fetching data:", error)
-            }
-        }
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await api.get("/products")
+    //             setSearchResults(response.data)
+    //         } catch (error) {
+    //             console.error("Error fetching data:", error)
+    //         }
+    //     }
 
-        fetchData()
-    }, [])
+    //     fetchData()
+    // }, [])
 
     const handleSearchChange = (event: any) => {
         setSearchTerm(event.target.value)
@@ -42,8 +42,6 @@ export function InputSearch() {
         )
         setSearchResults(filteredResults)
     }
-
-    console.log(searchResults)
 
     return (
         <div className="flex items-center relative border border-slate-100 rounded-md px-3 w-3/5 max-w-sm h-10 md:h-11">

@@ -1,80 +1,144 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useProduct } from "../../hooks/useProduct"
-import { Button, Divider, ActionIcon } from "@mantine/core"
+import { Button, Divider, ActionIcon, Image, Flex, Stack } from "@mantine/core"
 import PageError from "../../components/Error/PageError"
 import ProductDetails from "../../components/ProductDetails"
 import ColorSelect from "../../components/ColorSelect"
 import SelectSize from "../../components/SelectSize"
 import { BiHeart } from "react-icons/bi"
-import ProductImage from "../../components/ProductImage"
 import QuantitySelector from "../../components/QuantitySelector"
 import Totalizer from "../../components/Totalizer"
+import LoadingPage from "@/components/LoadingPage"
+import Recommendations from "../../components/Recommendations"
+import { useAuth } from "@/contexts/AuthContext"
+import { useNavigate } from "react-router-dom"
+import { useCartContext } from "@/contexts/CartContext"
+import { useFavoritesContext } from "@/contexts/FavoritesContext"
 
 export function Product() {
-    const { product } = useProduct()
+    const { user } = useAuth()
+    const userId = user?._id || null
+    const navigate = useNavigate()
+    const { product, loading } = useProduct()
+    const { handleAddFavorite, handleRemoveFavorite } = useFavoritesContext()
+    const { handleAddToCart } = useCartContext()
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
     const [quantity, setQuantity] = useState(1)
 
-    if (product) {
-        return (
-            <div className="flex justify-center p-8">
-                <section className="flex flex-col lg:flex-row lg:max-w-[1000px] gap-10">
-                    <ProductImage cover={`../../${product.cover}`} />
+    if (loading) return <LoadingPage />
 
-                    <aside>
-                        <ProductDetails
-                            type={product.type}
-                            title={product.title}
-                            rating={product.rating}
-                            price={product.price}
-                            description={product.description}
+    if (!product) return <PageError />
+
+    const handleBuyNowClick = () => {
+        if (!userId) return navigate("/auth")
+
+        const item = {
+            _id: product._id,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+            price: product.price,
+            subtotal: product.price * quantity,
+            cover: product.cover,
+            title: product.title,
+        }
+
+        handleAddToCart(item)
+        navigate("/cart")
+    }
+
+    const handleFavoriteClick = () => {
+        if (!userId) return navigate("/auth")
+
+        if (product.isFavorite) {
+            handleRemoveFavorite(product._id)
+        } else {
+            handleAddFavorite(product._id)
+        }
+    }
+
+    return (
+        <Flex direction="column" justify="center" gap={45} p={32}>
+            <Flex
+                direction={{ base: "column", lg: "row" }}
+                gap={40}
+                maw={900}
+                align="center"
+            >
+                <Image
+                    src={`../../${product.cover}`}
+                    alt={product.title}
+                    w={{ base: 300, md: 400 }}
+                    h={{ base: 300, md: 400 }}
+                    fit="contain"
+                />
+
+                <Stack gap={20}>
+                    <ProductDetails
+                        type={product.type}
+                        title={product.title}
+                        rating={product.rating}
+                        price={product.price}
+                        description={product.description}
+                    />
+
+                    <Divider />
+
+                    <Flex justify="space-between" align="center">
+                        <ColorSelect
+                            colors={product.colors}
+                            selectedColor={selectedColor}
+                            setSelectedColor={setSelectedColor}
                         />
 
-                        <Divider my={20} />
+                        <SelectSize
+                            sizes={product.sizes}
+                            selectedSize={selectedSize}
+                            setSelectedSize={setSelectedSize}
+                        />
+                    </Flex>
 
-                        <section className="flex justify-between">
-                            <ColorSelect
-                                colors={product.colors}
-                                selectedColor={selectedColor}
-                                setSelectedColor={setSelectedColor}
-                            />
+                    <Divider />
 
-                            <SelectSize
-                                sizes={product.sizes}
-                                selectedSize={selectedSize}
-                                setSelectedSize={setSelectedSize}
-                            />
-                        </section>
+                    <Flex
+                        justify="space-between"
+                        direction={{ base: "column", sm: "row" }}
+                        align={{ base: "normal", sm: "center" }}
+                        gap={10}
+                    >
+                        <QuantitySelector
+                            quantity={quantity}
+                            setQuantity={setQuantity}
+                        />
 
-                        <Divider my={20} />
+                        <Totalizer quantity={quantity} price={product.price} />
+                    </Flex>
 
-                        <div className="flex justify-between">
-                            <QuantitySelector
-                                quantity={quantity}
-                                setQuantity={setQuantity}
-                            />
+                    <Flex align="center" gap={8}>
+                        <Button
+                            color="pink"
+                            size="md"
+                            disabled={!selectedColor || !selectedSize}
+                            onClick={handleBuyNowClick}
+                            fullWidth
+                        >
+                            Buy now
+                        </Button>
 
-                            <Totalizer
-                                quantity={quantity}
-                                price={product.price}
-                            />
-                        </div>
+                        <ActionIcon
+                            variant="light"
+                            size="xl"
+                            color="pink"
+                            onClick={handleFavoriteClick}
+                        >
+                            <BiHeart />
+                        </ActionIcon>
+                    </Flex>
+                </Stack>
+            </Flex>
 
-                        <div className="flex gap-2 mt-4 items-center">
-                            <Button color="pink" size="md" fullWidth>
-                                Buy now
-                            </Button>
-
-                            <ActionIcon variant="light" size="xl" color="pink">
-                                <BiHeart />
-                            </ActionIcon>
-                        </div>
-                    </aside>
-                </section>
-            </div>
-        )
-    } else {
-        return <PageError />
-    }
+            <Recommendations />
+        </Flex>
+    )
 }

@@ -1,9 +1,17 @@
-import React from "react"
-import { NumberFormatter, Text } from "@mantine/core"
+import { Flex, NumberFormatter, Text } from "@mantine/core"
 
-export default function Totalizer({ quantity, price }) {
+interface TotalizerProps {
+    quantity: number
+    price: number
+}
+
+export default function Totalizer({ quantity, price }: TotalizerProps) {
     return (
-        <div className="flex flex-col gap-2">
+        <Flex
+            justify={{ base: "space-between", md: "end" }}
+            align="center"
+            gap={50}
+        >
             <Text fw={700} size="sm">
                 Total:
             </Text>
@@ -16,6 +24,6 @@ export default function Totalizer({ quantity, price }) {
                 decimalScale={2}
                 className="text-pink font-bold text-xl"
             />
-        </div>
+        </Flex>
     )
 }

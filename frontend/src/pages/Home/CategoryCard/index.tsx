@@ -1,25 +1,33 @@
-// types
-import { CategoriesProps } from "../../../types/CategoriesTypes"
+import { BackgroundImage, Box, Flex, Text } from "@mantine/core"
 
-export function CategoryCard({ title, amount, cover }: CategoriesProps) {
+export interface CategoriesProps {
+    title: string
+    cover: string
+}
+
+export function CategoryCard({ title, cover }: CategoriesProps) {
     return (
-        <div className="flex w-full p-4 rounded-2xl shadow-slate-200 shadow-md mx-4 sm:mx-0">
-            <div className="flex justify-center items-center w-1/5 me-3 rounded-lg bg-slate-100">
-                <img src={cover} />
-            </div>
-
-            <div className="w-4/5">
-                <div className="flex justify-between">
-                    <h3>{title}</h3>
-                    <p>({amount})</p>
-                </div>
-                <a
-                    href=""
-                    className="text-pink font-medium text-sm hover:text-lightPink transition-colors"
+        <Box w="100%" mx="auto">
+            <BackgroundImage
+                src={cover}
+                radius="sm"
+                style={{ overflow: "hidden" }}
+                h={100}
+                component="a"
+                href="/"
+            >
+                <Flex
+                    p="md"
+                    h="100%"
+                    align="center"
+                    justify="center"
+                    style={{
+                        background: "rgba(0, 0, 0, 0.5)",
+                    }}
                 >
-                    Show All
-                </a>
-            </div>
-        </div>
+                    <Text c="white">{title}</Text>
+                </Flex>
+            </BackgroundImage>
+        </Box>
     )
 }

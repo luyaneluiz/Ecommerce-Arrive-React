@@ -7,8 +7,11 @@ import "./index.css"
 import "@mantine/core/styles.css"
 import "@mantine/carousel/styles.css"
 import { createTheme, MantineProvider } from "@mantine/core"
-
-import { BreakpointProvider } from "./contexts/BreakpointContext"
+import { AuthProvider } from "./contexts/AuthContext.tsx"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { CartProvider } from "./contexts/CartContext.tsx"
+import { FavoritesProvider } from "./contexts/FavoritesContext.tsx"
 
 const theme = createTheme({
     /** Put your mantine theme override here */
@@ -17,9 +20,14 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <MantineProvider theme={theme}>
-            <BreakpointProvider>
-                <RouterProvider router={router} />
-            </BreakpointProvider>
+            <AuthProvider>
+                <CartProvider>
+                    <FavoritesProvider>
+                        <RouterProvider router={router} />
+                        <ToastContainer />
+                    </FavoritesProvider>
+                </CartProvider>
+            </AuthProvider>
         </MantineProvider>
     </React.StrictMode>,
 )
