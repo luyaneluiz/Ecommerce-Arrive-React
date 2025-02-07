@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import {
+    Box,
     Button,
     Card,
     Flex,
@@ -12,6 +13,7 @@ import {
 import { Title } from "@/components/Titlte"
 import { CounterBlock } from "../CounterBlock"
 import { useProducts } from "@/hooks/useProducts"
+import { Link } from "react-router-dom"
 
 interface TimerProps {
     days: number
@@ -91,18 +93,25 @@ export function PromoCard() {
             <Title text="Daily deal" />
 
             <Card
-                component="a"
-                href={`/product/${products[0]._id}`}
                 className="lg:!flex-row items-center w-full gap-4"
                 radius={8}
                 padding="xl"
                 withBorder
             >
-                <Image
-                    src={products[0].cover}
-                    alt={products[0].title}
-                    className="transition-all duration-500 hover:scale-105 w-52 h-52 max-w-sm md:w-64 md:h-64"
-                />
+                <Link to={`/product/${products[0]._id}`}>
+                    <Box
+                        w={{ base: "auto", md: 250, lg: 300 }}
+                        h={{ base: 200, md: 250, lg: 300 }}
+                        m="auto"
+                    >
+                        <Image
+                            src={products[0].cover}
+                            alt={products[0].title}
+                            h="100%"
+                            fit="contain"
+                        />
+                    </Box>
+                </Link>
 
                 <Stack>
                     <Text size="xl" fw={700} lineClamp={2}>
