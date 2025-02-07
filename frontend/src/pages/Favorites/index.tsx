@@ -8,7 +8,7 @@ export function Favorites() {
     const { favorites } = useFavoritesContext()
 
     return (
-        <main className="px-4 md:px-12 pb-8">
+        <Stack px={{ base: 20, md: 52 }} mb={6}>
             {favorites && favorites.length > 0 ? (
                 <Stack>
                     <PageTitle text="Favorites" />
@@ -22,6 +22,6 @@ export function Favorites() {
             ) : (
                 <EmptyPage message="No favorites yet." />
             )}
-        </main>
+        </Stack>
     )
 }
