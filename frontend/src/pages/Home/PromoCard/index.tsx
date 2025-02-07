@@ -13,7 +13,9 @@ import {
 import { PageTitle } from "@/components/PageTitle"
 import { CounterBlock } from "../CounterBlock"
 import { useProducts } from "@/hooks/useProducts"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useModalContext } from "@/contexts/ModalContext"
+import { useAuth } from "@/contexts/AuthContext"
 
 interface TimerProps {
     days: number
@@ -37,6 +39,9 @@ export function PromoCard() {
         loading,
         fetchProductsByType,
     } = useProducts()
+    const navigate = useNavigate()
+    const { openModal } = useModalContext()
+    const { user } = useAuth()
 
     const [timerValues, setTimerValues] = useState({
         days: 10,
@@ -83,6 +88,15 @@ export function PromoCard() {
 
         return () => clearInterval(counter)
     }, [])
+
+    const handleAddToCartClick = () => {
+        const { _id: id, title, price, cover } = products[0]
+        if (user) {
+            openModal({ id, title, price, cover })
+        } else {
+            navigate("/auth")
+        }
+    }
 
     if (loading) <Skeleton radius="lg" height={400} />
 
@@ -134,7 +148,9 @@ export function PromoCard() {
                         )}
                     </Flex>
 
-                    <Button color="pink">SHOP NOW</Button>
+                    <Button color="pink" onClick={handleAddToCartClick}>
+                        SHOP NOW
+                    </Button>
 
                     <Stack gap={4}>
                         <Flex justify="space-between">

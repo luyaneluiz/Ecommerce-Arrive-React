@@ -4,6 +4,7 @@ import { Trends } from "../../components/Trends"
 import { PromoCard } from "./PromoCard"
 import { Products } from "./Products"
 import { Flex, Stack } from "@mantine/core"
+import { ModalProvider } from "@/contexts/ModalContext"
 
 export function Home() {
     return (
@@ -21,8 +22,10 @@ export function Home() {
                 <Trends />
 
                 <Stack w="100%">
-                    <PromoCard />
-                    <Products />
+                    <ModalProvider>
+                        <PromoCard />
+                        <Products />
+                    </ModalProvider>
                 </Stack>
             </Flex>
         </Stack>
