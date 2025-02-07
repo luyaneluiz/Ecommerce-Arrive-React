@@ -1,36 +1,62 @@
-import { Button, Paper, Stack } from "@mantine/core"
+import { Button, Image, Paper, Stack, Text } from "@mantine/core"
 import { ProductProps } from "../../types/Product"
-import { BiShoppingBag } from "react-icons/bi"
+import { useAuth } from "@/contexts/AuthContext"
+import { useModalContext } from "@/contexts/ModalContext"
+import { useNavigate } from "react-router-dom"
 
 export default function FavoriteCard({ product }: { product: ProductProps }) {
+    const navigate = useNavigate()
+    const { openModal } = useModalContext()
+    const { user } = useAuth()
+
+    const handleAddToCartClick = () => {
+        const { _id: id, title, price, cover } = product
+
+        if (user) {
+            openModal({ id, title, price, cover })
+        } else {
+            navigate("/auth")
+        }
+    }
+
     return (
-        <Paper shadow="xs" radius="md" p="xl">
-            <div className="flex justify-center">
-                <img
+        <Paper>
+            <Paper
+                w="100%"
+                h={230}
+                m="auto"
+                bg="#f2f2f2"
+                p={10}
+                mb={5}
+                radius="sm"
+            >
+                <Image
                     src={product.cover}
                     alt={product.title}
-                    className="w-28 h-40"
+                    fit="contain"
+                    w="100%"
+                    h="100%"
+                    radius="lg"
                 />
-            </div>
+            </Paper>
 
-            <div className="flex flex-col gap-1 my-4">
-                <h4 className="text-ellipsis overflow-hidden whitespace-nowrap">
+            <Stack gap={8}>
+                <Text lineClamp={1} fw={600}>
                     {product.title}
-                </h4>
-                <h3 className="font-bold">${product.price.toFixed(2)}</h3>
-            </div>
+                </Text>
 
-            <Stack gap="sm">
+                <Text size="xs" c="dimmed" lineClamp={1}>
+                    {product.description}
+                </Text>
+
+                <Text fw={600}>${product.price.toFixed(2)}</Text>
+
                 <Button
-                    leftSection={<BiShoppingBag size={14} />}
                     variant="outline"
                     color="pink"
                     fullWidth
+                    onClick={handleAddToCartClick}
                 >
-                    Add to bag
-                </Button>
-
-                <Button color="pink" fullWidth>
                     Shop now
                 </Button>
             </Stack>
