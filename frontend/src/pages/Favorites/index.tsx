@@ -1,7 +1,7 @@
 import { SimpleGrid, Stack } from "@mantine/core"
 import FavoriteCard from "../../components/FavoriteCard"
 import EmptyPage from "@/components/Empty"
-import { Title } from "@/components/Titlte"
+import { PageTitle } from "@/components/PageTitle"
 import { useFavoritesContext } from "@/contexts/FavoritesContext"
 
 export function Favorites() {
@@ -11,7 +11,7 @@ export function Favorites() {
         <main className="px-4 md:px-12 pb-8">
             {favorites && favorites.length > 0 ? (
                 <Stack>
-                    <Title text="Favorites" />
+                    <PageTitle text="Favorites" />
 
                     <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 5 }}>
                         {favorites.map((product) => (

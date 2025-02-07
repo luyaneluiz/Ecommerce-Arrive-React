@@ -1,5 +1,5 @@
 import EmptyPage from "@/components/Empty"
-import { Title } from "@/components/Titlte"
+import { PageTitle } from "@/components/PageTitle"
 import { Flex, Stack } from "@mantine/core"
 import CartTable from "./CartTable"
 import OrderSummary from "./OrderSummary/indext"
@@ -13,7 +13,7 @@ export function Cart() {
 
     return (
         <Stack px={{ base: 20, md: 52 }} mb={6}>
-            <Title text="Cart" />
+            <PageTitle text="Cart" />
 
             {hasProductsInCart ? (
                 <Stack gap={20}>

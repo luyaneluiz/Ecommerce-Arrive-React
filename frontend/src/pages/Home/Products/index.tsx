@@ -1,4 +1,4 @@
-import { Title } from "@/components/Titlte"
+import { PageTitle } from "@/components/PageTitle"
 import { ProductCard } from "@/components/ProductCard"
 import { useProducts } from "@/hooks/useProducts"
 import { SimpleGrid, Skeleton, Stack } from "@mantine/core"
@@ -11,7 +11,7 @@ export function Products() {
     return (
         <ModalProvider>
             <Stack>
-                <Title text="Products" />
+                <PageTitle text="Products" />
 
                 {loading && (
                     <SimpleGrid

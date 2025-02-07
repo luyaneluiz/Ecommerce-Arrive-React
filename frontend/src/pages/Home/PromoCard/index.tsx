@@ -10,7 +10,7 @@ import {
     Stack,
     Text,
 } from "@mantine/core"
-import { Title } from "@/components/Titlte"
+import { PageTitle } from "@/components/PageTitle"
 import { CounterBlock } from "../CounterBlock"
 import { useProducts } from "@/hooks/useProducts"
 import { Link } from "react-router-dom"
@@ -90,7 +90,7 @@ export function PromoCard() {
 
     return (
         <Stack>
-            <Title text="Daily deal" />
+            <PageTitle text="Daily deal" />
 
             <Card
                 className="lg:!flex-row items-center w-full gap-4"
