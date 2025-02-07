@@ -7,12 +7,14 @@ import {
     deleteProduct,
     updateProducts,
     getProductsByType,
+    getProductsByCategory,
 } from "../controllers/productController"
 
 const router = express.Router()
 
 router.get("/", getProducts)
 router.get("/type", getProductsByType)
+router.get("/category", getProductsByCategory)
 router.post("/create/product", createProduct)
 router.get("/product/:id", getProductById)
 router.put("/update/product/:id", updateProduct)

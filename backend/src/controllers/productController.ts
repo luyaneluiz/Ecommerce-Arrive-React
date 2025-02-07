@@ -14,6 +14,13 @@ export const getProductsByType = async (req: Request, res: Response) => {
     res.send(products)
 }
 
+export const getProductsByCategory = async (req: Request, res: Response) => {
+    const { category } = req.query
+    const products = await Product.find({ category })
+
+    res.send(products)
+}
+
 export const createProduct = async (req: Request, res: Response) => {
     const product = new Product(req.body)
     await product.save()
