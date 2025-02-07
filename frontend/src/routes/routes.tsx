@@ -8,6 +8,7 @@ import { Offers } from "../pages/Offers"
 import { Product } from "../pages/Product"
 import PageError from "@/components/Error/PageError"
 import { NotFound } from "@/pages/NotFound"
+import Category from "@/pages/Category"
 
 export const Routes = [
     {
@@ -41,6 +42,10 @@ export const Routes = [
             {
                 path: "/product/:id",
                 element: <Product />,
+            },
+            {
+                path: "/products/:category",
+                element: <Category />,
             },
             {
                 path: "/not-authorized",
