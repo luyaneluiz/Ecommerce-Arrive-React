@@ -19,7 +19,7 @@ export function Layout() {
 
             {!mobile && <NavbarItems mobile={false} />}
 
-            <main className="max-w-[1300px] m-auto">
+            <main className="max-w-[1400px] m-auto">
                 <Outlet />
             </main>
 
