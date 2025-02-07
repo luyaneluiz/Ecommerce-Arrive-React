@@ -12,10 +12,10 @@ export function Home() {
             <CategoriesCards />
 
             <Flex
-                direction={{ base: "column", md: "row" }}
+                direction={{ base: "column", sm: "row" }}
                 gap="xl"
                 align="start"
-                w={"100%"}
+                w="100%"
                 p={32}
             >
                 <Trends />
