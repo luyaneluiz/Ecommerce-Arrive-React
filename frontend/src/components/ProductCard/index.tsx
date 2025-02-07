@@ -87,17 +87,17 @@ export function ProductCard({
             </Flex>
 
             <Link to={`/product/${id}`}>
-                <Box w={200} h={200} m="auto">
+                <Box
+                    w={{ base: "auto", sm: 200 }}
+                    h={{ base: 150, sm: 200 }}
+                    m="auto"
+                >
                     <Image src={cover} alt={title} h="100%" fit="contain" />
                 </Box>
             </Link>
 
-            <Stack mt="sm" align={description ? "flex-start" : "center"}>
-                <Text
-                    fw={description ? "bold" : 500}
-                    size={description ? "sm" : "md"}
-                    lineClamp={1}
-                >
+            <Stack mt="sm" gap={10}>
+                <Text fw={description ? "bold" : 500} size="sm" lineClamp={2}>
                     {title}
                 </Text>
 

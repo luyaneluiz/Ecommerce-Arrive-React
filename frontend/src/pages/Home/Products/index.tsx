@@ -15,8 +15,8 @@ export function Products() {
 
                 {loading && (
                     <SimpleGrid
-                        cols={{ base: 1, xs: 2, sm: 3, md: 2, lg: 3 }}
-                        spacing="lg"
+                        cols={{ base: 2, sm: 3, md: 2, lg: 3 }}
+                        spacing={{ base: "sm", md: "lg" }}
                     >
                         <Skeleton height={300} radius="lg" />
                         <Skeleton height={300} radius="lg" />
@@ -25,8 +25,8 @@ export function Products() {
                 )}
 
                 <SimpleGrid
-                    cols={{ base: 1, xs: 2, sm: 3, md: 2, lg: 3 }}
-                    spacing="lg"
+                    cols={{ base: 2, sm: 3, md: 2, lg: 3 }}
+                    spacing={{ base: "sm", md: "lg" }}
                 >
                     {products.map((product) => (
                         <ProductCard
