@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { CartProvider } from "./contexts/CartContext.tsx"
 import { FavoritesProvider } from "./contexts/FavoritesContext.tsx"
+import { ModalProvider } from "./contexts/ModalContext.tsx"
 
 const theme = createTheme({
     /** Put your mantine theme override here */
@@ -23,8 +24,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <AuthProvider>
                 <CartProvider>
                     <FavoritesProvider>
-                        <RouterProvider router={router} />
-                        <ToastContainer />
+                        <ModalProvider>
+                            <RouterProvider router={router} />
+                            <ToastContainer />
+                        </ModalProvider>
                     </FavoritesProvider>
                 </CartProvider>
             </AuthProvider>
