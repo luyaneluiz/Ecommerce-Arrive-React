@@ -1,52 +1,45 @@
-import { useState } from "react"
 // Context
 import { useAuth } from "@/contexts/AuthContext"
 // Custom components
 import Logo from "@/components/Logo"
-import RedirectLink from "@/components/RedirectLink"
 import LoggatedActions from "@/components/LoggatedActions"
+import RedirectLink from "@/components/RedirectLink"
 import InputSearch from "@/components/Search"
-import MobileDrawer from "../MobileDrawer"
 // Mantine components
-import { Burger } from "@mantine/core"
+import { AppShell, Burger, Group } from "@mantine/core"
 
 interface HeaderProps {
-    isMobile: boolean
+    opened: boolean
+    toggle: () => void
 }
 
-export function Header({ isMobile }: HeaderProps) {
+export default function Header({ opened, toggle }: HeaderProps) {
     const { user } = useAuth()
 
-    const [openDrawer, setOpenDrawer] = useState(false)
-
-    const handleToggleDrawer = () => {
-        setOpenDrawer(!openDrawer)
-    }
-
     return (
-        <>
-            <header className="flex justify-between items-center bg-white py-2 px-4 border-b-slate-100 border-b md:py-4 md:px-6">
+        <AppShell.Header
+            withBorder={false}
+            className="border-b-slate-100 border-b"
+        >
+            <Group h="100%" px="md" justify="space-between">
                 <Logo />
                 <InputSearch />
 
-                {isMobile ? (
-                    <Burger
-                        opened={openDrawer}
-                        onClick={handleToggleDrawer}
-                        size="sm"
-                    />
-                ) : user ? (
-                    <LoggatedActions />
-                ) : (
-                    <RedirectLink path="/auth" text="Login" />
-                )}
-            </header>
+                <Burger
+                    opened={opened}
+                    onClick={toggle}
+                    hiddenFrom="sm"
+                    size="sm"
+                />
 
-            <MobileDrawer
-                open={openDrawer}
-                closeDrawer={handleToggleDrawer}
-                isLoggated={user ? true : false}
-            />
-        </>
+                <Group ml="xl" gap={0} visibleFrom="sm">
+                    {user ? (
+                        <LoggatedActions />
+                    ) : (
+                        <RedirectLink path="/auth" text="Login" />
+                    )}
+                </Group>
+            </Group>
+        </AppShell.Header>
     )
 }
