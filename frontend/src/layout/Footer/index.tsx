@@ -1,6 +1,19 @@
+import { Link } from "react-router-dom"
+// Images
 import Logo from "@/assets/logo.png"
 import PaymentMethods from "@/assets/payment-methods.png"
-
+// Mantine components
+import {
+    Button,
+    Flex,
+    Image,
+    Input,
+    Paper,
+    SimpleGrid,
+    Stack,
+    Text,
+} from "@mantine/core"
+// Icons
 import {
     BiLogoInstagram,
     BiLogoFacebook,
@@ -8,81 +21,106 @@ import {
     BiLogoPinterest,
 } from "react-icons/bi"
 
-export function Footer() {
+export default function Footer() {
     return (
-        <footer>
-            <div className="bg-gray-300 p-7 text-sm flex flex-col gap-5 items-center lg:items-start lg:flex-row lg:justify-center lg:gap-8">
-                <aside className="flex flex-col gap-5 sm:flex-row sm:justify-around sm:w-[500px] sm:gap-9">
-                    <section>
-                        <img src={Logo} alt="Logo arrive" width={100} />
-                        <p>Avenue des Champs-Élysées, Paris, France</p>
-                        <p>(+33) 900-6543-99</p>
-                        <p>arriveboutique@contato.com</p>
-                        <p>arrive.boutique.com</p>
-                        <div className="flex mt-5">
+        <Stack>
+            <Paper shadow="xs" bg="#e5e7eb" radius="xs" p={20}>
+                <SimpleGrid cols={2} spacing={30} p={10}>
+                    <Stack gap="xs">
+                        <Image src={Logo} alt="Logo arrive" w={100} />
+                        <Text>Avenue des Champs-Élysées, Paris, France</Text>
+                        <Text>(+33) 900-6543-99</Text>
+                        <Link to="mailto:arriveboutique@contato.com">
+                            arriveboutique@contato.com
+                        </Link>
+                        <Text>arrive.boutique.com</Text>
+                        <Flex>
                             <BiLogoInstagram size={28} />
                             <BiLogoFacebook size={28} />
                             <BiLogoTwitter size={28} />
                             <BiLogoPinterest size={28} />
-                        </div>
-                    </section>
-                    <section className="flex flex-col gap-2">
-                        <h2 className="font-bold text-xl">Terms</h2>
-                        <a href="/">Privacy Policy</a>
-                        <a href="/">Terms & Condition</a>
-                        <a href="/">Search Terms</a>
-                        <a href="/">About us</a>
-                        <a href="/">Order & Return</a>
-                    </section>
-                </aside>
+                        </Flex>
+                    </Stack>
 
-                <aside className="flex flex-col gap-5 sm:flex-row sm:justify-around sm:w-[500px] sm:gap-9">
-                    <section className="flex flex-col gap-2">
-                        <h2 className="font-bold text-xl">Popular</h2>
-                        <a href="/">Fashion</a>
-                        <a href="/">Cosmetic</a>
-                        <a href="/">New Products</a>
-                        <a href="/">Best Sales</a>
-                        <a href="/">Footwear</a>
-                    </section>
-                    <div className="flex flex-col gap-5 max-w-[300px]">
-                        <section className="flex flex-col gap-2">
-                            <h2 className="font-bold text-xl">Newsletter</h2>
-                            <form className="flex gap-2">
-                                <input
-                                    type="email"
-                                    className="py-2 px-3 outline-none rounded-sm w-full border-gray-400"
-                                    placeholder="Enter your e-mail here"
-                                />
-                                <button className="w-44 sm:w-36 py-2 px-3 bg-pink rounded-sm text-white cursor-pointer font-bold transition-all duration-500 hover:bg-lightPink">
-                                    SUBSCRIBE
-                                </button>
-                            </form>
-                        </section>
-                        <ul>
-                            <li className="border-b border-gray-500 flex justify-between py-3">
-                                <span>Monday - Friday</span>
-                                <span>08:00 - 18:00</span>
-                            </li>
-                            <li className="border-b border-gray-500 flex justify-between py-3">
-                                <span>Saturday</span>
-                                <span>10:00 - 20:00</span>
-                            </li>
-                            <li className="border-b border-gray-500 flex justify-between py-3">
-                                <span>Sunday</span>
-                                <span>13:00 - 21:00</span>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-            </div>
+                    <Stack gap="xs">
+                        <Text fw={700} fz={22}>
+                            Terms
+                        </Text>
+                        <Link to="/">Privacy Policy</Link>
+                        <Link to="/">Terms & Condition</Link>
+                        <Link to="/">Search Terms</Link>
+                        <Link to="/">About us</Link>
+                        <Link to="/">Order & Return</Link>
+                    </Stack>
+                </SimpleGrid>
 
-            <div className="flex flex-col items-center py-8">
-                <p>
+                <SimpleGrid cols={2} spacing={30} p={10}>
+                    <Stack gap="xs">
+                        <Text fw={700} fz={22}>
+                            Popular
+                        </Text>
+                        <Link to="/">Fashion</Link>
+                        <Link to="/">Cosmetic</Link>
+                        <Link to="/">New Products</Link>
+                        <Link to="/">Best Sales</Link>
+                        <Link to="/">Footwear</Link>
+                    </Stack>
+
+                    <Stack gap="xs">
+                        <Text fw={700} fz={22}>
+                            Newsletter
+                        </Text>
+
+                        <Flex gap={10}>
+                            <Input
+                                placeholder="Enter your e-mail here"
+                                size="md"
+                                w="100%"
+                            />
+                            <Button
+                                color="pink"
+                                w={150}
+                                size="md"
+                                fz={14}
+                                p={5}
+                            >
+                                SUBSCRIBE
+                            </Button>
+                        </Flex>
+
+                        <Stack>
+                            <Flex
+                                justify="space-between"
+                                className="border-b border-gray-500 pb-3"
+                            >
+                                <Text>Monday - Friday</Text>
+                                <Text>08:00 - 18:00</Text>
+                            </Flex>
+                            <Flex
+                                justify="space-between"
+                                className="border-b border-gray-500 pb-3"
+                            >
+                                <Text>Saturday</Text>
+                                <Text>10:00 - 20:00</Text>
+                            </Flex>
+                            <Flex
+                                justify="space-between"
+                                className="border-b border-gray-500 pb-3"
+                            >
+                                <Text>Sunday</Text>
+                                <Text>13:00 - 21:00</Text>
+                            </Flex>
+                        </Stack>
+                    </Stack>
+                </SimpleGrid>
+            </Paper>
+
+            <Stack align="center" p={15} gap={10}>
+                <Text fz={14} c="gray">
                     © 2022 <span>Arrive</span> - All Right reserved!
-                </p>
-                <img src={PaymentMethods} alt="Payments Methods" width={260} />
-            </div>
-        </footer>
+                </Text>
+                <Image src={PaymentMethods} alt="Payments Methods" w={260} />
+            </Stack>
+        </Stack>
     )
 }

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 // Components
 import Header from "./Header"
 import Navbar from "./Navbar"
-import { Footer } from "./Footer"
+import Footer from "./Footer"
 import FloatingCartButton from "./FloatingCartButton"
 // Mantine components
 import { AppShell } from "@mantine/core"
