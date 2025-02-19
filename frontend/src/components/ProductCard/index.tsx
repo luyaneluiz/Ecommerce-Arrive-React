@@ -38,13 +38,17 @@ export function ProductCard({
     )
 
     const toggleFavorite = () => {
-        if (isFavorite) {
-            handleRemoveFavorite(id)
-        } else {
-            handleAddFavorite(id)
-        }
+        if (user) {
+            if (isFavorite) {
+                handleRemoveFavorite(id)
+            } else {
+                handleAddFavorite(id)
+            }
 
-        setIsFavorite(!isFavorite)
+            setIsFavorite(!isFavorite)
+        } else {
+            navigate("/auth")
+        }
     }
 
     const badgeColor = () => {
