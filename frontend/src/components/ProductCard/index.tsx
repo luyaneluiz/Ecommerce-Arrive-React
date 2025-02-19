@@ -90,7 +90,7 @@ export function ProductCard({
 
             <Link to={`/product/${id}`}>
                 <Box
-                    w={{ base: "auto", sm: 200 }}
+                    w={{ base: "auto", md: 200 }}
                     h={{ base: 150, sm: 200 }}
                     m="auto"
                 >
