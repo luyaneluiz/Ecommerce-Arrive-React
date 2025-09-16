@@ -12,12 +12,14 @@ import {
 } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import { upperFirst, useToggle } from "@mantine/hooks"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function Auth() {
     const navigate = useNavigate()
     const { login, register } = useAuth()
     const [type, toggle] = useToggle(["login", "register"])
+    const [loading, setLoading] = useState(false)
     const form = useForm({
         initialValues: {
             email: "maria@gmail.com",
@@ -41,6 +43,8 @@ export default function Auth() {
 
         if (type === "register" && !terms) return
 
+        setLoading(true)
+
         try {
             if (type === "login") {
                 await login(email, password)
@@ -51,6 +55,8 @@ export default function Auth() {
             }
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -134,9 +140,16 @@ export default function Auth() {
                     </Stack>
 
                     <Group justify="space-between" mt={25}>
-                        <Button type="submit" radius="md" color="pink" w="100%">
+                        <Button
+                            type="submit"
+                            radius="md"
+                            color="pink"
+                            w="100%"
+                            loading={loading}
+                        >
                             {upperFirst(type)}
                         </Button>
+
                         <Anchor
                             component="button"
                             type="button"
