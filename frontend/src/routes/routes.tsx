@@ -1,5 +1,5 @@
 import Auth from "@/pages/Auth/"
-import { Layout } from "../layout"
+import AppProviders from "@/AppProviders"
 import { Cart } from "../pages/Cart"
 import { Home } from "../pages/Home"
 import { New } from "../pages/New"
@@ -13,7 +13,7 @@ import Category from "@/pages/Category"
 export const Routes = [
     {
         path: "/",
-        element: <Layout />,
+        element: <AppProviders />,
         children: [
             {
                 index: true,
