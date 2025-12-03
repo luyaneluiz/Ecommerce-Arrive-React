@@ -32,6 +32,7 @@ export const addToCart = async (req: Request, res: Response) => {
 
         res.status(201).json({
             message: `Product added to cart: ${cart}`,
+            product,
         })
     } catch (error) {
         res.status(500).json({ message: error })

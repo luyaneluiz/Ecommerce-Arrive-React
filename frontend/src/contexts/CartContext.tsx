@@ -55,11 +55,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
             if (response.data) {
                 setCart((prev) => {
-                    const updatedCart = [...(prev || []), response.data]
+                    const updatedCart = [...(prev || []), response.data.product]
                     setCartTotal(updatedCart.length)
                     return updatedCart
                 })
-                console.log("Product added to cart")
             } else {
                 console.log(response.data.error)
             }
