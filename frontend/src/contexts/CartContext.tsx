@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react"
 import { api } from "../services/api"
 import { ProductCartProps, AddToCartProps } from "../types/Cart"
 import { useAuth } from "./AuthContext"
+import { notifications } from "@mantine/notifications"
 
 interface CartContextProps {
     cart: ProductCartProps[] | null
@@ -60,8 +61,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
                     return updatedCart
                 })
+
+                notifications.show({
+                    title: "Success",
+                    message: "Product added to cart",
+                    color: "green",
+                    autoClose: 3000,
+                    position: "top-right",
+                })
             } else {
-                console.log(response.data.error)
+                notifications.show({
+                    title: "Error",
+                    message: response.data.error,
+                    color: "red",
+                    autoClose: 3000,
+                    position: "top-right",
+                })
             }
         } catch (error) {
             console.log(error)
