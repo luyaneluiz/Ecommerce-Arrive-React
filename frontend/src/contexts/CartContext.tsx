@@ -5,7 +5,7 @@ import { useAuth } from "./AuthContext"
 import { notifications } from "@mantine/notifications"
 
 interface CartContextProps {
-    cart: ProductCartProps[] | null
+    cart: ProductCartProps[]
     cartTotal: number
     loading: boolean
     error: unknown
@@ -20,7 +20,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
     const { user } = useAuth()
     const userId = user?._id || null
-    const [cart, setCart] = useState<ProductCartProps[] | null>(null)
+    const [cart, setCart] = useState<ProductCartProps[]>([])
     const [error, setError] = useState<unknown>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [cartTotal, setCartTotal] = useState<number>(0)
@@ -33,8 +33,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 })
 
                 if (response.data) {
-                    setCart(response.data)
-                    setCartTotal(response.data.length)
+                    console.log("Cart data fetched:", response.data)
+
+                    const serverCart = response.data
+                        .products as ProductCartProps[]
+
+                    setCart(serverCart)
+                    setCartTotal(serverCart.length)
                 }
             } catch (error) {
                 setError(error)
@@ -56,8 +61,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
             if (response.data) {
                 setCart((prev) => {
-                    const updatedCart = [...(prev || []), response.data.product]
+                    const updatedCart = [...prev, response.data.product]
                     setCartTotal(updatedCart.length)
+
+                    console.log("Prev cart:", prev)
 
                     return updatedCart
                 })
