@@ -33,8 +33,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 })
 
                 if (response.data) {
-                    console.log("Cart data fetched:", response.data)
-
                     const serverCart = response.data
                         .products as ProductCartProps[]
 
@@ -63,8 +61,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 setCart((prev) => {
                     const updatedCart = [...prev, response.data.product]
                     setCartTotal(updatedCart.length)
-
-                    console.log("Prev cart:", prev)
 
                     return updatedCart
                 })
