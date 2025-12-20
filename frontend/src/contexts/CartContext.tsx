@@ -33,8 +33,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 })
 
                 if (response.data) {
-                    const serverCart = response.data
-                        .products as ProductCartProps[]
+                    const serverCart = response.data as ProductCartProps[]
 
                     setCart(serverCart)
                     setCartTotal(serverCart.length)
@@ -94,15 +93,28 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
             if (response.data) {
                 setCart((prev) => {
-                    const updatedCart = [...(prev || [])].filter(
+                    const updatedCart = prev.filter(
                         (product) => product._id !== productId,
                     )
                     setCartTotal(updatedCart.length)
+
                     return updatedCart
                 })
-                console.log("Product removed from cart")
+                notifications.show({
+                    title: "Success",
+                    message: "Product removed from cart",
+                    color: "green",
+                    autoClose: 3000,
+                    position: "top-right",
+                })
             } else {
-                console.log(response.data.error)
+                notifications.show({
+                    title: "Error",
+                    message: response.data.error,
+                    color: "red",
+                    autoClose: 3000,
+                    position: "top-right",
+                })
             }
         } catch (error) {
             console.log(error)
