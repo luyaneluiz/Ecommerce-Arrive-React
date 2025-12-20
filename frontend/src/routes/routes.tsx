@@ -6,6 +6,7 @@ import { New } from "../pages/New"
 import { Trends } from "../pages/Trends"
 import { Offers } from "../pages/Offers"
 import { Product } from "../pages/Product"
+import { Favorites } from "../pages/Favorites"
 import PageError from "@/components/Error/PageError"
 import { NotFound } from "@/pages/NotFound"
 import Category from "@/pages/Category"
@@ -26,6 +27,10 @@ export const Routes = [
             {
                 path: "/cart",
                 element: <Cart />,
+            },
+            {
+                path: "/favorites",
+                element: <Favorites />,
             },
             {
                 path: "/new",
