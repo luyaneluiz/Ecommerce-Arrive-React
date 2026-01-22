@@ -1,6 +1,6 @@
-# 🚀 Aplicação Full Stack com React, TypeScript e Node.js
+# 🚀 Full Stack Application using React, TypeScript e Node.js
 
-Este projeto é uma aplicação full stack que utiliza React com TypeScript no front-end e Node.js no back-end. O front-end é configurado com Vite para um desenvolvimento rápido e eficiente, enquanto o back-end utiliza uma estrutura modular para gerenciar rotas e serviços.
+This project is a full stack application that uses React with TypeScript on the front-end and Node.js on the back-end. The front-end is configured with Vite for fast and efficient development, while the back-end follows a modular structure to manage routes and services.
 
 ## 📂 Estrutura do Projeto
 
@@ -37,24 +37,24 @@ Ecommerce-Arrive-React/
 
 ## Front-end
 
-O front-end da aplicação é construído com React e TypeScript, utilizando Vite para um desenvolvimento rápido com HMR (Hot Module Replacement). Algumas das principais configurações e ferramentas utilizadas incluem:
+The front-end of the application is built with React and TypeScript, using Vite for fast development with Hot Module Replacement (HMR). Some of the main tools and configurations include:
 
-- **Vite**: Ferramenta de build rápida e leve.
-- **ESLint**: Ferramenta de linting para manter a qualidade do código.
-- **Tailwind CSS**: Framework de CSS utilitário para estilização rápida e eficiente.
-- **Prettier**: Ferramenta de formatação de código.
+- **Vite**: Fast and lightweight build tool.
+- **ESLint**: Linting tool to maintain code quality.
+- **Tailwind CSS**: Utility-first CSS framework for fast and efficient styling.
+- **Prettier**: My favorite code formatting tool.
 
 ## Back-end
-O back-end da aplicação é construído com Node.js, utilizando uma estrutura modular para gerenciar rotas e serviços. O arquivo principal do servidor é o server.ts, e as rotas são definidas na pasta routes.
+The back-end of the application is built with Node.js, using a modular structure to manage routes and services. The main server file is server.ts, and the routes are defined in the routes folder.
 
 ### Estrutura do Back-end
-- **server.ts**: Arquivo principal do servidor.
-- **routes/**: Pasta contendo as definições de rotas, como products.ts.
+- **server.ts**: Main server file.
+- **routes/**: Folder containing route definitions, such as products.ts.
 
 ## 🛠️ Como Executar o Projeto
 
 ### Front-end
-Para rodar o front-end, utilize os seguintes comandos:
+To run the front-end, use the following commands:
 
 **Instalar dependências**
 ```bash
@@ -67,13 +67,13 @@ npm install
 npm run dev
 ```
 
-**Temporariamente: Watch da base fake json**
+**[Obsolete] Watch da base fake json**
 ```bash
 json-server --watch db.json
 ```
 
 ### Back-end
-Para rodar o back-end, utilize os seguintes comandos:
+To run the back-end, use the following commands:
 
 **Instalar dependências**
 ```bash
