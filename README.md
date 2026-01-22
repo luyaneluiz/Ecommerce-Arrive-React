@@ -2,7 +2,7 @@
 
 This project is a full stack application that uses React with TypeScript on the front-end and Node.js on the back-end. The front-end is configured with Vite for fast and efficient development, while the back-end follows a modular structure to manage routes and services.
 
-## 📂 Estrutura do Projeto
+## 📂 Project Structure
 
 ```bash
 Ecommerce-Arrive-React/
@@ -47,22 +47,22 @@ The front-end of the application is built with React and TypeScript, using Vite 
 ## Back-end
 The back-end of the application is built with Node.js, using a modular structure to manage routes and services. The main server file is server.ts, and the routes are defined in the routes folder.
 
-### Estrutura do Back-end
+### Back-end Structure
 - **server.ts**: Main server file.
 - **routes/**: Folder containing route definitions, such as products.ts.
 
-## 🛠️ Como Executar o Projeto
+## 🛠️ How to Run the Project
 
 ### Front-end
 To run the front-end, use the following commands:
 
-**Instalar dependências**
+**Install dependencies**
 ```bash
 cd frontend
 npm install
 ```
 
-**Rodar o servidor de desenvolvimento**
+**Run the development server**
 ```bash
 npm run dev
 ```
@@ -75,16 +75,20 @@ json-server --watch db.json
 ### Back-end
 To run the back-end, use the following commands:
 
-**Instalar dependências**
+**Install dependencies**
 ```bash
 cd backend
 npm install
 ```
 
-**Rodar o servidor de desenvolvimento**
+**Run the development server**
 ```bash
 npm run dev
 ```
 
-## Contribuição
-Sinta-se à vontade para contribuir com este projeto. Abra uma issue ou envie um pull request com melhorias e correções.
+## Contributing
+Feel free to contribute to this project. Open an issue or submit a pull request with improvements or fixes.
+
+```md
+> This is a personal project developed for learning and portfolio purposes.  
+> The application is still a work in progress and reflects my approach to structuring real-world frontend and full stack applications.
