@@ -58,7 +58,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
             if (response.data) {
                 setCart((prev) => {
-                    const updatedCart = [...prev, response.data.product]
+                    const updatedCart = [...(prev || []), response.data.product]
                     setCartTotal(updatedCart.length)
 
                     return updatedCart
