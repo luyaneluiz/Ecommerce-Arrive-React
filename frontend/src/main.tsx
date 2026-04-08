@@ -9,6 +9,7 @@ import "@mantine/carousel/styles.css"
 import "@mantine/notifications/styles.css"
 import { createTheme, MantineProvider } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
+import AppProviders from "./AppProviders.tsx"
 
 const theme = createTheme({
     /** Put your mantine theme override here */
@@ -17,8 +18,10 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <MantineProvider theme={theme}>
-            <RouterProvider router={router} />
-            <Notifications />
+            <AppProviders>
+                <RouterProvider router={router} />
+                <Notifications />
+            </AppProviders>
         </MantineProvider>
     </React.StrictMode>,
 )

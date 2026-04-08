@@ -1,18 +1,15 @@
-import React from "react"
+import React, { PropsWithChildren } from "react"
 import { AuthProvider } from "./contexts/AuthContext"
 import { CartProvider } from "./contexts/CartContext"
 import { FavoritesProvider } from "./contexts/FavoritesContext"
 import { ModalProvider } from "./contexts/ModalContext"
-import { Layout } from "./layout"
 
-export const AppProviders: React.FC = () => {
+export const AppProviders: React.FC<PropsWithChildren> = ({ children }) => {
     return (
         <AuthProvider>
             <CartProvider>
                 <FavoritesProvider>
-                    <ModalProvider>
-                        <Layout />
-                    </ModalProvider>
+                    <ModalProvider>{children}</ModalProvider>
                 </FavoritesProvider>
             </CartProvider>
         </AuthProvider>

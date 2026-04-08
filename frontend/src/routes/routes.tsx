@@ -1,5 +1,4 @@
 import Auth from "@/pages/Auth/"
-import AppProviders from "@/AppProviders"
 import { Cart } from "../pages/Cart"
 import { Home } from "../pages/Home"
 import { New } from "../pages/New"
@@ -10,11 +9,12 @@ import { Favorites } from "../pages/Favorites"
 import PageError from "@/components/Error/PageError"
 import { NotFound } from "@/pages/NotFound"
 import Category from "@/pages/Category"
+import { Layout } from "@/layout"
 
 export const Routes = [
     {
         path: "/",
-        element: <AppProviders />,
+        element: <Layout />,
         children: [
             {
                 index: true,
