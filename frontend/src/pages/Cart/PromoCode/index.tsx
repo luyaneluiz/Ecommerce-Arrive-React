@@ -10,20 +10,30 @@ import {
 import { LuTicket } from "react-icons/lu"
 import { IoIosArrowRoundForward } from "react-icons/io"
 import { IoTicketOutline } from "react-icons/io5"
-import { useRef, useState } from "react"
+import { useRef } from "react"
+import { usePromoCode } from "@/hooks/usePromoCode"
 
 export default function PromoCode() {
-    const [promoCode, setPromoCode] = useState("")
-    const [isApplied, setIsApplied] = useState(false)
+    const {
+        promoCode,
+        setPromoCode,
+        isApplied,
+        setIsApplied,
+        validatePromoCode,
+        isValid,
+    } = usePromoCode()
 
     const inputRef = useRef<HTMLInputElement>(null)
     const buttonRef = useRef<HTMLButtonElement>(null)
 
     const handleApplyPromoCode = () => {
-        setIsApplied(true)
+        const isValid = validatePromoCode(promoCode.code)
 
-        if (inputRef.current) inputRef.current.disabled = true
-        if (buttonRef.current) buttonRef.current.disabled = true
+        if (isValid) {
+            setIsApplied(true)
+            if (inputRef.current) inputRef.current.disabled = true
+            if (buttonRef.current) buttonRef.current.disabled = true
+        }
     }
 
     return (
@@ -39,8 +49,13 @@ export default function PromoCode() {
                         placeholder="Enter your promo code here"
                         w="100%"
                         ref={inputRef}
-                        value={promoCode}
-                        onChange={(e) => setPromoCode(e.currentTarget.value)}
+                        value={promoCode.code}
+                        onChange={(e) =>
+                            setPromoCode({
+                                ...promoCode,
+                                code: e.currentTarget.value,
+                            })
+                        }
                     />
 
                     <ActionIcon
@@ -56,7 +71,7 @@ export default function PromoCode() {
                     </ActionIcon>
                 </Flex>
 
-                {isApplied && (
+                {isApplied ? (
                     <Alert variant="light" color="teal" id="alert">
                         <Flex align="center" gap={5}>
                             <LuTicket color="teal" />
@@ -65,6 +80,16 @@ export default function PromoCode() {
                             </Text>
                         </Flex>
                     </Alert>
+                ) : (
+                    !isValid && (
+                        <Alert variant="light" color="red" id="alert">
+                            <Flex align="center" gap={5}>
+                                <Text size="xs" fw={800} c="red">
+                                    Invalid promo code. Please try again.
+                                </Text>
+                            </Flex>
+                        </Alert>
+                    )
                 )}
 
                 <Text size="sm" c="gray">

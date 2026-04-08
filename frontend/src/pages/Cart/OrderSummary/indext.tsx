@@ -10,10 +10,30 @@ import {
     Image,
 } from "@mantine/core"
 import PaymentMethods from "@/assets/payment-methods.png"
+import { usePromoCode } from "@/hooks/usePromoCode"
 
 export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
     const fixTax = 2.0
     const fixShipping = 8.0
+    const { promoCode, isApplied } = usePromoCode()
+
+    function calculateTotal() {
+        const subtotal = cart.reduce(
+            (acc, product) => acc + product.subtotal,
+            0,
+        )
+        const discount = (subtotal * promoCode.discount) / 100
+
+        return subtotal - discount + fixTax + fixShipping
+    }
+
+    function calculateDiscount() {
+        const subtotal = cart.reduce(
+            (acc, product) => acc + product.subtotal,
+            0,
+        )
+        return (subtotal * promoCode.discount) / 100
+    }
 
     return (
         <Paper bg="#f1f1f1" p={20} miw={300}>
@@ -51,6 +71,15 @@ export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
                         ${fixShipping}
                     </Text>
                 </Flex>
+
+                {isApplied && (
+                    <Flex>
+                        <Text size="sm">Discount:</Text>
+                        <Text size="sm" ml="auto">
+                            - ${calculateDiscount()}
+                        </Text>
+                    </Flex>
+                )}
             </Stack>
 
             <Divider color="gray" my={10} />
@@ -61,14 +90,7 @@ export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
                 </Text>
                 <Text size="md" ml="auto" fw={900}>
                     <NumberFormatter
-                        value={
-                            cart.reduce(
-                                (acc, product) => acc + product.subtotal,
-                                0,
-                            ) +
-                            fixTax +
-                            fixShipping
-                        }
+                        value={calculateTotal()}
                         prefix="$"
                         decimalScale={2}
                     />
