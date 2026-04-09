@@ -10,12 +10,12 @@ import {
     Image,
 } from "@mantine/core"
 import PaymentMethods from "@/assets/payment-methods.png"
-import { usePromoCode } from "@/hooks/usePromoCode"
+import { useCartContext } from "@/contexts/CartContext"
 
 export default function OrderSummary({ cart }: { cart: ProductCartProps[] }) {
     const fixTax = 2.0
     const fixShipping = 8.0
-    const { promoCode, isApplied } = usePromoCode()
+    const { promoCode, isApplied } = useCartContext()
 
     function calculateTotal() {
         const subtotal = cart.reduce(

@@ -10,31 +10,16 @@ import {
 import { LuTicket } from "react-icons/lu"
 import { IoIosArrowRoundForward } from "react-icons/io"
 import { IoTicketOutline } from "react-icons/io5"
-import { useRef } from "react"
-import { usePromoCode } from "@/hooks/usePromoCode"
+import { useCartContext } from "@/contexts/CartContext"
 
 export default function PromoCode() {
     const {
         promoCode,
         setPromoCode,
         isApplied,
-        setIsApplied,
-        validatePromoCode,
         isValid,
-    } = usePromoCode()
-
-    const inputRef = useRef<HTMLInputElement>(null)
-    const buttonRef = useRef<HTMLButtonElement>(null)
-
-    const handleApplyPromoCode = () => {
-        const isValid = validatePromoCode(promoCode.code)
-
-        if (isValid) {
-            setIsApplied(true)
-            if (inputRef.current) inputRef.current.disabled = true
-            if (buttonRef.current) buttonRef.current.disabled = true
-        }
-    }
+        handleApplyPromoCode,
+    } = useCartContext()
 
     return (
         <Paper bg="#f1f1f1" p={20} my={15}>
@@ -48,7 +33,7 @@ export default function PromoCode() {
                     <Input
                         placeholder="Enter your promo code here"
                         w="100%"
-                        ref={inputRef}
+                        disabled={isApplied}
                         value={promoCode.code}
                         onChange={(e) =>
                             setPromoCode({
@@ -63,8 +48,7 @@ export default function PromoCode() {
                         bg="white"
                         variant="outline"
                         size="lg"
-                        disabled={!promoCode}
-                        ref={buttonRef}
+                        disabled={isApplied}
                         onClick={handleApplyPromoCode}
                     >
                         <IoIosArrowRoundForward size={20} />

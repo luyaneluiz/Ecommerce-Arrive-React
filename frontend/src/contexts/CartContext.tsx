@@ -4,13 +4,25 @@ import { ProductCartProps, AddToCartProps } from "../types/Cart"
 import { useAuth } from "./AuthContext"
 import { notifications } from "@mantine/notifications"
 
+interface PromoCodeState {
+    code: string
+    discount: number
+}
+
 interface CartContextProps {
     cart: ProductCartProps[]
     cartTotal: number
     loading: boolean
     error: unknown
+    promoCode: PromoCodeState
+    isApplied: boolean
+    isValid: boolean
     handleAddToCart: (item: AddToCartProps) => Promise<void>
     handleRemoveFromCart: (productId: string) => Promise<void>
+    setPromoCode: React.Dispatch<React.SetStateAction<PromoCodeState>>
+    handleApplyPromoCode: () => void
+    setIsApplied: React.Dispatch<React.SetStateAction<boolean>>
+    setIsValid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined)
@@ -24,6 +36,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     const [error, setError] = useState<unknown>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [cartTotal, setCartTotal] = useState<number>(0)
+
+    const [promoCode, setPromoCode] = useState<PromoCodeState>({
+        code: "",
+        discount: 0,
+    })
+    const [isApplied, setIsApplied] = useState(false)
+    const [isValid, setIsValid] = useState(true)
+
+    const validPromoCodes = ["WELCOME10", "ARRIVE10", "DISCOUNT15"]
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -121,6 +142,48 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         }
     }
 
+    const handleApplyPromoCode = () => {
+        const isValid = validatePromoCode(promoCode.code)
+
+        if (isValid) {
+            setIsApplied(true)
+        }
+    }
+
+    const validatePromoCode = (code: string) => {
+        if (!code) return false
+
+        const codeExists = validPromoCodes.includes(code)
+
+        if (!codeExists) {
+            setIsApplied(false)
+            setIsValid(false)
+            return false
+        }
+
+        const discount = setDiscountForPromoCode(code)
+        setPromoCode((prev) => ({
+            ...prev,
+            discount,
+        }))
+        setIsApplied(true)
+        setIsValid(true)
+
+        return true
+    }
+
+    const setDiscountForPromoCode = (code: string) => {
+        switch (code) {
+            case "WELCOME10":
+            case "ARRIVE10":
+                return 10
+            case "DISCOUNT15":
+                return 15
+            default:
+                return 0
+        }
+    }
+
     return (
         <CartContext.Provider
             value={{
@@ -128,8 +191,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 cartTotal,
                 loading,
                 error,
+                promoCode,
+                isApplied,
+                isValid,
                 handleAddToCart,
                 handleRemoveFromCart,
+                setPromoCode,
+                handleApplyPromoCode,
+                setIsApplied,
+                setIsValid,
             }}
         >
             {children}
