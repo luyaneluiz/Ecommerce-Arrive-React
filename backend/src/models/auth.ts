@@ -5,6 +5,10 @@ export interface IUser extends mongoose.Document {
     name: string
     email: string
     password: string
+    phone?: string
+    birthDate?: Date
+    addresses: mongoose.Types.ObjectId[]
+    paymentMethods: mongoose.Types.ObjectId[]
 }
 
 const UserSchema = new mongoose.Schema<IUser>(
@@ -22,6 +26,24 @@ const UserSchema = new mongoose.Schema<IUser>(
             type: String,
             required: true,
         },
+        phone: {
+            type: String,
+        },
+        birthDate: {
+            type: Date,
+        },
+        addresses: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Address",
+            },
+        ],
+        paymentMethods: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "PaymentMethod",
+            },
+        ],
     },
     { timestamps: true },
 )

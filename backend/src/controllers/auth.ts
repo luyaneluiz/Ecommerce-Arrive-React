@@ -28,6 +28,21 @@ export const register = async (req: Request, res: Response) => {
 
         const user = new User({ name, email, password })
         await user.save()
+
+        req.session.user = {
+            _id: user._id as string,
+            name: user.name,
+            email: user.email,
+        }
+
+        res.status(201).json({
+            message: "User registered successfully",
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+            },
+        })
     } catch (error) {
         res.status(500).json({ message: "Internal server error" })
     }
@@ -64,7 +79,7 @@ export const login = async (req: Request, res: Response) => {
             res.status(200).json({
                 message: "Logged in",
                 user: {
-                    id: user._id,
+                    _id: user._id,
                     name: user.name,
                     email: user.email,
                 },

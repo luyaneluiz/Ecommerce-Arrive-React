@@ -1,7 +1,27 @@
 import { Paper, Flex, Avatar, Button, Divider, Box, Text } from "@mantine/core"
-import { BiEdit } from "react-icons/bi"
+import { BiSave, BiEdit } from "react-icons/bi"
+import { useEffect, useState } from "react"
+import AddressRadioCardGroup from "@/components/AddressCard"
+import { useAddress } from "@/hooks/useAddress"
+import Address from "@/types/Address"
 
 export default function AddressSection() {
+    const [isEditing, setIsEditing] = useState(false)
+    const { addresses } = useAddress()
+    const [address, setAddress] = useState<Address | null>(null)
+
+    const onClickSave = async () => {
+        setIsEditing(false)
+    }
+
+    useEffect(() => {
+        if (addresses.length > 0) {
+            const defaultAddress =
+                addresses.find((addr) => addr.isDefault) || addresses[0]
+            setAddress(defaultAddress)
+        }
+    }, [addresses])
+
     return (
         <Paper p={20} withBorder>
             <Flex justify="space-between">
@@ -13,19 +33,45 @@ export default function AddressSection() {
                     </Text>
                 </Flex>
 
-                <Button variant="transparent" color="pink">
-                    <BiEdit size={16} />
-                    <Text ml={4}>Edit</Text>
-                </Button>
+                <Flex>
+                    {isEditing ? (
+                        <Button
+                            variant="outline"
+                            color="pink"
+                            onClick={onClickSave}
+                        >
+                            <BiSave size={16} />
+                            <Text ml={4}>Save</Text>
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="transparent"
+                            color="pink"
+                            onClick={() => setIsEditing(true)}
+                        >
+                            <BiEdit size={16} />
+                            <Text ml={4}>Edit</Text>
+                        </Button>
+                    )}
+                </Flex>
             </Flex>
 
             <Divider my={15} />
 
-            <Box>
-                <Text fw={600}>Maria</Text>
-                <Text fz={14}>1234 Main St, Springfield, IL 62701</Text>
-                <Text fz={14}>United States - 123456789</Text>
-            </Box>
+            {isEditing ? (
+                <AddressRadioCardGroup onAddressSelect={setAddress} />
+            ) : (
+                <Box>
+                    <Text fw={600}>
+                        {address?.first_name} {address?.last_name}
+                    </Text>
+                    <Text fz={14}>
+                        {address?.number}, {address?.street} - {address?.state},{" "}
+                        {address?.zipCode}
+                    </Text>
+                    <Text fz={14}>{address?.phone_number}</Text>
+                </Box>
+            )}
         </Paper>
     )
 }
