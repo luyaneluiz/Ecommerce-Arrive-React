@@ -1,4 +1,5 @@
 import RadioCardGroup from "@/components/RadioCardGroup"
+import { CheckoutFormData } from "@/types/Checkout"
 import {
     Paper,
     Flex,
@@ -9,11 +10,20 @@ import {
     TextInput,
     Text,
 } from "@mantine/core"
-import { useState } from "react"
+import { useFormContext } from "react-hook-form"
 import { BiCreditCard, BiLogoPaypal } from "react-icons/bi"
 
 export default function PaymentSection() {
-    const [paymentMethod, setPaymentMethod] = useState<string>("Credit card")
+    const {
+        setValue,
+        watch,
+        register,
+        formState: { errors },
+    } = useFormContext<CheckoutFormData>()
+    const paymentMethod = watch("paymentMethod")
+    const cardNumber = watch("card.number")
+    const expiryDate = watch("card.expiry")
+    const cvv = watch("card.cvv")
 
     const paymentData = [
         {
@@ -26,29 +36,24 @@ export default function PaymentSection() {
         },
     ]
 
-    const [cardNumber, setCardNumber] = useState("")
-    const [expiryDate, setExpiryDate] = useState("")
-    const [cvv, setCvv] = useState("")
-
     const formatCardNumber = (value: string) => {
-        console.log(value)
         return value
-            .replace(/\D/g, "") // Remove tudo que não for número
-            .replace(/(\d{4})/g, "$1 ") // Adiciona espaço a cada 4 dígitos
-            .trim() // Remove espaços extras
+            .replace(/\D/g, "")
+            .replace(/(\d{4})/g, "$1 ")
+            .trim()
     }
 
     const formatExpiryDate = (value: string) => {
         return value
-            .replace(/\D/g, "") // Remove tudo que não for número
-            .replace(/(\d{2})(\d{0,2})/, "$1/$2") // Insere a barra automaticamente
+            .replace(/\D/g, "")
+            .replace(/(\d{2})(\d{0,2})/, "$1/$2")
             .trim()
     }
 
-    // Restringe o CVV para 3 ou 4 números (3 para Visa/Master, 4 para Amex)
     const formatCvv = (value: string) => {
         return value.replace(/\D/g, "").slice(0, 4)
     }
+
     return (
         <Paper p={20} withBorder>
             <Flex gap={10} align="center">
@@ -66,7 +71,12 @@ export default function PaymentSection() {
                     <RadioCardGroup
                         options={paymentData}
                         selected={paymentMethod}
-                        setSelected={setPaymentMethod}
+                        setSelected={(value) =>
+                            setValue(
+                                "paymentMethod",
+                                value as CheckoutFormData["paymentMethod"],
+                            )
+                        }
                         layout="horizontal"
                         indicator="icon"
                     />
@@ -77,6 +87,10 @@ export default function PaymentSection() {
                         <TextInput
                             label="Name on card"
                             placeholder="Enter your name"
+                            error={errors.card?.name?.message}
+                            {...register("card.name", {
+                                required: "Name on card is required",
+                            })}
                         />
 
                         <TextInput
@@ -84,8 +98,19 @@ export default function PaymentSection() {
                             placeholder="0000 0000 0000 0000"
                             maxLength={19}
                             value={cardNumber}
+                            error={errors.card?.number?.message}
+                            {...register("card.number", {
+                                required: "Card number is required",
+                                minLength: {
+                                    value: 19,
+                                    message: "Invalid card number",
+                                },
+                            })}
                             onChange={(e) =>
-                                setCardNumber(formatCardNumber(e.target.value))
+                                setValue(
+                                    "card.number",
+                                    formatCardNumber(e.target.value),
+                                )
                             }
                         />
 
@@ -96,8 +121,17 @@ export default function PaymentSection() {
                                 maxLength={5}
                                 value={expiryDate}
                                 w="100%"
+                                error={errors.card?.expiry?.message}
+                                {...register("card.expiry", {
+                                    required: "Expiry date is required",
+                                    minLength: {
+                                        value: 5,
+                                        message: "Invalid expiry date",
+                                    },
+                                })}
                                 onChange={(e) =>
-                                    setExpiryDate(
+                                    setValue(
+                                        "card.expiry",
                                         formatExpiryDate(e.target.value),
                                     )
                                 }
@@ -109,8 +143,19 @@ export default function PaymentSection() {
                                 maxLength={3}
                                 value={cvv}
                                 w="100%"
+                                error={errors.card?.cvv?.message}
+                                {...register("card.cvv", {
+                                    required: "CVV is required",
+                                    minLength: {
+                                        value: 3,
+                                        message: "Invalid CVV",
+                                    },
+                                })}
                                 onChange={(e) =>
-                                    setCvv(formatCvv(e.target.value))
+                                    setValue(
+                                        "card.cvv",
+                                        formatCvv(e.target.value),
+                                    )
                                 }
                             />
                         </Flex>

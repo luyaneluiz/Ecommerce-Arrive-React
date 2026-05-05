@@ -3,12 +3,14 @@ import { BiSave, BiEdit } from "react-icons/bi"
 import { useEffect, useState } from "react"
 import AddressRadioCardGroup from "@/components/AddressCard"
 import { useAddress } from "@/hooks/useAddress"
-import Address from "@/types/Address"
+import { useFormContext } from "react-hook-form"
+import { CheckoutFormData } from "@/types/Checkout"
 
 export default function AddressSection() {
     const [isEditing, setIsEditing] = useState(false)
     const { addresses } = useAddress()
-    const [address, setAddress] = useState<Address | null>(null)
+    const { setValue, watch } = useFormContext<CheckoutFormData>()
+    const address = watch("address")
 
     const onClickSave = async () => {
         setIsEditing(false)
@@ -18,7 +20,7 @@ export default function AddressSection() {
         if (addresses.length > 0) {
             const defaultAddress =
                 addresses.find((addr) => addr.isDefault) || addresses[0]
-            setAddress(defaultAddress)
+            setValue("address", defaultAddress)
         }
     }, [addresses])
 
@@ -59,7 +61,9 @@ export default function AddressSection() {
             <Divider my={15} />
 
             {isEditing ? (
-                <AddressRadioCardGroup onAddressSelect={setAddress} />
+                <AddressRadioCardGroup
+                    onAddressSelect={(address) => setValue("address", address)}
+                />
             ) : (
                 <Box>
                     <Text fw={600}>

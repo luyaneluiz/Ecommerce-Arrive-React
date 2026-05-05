@@ -9,7 +9,7 @@ export interface IOrder extends mongoose.Document {
     }[]
     total: number
     status: "pending" | "paid" | "shipped" | "delivered" | "cancelled"
-    paymentMethod: mongoose.Types.ObjectId
+    paymentMethod: "credit_card" | "paypal"
     shippingAddress: mongoose.Types.ObjectId
     orderDate: Date
 }
@@ -48,8 +48,8 @@ const OrderSchema = new mongoose.Schema<IOrder>(
             default: "pending",
         },
         paymentMethod: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "PaymentMethod",
+            type: String,
+            enum: ["credit_card", "paypal"],
         },
         shippingAddress: {
             type: mongoose.Schema.Types.ObjectId,

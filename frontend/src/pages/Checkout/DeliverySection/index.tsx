@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react"
 import { Paper, Flex, Avatar, Divider, Text } from "@mantine/core"
 import RadioCardGroup from "@/components/RadioCardGroup"
+import { CheckoutFormData } from "@/types/Checkout"
+import { useFormContext } from "react-hook-form"
 
-interface DeliverySectionProps {
-    setShipping: (value: number) => void
-}
-
-export default function DeliverySection({ setShipping }: DeliverySectionProps) {
-    const [deliveryValue, setDeliveryValue] = useState<string>("Standard")
+export default function DeliverySection() {
+    const { setValue, watch } = useFormContext<CheckoutFormData>()
 
     const deliveryData = [
         {
@@ -21,13 +18,6 @@ export default function DeliverySection({ setShipping }: DeliverySectionProps) {
             value: 15,
         },
     ]
-
-    useEffect(() => {
-        setShipping(
-            deliveryData.find((item) => item.name === deliveryValue)?.value ||
-                8,
-        )
-    }, [deliveryValue])
 
     return (
         <Paper p={20} withBorder>
@@ -43,8 +33,10 @@ export default function DeliverySection({ setShipping }: DeliverySectionProps) {
 
             <RadioCardGroup
                 options={deliveryData}
-                selected={deliveryValue}
-                setSelected={setDeliveryValue}
+                selected={watch("shippingMethod")}
+                setSelected={(value) =>
+                    setValue("shippingMethod", value as "Standard" | "Express")
+                }
             />
         </Paper>
     )

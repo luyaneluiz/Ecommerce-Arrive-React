@@ -2,12 +2,11 @@ import mongoose from "mongoose"
 
 export interface IPaymentMethod extends mongoose.Document {
     user: mongoose.Types.ObjectId
-    type: "credit_card" | "debit_card" | "paypal" | "bank_transfer"
-    cardNumber?: string // Últimos 4 dígitos para referência
+    type: "credit_card" | "paypal"
+    cardNumber?: string
     cardHolderName?: string
     expiryDate?: string
     isDefault: boolean
-    // Outros campos conforme necessário
 }
 
 const PaymentMethodSchema = new mongoose.Schema<IPaymentMethod>(
@@ -19,7 +18,7 @@ const PaymentMethodSchema = new mongoose.Schema<IPaymentMethod>(
         },
         type: {
             type: String,
-            enum: ["credit_card", "debit_card", "paypal", "bank_transfer"],
+            enum: ["credit_card", "paypal"],
             required: true,
         },
         cardNumber: {

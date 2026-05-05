@@ -22,7 +22,6 @@ app.use(express.json())
 
 connectDB()
 
-// Configuração de sessões
 app.use(
     session({
         secret: process.env.SESSION_SECRET || "defaultSecret",
@@ -34,7 +33,7 @@ app.use(
         }),
         cookie: {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Cookies seguros apenas em produção
+            secure: process.env.NODE_ENV === "production", // cookies seguros apenas em produção
             sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 24, // 1 dia
         },
