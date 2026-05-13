@@ -2,7 +2,8 @@ import { Radio, Text, Flex, Box } from "@mantine/core"
 
 interface OptionProps {
     name: string
-    value?: number
+    price?: number
+    value: string
     description?: string
     icon?: React.ReactNode
 }
@@ -33,7 +34,7 @@ export default function RadioCardGroup({
             }
             className="transition-colors duration-150 ease-in-out hover:border-gray-300"
             radius="md"
-            value={item.name}
+            value={item.value}
             key={item.name}
         >
             <Flex
@@ -57,7 +58,7 @@ export default function RadioCardGroup({
                     </Text>
                 </Flex>
 
-                {item.value && <Text size="sm">${item.value}</Text>}
+                {item.price && <Text size="sm">${item.price.toFixed(2)}</Text>}
             </Flex>
         </Radio.Card>
     ))

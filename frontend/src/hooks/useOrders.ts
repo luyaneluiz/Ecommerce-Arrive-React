@@ -22,19 +22,15 @@ export const useOrders = () => {
 
     const handleAddOrder = async (orderData: Omit<Order, "isDefault">) => {
         try {
-            console.log("📤 Enviando pedido:", orderData)
             const response = await api.post("/order", {
                 user: user?._id,
                 ...orderData,
             })
 
-            console.log("✅ Pedido criado com sucesso:", response.data)
             setOrders((prev) => [...prev, response.data])
             return response.data
         } catch (error) {
-            const errorMsg = error instanceof Error ? error.message : "Erro desconhecido"
-            console.error("❌ Erro ao finalizar pedido:", errorMsg, error)
-            setError(error)
+            console.error("❌ Erro ao finalizar pedido:", error)
             throw error
         }
     }

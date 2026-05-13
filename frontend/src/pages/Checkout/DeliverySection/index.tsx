@@ -9,13 +9,15 @@ export default function DeliverySection() {
     const deliveryData = [
         {
             name: "Standard",
+            value: "standard",
             description: "Transit time: 4-6 business days.",
-            value: 8,
+            price: 8,
         },
         {
             name: "Express",
+            value: "express",
             description: "Transit time: 2-3 business days.",
-            value: 15,
+            price: 15,
         },
     ]
 
@@ -35,7 +37,7 @@ export default function DeliverySection() {
                 options={deliveryData}
                 selected={watch("shippingMethod")}
                 setSelected={(value) =>
-                    setValue("shippingMethod", value as "Standard" | "Express")
+                    setValue("shippingMethod", value as "standard" | "express")
                 }
             />
         </Paper>

@@ -28,10 +28,12 @@ export default function PaymentSection() {
     const paymentData = [
         {
             name: "Credit card",
+            value: "credit_card",
             icon: <BiCreditCard size={24} />,
         },
         {
             name: "PayPal",
+            value: "paypal",
             icon: <BiLogoPaypal size={24} />,
         },
     ]
@@ -82,7 +84,7 @@ export default function PaymentSection() {
                     />
                 </Box>
 
-                {paymentMethod === "Credit card" && (
+                {paymentMethod === "credit_card" && (
                     <Stack gap={15}>
                         <TextInput
                             label="Name on card"
@@ -162,7 +164,7 @@ export default function PaymentSection() {
                     </Stack>
                 )}
 
-                {paymentMethod === "PayPal" && (
+                {paymentMethod === "paypal" && (
                     <Text size="sm">
                         You will be redirected to PayPal to complete the
                         payment.

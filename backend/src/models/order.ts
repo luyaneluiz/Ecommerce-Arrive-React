@@ -11,6 +11,7 @@ export interface IOrder extends mongoose.Document {
     status: "pending" | "paid" | "shipped" | "delivered" | "cancelled"
     paymentMethod: "credit_card" | "paypal"
     shippingAddress: mongoose.Types.ObjectId
+    shippingMethod: "standard" | "express"
     orderDate: Date
 }
 
@@ -59,6 +60,11 @@ const OrderSchema = new mongoose.Schema<IOrder>(
         orderDate: {
             type: Date,
             default: Date.now,
+        },
+        shippingMethod: {
+            type: String,
+            enum: ["standard", "express"],
+            default: "standard",
         },
     },
     { timestamps: true },

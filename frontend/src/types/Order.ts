@@ -10,6 +10,7 @@ export interface Order {
     status: "pending" | "paid" | "shipped" | "delivered" | "cancelled"
     paymentMethod: string
     shippingAddress: string
+    shippingMethod: "standard" | "express"
     orderDate: Date
     isDefault?: boolean
 }

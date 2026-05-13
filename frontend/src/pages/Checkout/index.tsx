@@ -18,15 +18,19 @@ import { useCartContext } from "@/contexts/CartContext"
 import { CheckoutFormData } from "@/types/Checkout"
 import { useForm, FormProvider } from "react-hook-form"
 import { useOrders } from "@/hooks/useOrders"
+import { useAuth } from "@/contexts/AuthContext"
+import { notifications } from "@mantine/notifications"
 
 export default function Checkout() {
     const { cart } = useCartContext()
+    const { user } = useAuth()
+    const userId = user?._id
     const { handleAddOrder } = useOrders()
     const methods = useForm<CheckoutFormData>({
         defaultValues: {
             address: null,
-            shippingMethod: "Standard",
-            paymentMethod: "Credit card",
+            shippingMethod: "standard",
+            paymentMethod: "credit_card",
             card: {
                 name: "",
                 number: "",
@@ -36,7 +40,7 @@ export default function Checkout() {
         },
     })
     const shipping = methods.watch("shippingMethod")
-    const shippingCost = shipping === "Express" ? 15 : 8
+    const shippingCost = shipping === "express" ? 15 : 8
 
     const subtotal = useMemo(
         () => cart?.reduce((acc, product) => acc + product.subtotal, 0) ?? 0,
@@ -46,15 +50,20 @@ export default function Checkout() {
     const total = subtotal + 2 + shippingCost
 
     const onSubmit = async (data: CheckoutFormData) => {
-        console.log("📝 Formulário enviado:", data)
-
         if (!data.address) {
-            alert("Por favor selecione um endereço")
+            notifications.show({
+                title: "Address required",
+                message: "Please select a shipping address to proceed.",
+                color: "red",
+                autoClose: 3000,
+                position: "top-right",
+            })
             return
         }
 
         try {
             await handleAddOrder({
+                user: userId!,
                 products:
                     cart?.map((item) => ({
                         product: item._id,
@@ -65,12 +74,32 @@ export default function Checkout() {
                 status: "pending",
                 paymentMethod: data.paymentMethod,
                 shippingAddress: data.address._id,
+                shippingMethod: data.shippingMethod,
                 orderDate: new Date(),
             })
-            alert("✅ Pedido realizado com sucesso!")
+
+            notifications.show({
+                title: "Order placed successfully!",
+                message:
+                    "Your order has been placed. Thank you for shopping with us!",
+                color: "green",
+                autoClose: 3000,
+                position: "top-right",
+            })
+
+            methods.reset()
+            window.location.href = "/orders"
         } catch (error) {
             console.error("Erro ao enviar pedido:", error)
-            alert("❌ Erro ao finalizar o pedido. Tente novamente.")
+
+            notifications.show({
+                title: "Error",
+                message:
+                    "There was an error placing your order. Please try again.",
+                color: "red",
+                autoClose: 3000,
+                position: "top-right",
+            })
         }
     }
 
