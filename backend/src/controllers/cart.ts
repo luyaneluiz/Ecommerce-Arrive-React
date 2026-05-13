@@ -65,6 +65,38 @@ export const removeFromCart = async (req: Request, res: Response) => {
     }
 }
 
+export const clearCartByUser = async (user: string) => {
+    const cart = await Cart.findOne({ user })
+
+    if (!cart) {
+        return false
+    }
+
+    cart.products = []
+    await cart.save()
+    return true
+}
+
+export const clearCart = async (req: Request, res: Response) => {
+    const { user } = req.body
+
+    try {
+        const cleared = await clearCartByUser(user)
+
+        if (!cleared) {
+            return res.status(404).json({
+                message: `No cart found for user: ${user}`,
+            })
+        }
+
+        res.status(200).json({
+            message: `Cart cleared for user: ${user}`,
+        })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" })
+    }
+}
+
 export const getCartProducts = async (req: Request, res: Response) => {
     const { userId } = req.query
 

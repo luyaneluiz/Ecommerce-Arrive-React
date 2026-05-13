@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import Order from "../models/order"
+import { clearCartByUser } from "./cart"
 
 export const createOrder = async (req: Request, res: Response) => {
     try {
@@ -26,6 +27,15 @@ export const createOrder = async (req: Request, res: Response) => {
         })
 
         await order.save()
+
+        try {
+            await clearCartByUser(user)
+        } catch (clearError) {
+            console.error(
+                "Erro ao limpar carrinho após criar pedido:",
+                clearError,
+            )
+        }
 
         res.status(201).json(order)
     } catch (error) {
